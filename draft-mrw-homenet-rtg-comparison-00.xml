@@ -271,14 +271,19 @@
     <section title="Code and State Size">
       <section title="IS-IS Code and State Size">
         <t>
-          [I suggest rewriting this section as follows: The Homenet
-          implementation of IS-IS consists of XXX lines of code and
-          compiles to XXX bytes of code on XXX platform.  It requires XXX
-          bytes of memory to run, and its working set increases by XXX
-          bytes for each new edge in the network graph.  To put these
-          numbers into perspective, in a network with XXX nodes each of
-          which has XXX neighbours, the Homenet implementation of IS-IS
-          requires XXX bytes. -- jch]
+          The Homenet implementation of IS-IS consists of 7000 lines of
+          Erlang code and has an installed size of over 11MB.  Its initial
+          memory usage is 22MB, and its working set increases by XXX bytes
+          for each new edge in the network graph.  To put these numbers
+          into perspective, in a network with XXX nodes each of which has
+          XXX neighbours, the Homenet implementation of IS-IS requires XXX
+          bytes for its data structures.
+        </t>
+        <t>
+          [I suggest removing the rest of this section, since it consists
+          of unsubstantiated, vague claims depending on
+          a not-yet-implemented version of a not-yet-specified subset of
+          a large protocol. -- jch]
         </t>
 	<t>
           The code size of IS-IS depends greatly on what aspects of the protocol
@@ -313,19 +318,20 @@
 	</t>
       </section>
       <section title="Babel Code and State Size">
-        <t>The standard implementation of Babel, which implements multiple
-        extensions to the protocol, consists of roughly 9000 lines of
-        C and compiles to less than 100kB (dynamically linked against
-        libc) on AMD64.  The stub-only implementation consists of 900
-        lines and compiles to 12kB (dynamically linked).</t>
+        <t>The source-specific implementation of Babel, which implements
+        many non-Homenet extensions to the protocol, consists of roughly
+        10000 lines of C and has an installed size of less than 130kB on
+        AMD-64.  Its initial memory usage is 200kB.</t>
         <t>The amount of state stored by a Babel router is at worst one
-        routing table entry for each destination and each neighbour.  In
-        the standard implementation, one routing entry occupies roughly
-        100 bytes of memory, but that could easily be reduced by removing
-        support for extensions irrelevant to Homenet.  To put these
-        figures into perspective, in a network with 1000 nodes, a Babel
-        router with 10 neighbours needs roughly a megabyte of memory to
-        store its routing table.</t>
+        routing table entry for each destination through each neighbour.
+        In the source-specific implementation, one routing entry occupies
+        roughly 100 bytes of memory.  To put these figures into
+        perspective, in a network with 1000 nodes, a Babel router with 10
+        neighbours needs roughly a megabyte of memory to store its routing
+        table.</t>
+        <t>The stub-only implementation of Babel consists of 900 lines of
+        C and compiles to 12kB (dynamically linked).  Its memory usage is
+        constant (it doesn't perform any dynamic allocation).</t>
       </section>
     </section>
     <section title="Scalablity on IEEE 802.11 Wireless Networks">
