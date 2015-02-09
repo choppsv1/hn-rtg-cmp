@@ -141,15 +141,15 @@
       </section>
       <section title="Discussion">
         <t>
-          Babel's source-speicific extensions were carefully designed so
+          Babel's source-specific extensions were carefully designed so
           that source-specific and ordinary (non-specific) routers can
           coexist in a single routing domain, without routing pathologies
           such as routing loops.  Interoperability between plain Babel and
-          Source-Specific Babel is described in detail in Section ??? of
+          Source-Specific Babel is described in detail in Section VI.A of
           <xref target="SS-ROUTING"/>.
 
-	  Reports indicate that both IS-IS has critical issues (routing
-	  loops) in a mixed environment where some routers support
+	  Reports indicate that IS-IS has critical issues (routing loops)
+	  in a mixed environment where some routers support
 	  Source-Specific Routing, and some routers do not.  However, this
 	  is not likely to be a problem for Homenet, as we will require
 	  Source-Specific Routing on all routers.
@@ -182,7 +182,7 @@
       <section title="IS-IS Support for Stub Networks">
         <t>
           A stub network in IS-IS is supported by the advertisement of
-          reachability to a prefix by a router in it's LSP.
+          reachability to a prefix by a router in its LSP.
         </t>
       </section>
       <section title="Babel Supportt for Stub Networks">
@@ -203,7 +203,8 @@
         </t>
       </section>
       <section title="Security Features in Babel">
-        <t><xref target="RFC7298"/></t>
+        <t>Babel supports an extensible HMAC-based cryptographic
+        authentication mechanism <xref target="RFC7298"/>.</t>
       </section>
     </section>
     <section title="Support for Multicast">
@@ -232,8 +233,13 @@
       <t>
 	There are several independent, interoperable implementations of IS-IS
 	(all major router vendors implement IS-IS), including multiple open
-	source implementations.  There is one open source implementation of
-	Babel.
+	source implementations.
+      </t>
+      <t>
+        While there are multiple open source implementations of Babel,
+        they are all derived from Chroboczek's original implementation.  The
+        stub-only implementation is an independent strain, but it was again
+        written by Chroboczek.
       </t>
     </section>
     <section title="Code and State Size">
@@ -271,15 +277,19 @@
 	</t>
       </section>
       <section title="Babel Code and State Size">
-        <t>The standard implementation of Babel consists of roughly 9000
-        lines of C and compiles to less than 100kB (dynamically linked
-        against libc) on AMD64.  The stub-only implementation consists of
-        900 lines and compiles to 12kB.</t>
+        <t>The standard implementation of Babel, which implements multiple
+        extensions to the protocol, consists of roughly 9000 lines of
+        C and compiles to less than 100kB (dynamically linked against
+        libc) on AMD64.  The stub-only implementation consists of 900
+        lines and compiles to 12kB (dynamically linked).</t>
         <t>The amount of state stored by a Babel router is at worst one
         routing table entry for each destination and each neighbour.  In
-        the standard implementation, one routing entry occupies roughly 80
-        bytes of core, but that could easily be reduced by removing
-        support for extensions irrelevant to Homenet.</t>
+        the standard implementation, one routing entry occupies roughly
+        100 bytes of memory, but that could easily be reduced by removing
+        support for extensions irrelevant to Homenet.  To put these
+        figures into perspective, in a network with 1000 nodes, a Babel
+        router with 10 neighbours needs roughly a megabyte of memory to
+        store its routing table.</t>
       </section>
     </section>
     <section title="Scalablity on IEEE 802.11 Wireless Networks">
@@ -292,7 +302,16 @@
       </section>
       <section title="Babel Scalability on 802.11">
 	<t>
+          Babel was carefully optimised for 802.11 networks.  In
+          particular, it has (optional) provisions for link quality
+          estimation and (optional) provisions for radio-interference
+          sensitive routing.
 	</t>
+        <t>
+          Babel was designed to work well on pure mesh networks (networks
+          where a packet might exit through the same interface as the one
+          it came from), but this is probably out of scope for Homenet.
+        </t>
       </section>
     </section>
     <section title="Standardization Status">
@@ -309,7 +328,7 @@
 	<t>
 	  Babel is documented in an Experimental RFC (RFC 6126)
 	  published in 2011, and it has been updated in several
-	  individual-submission Internet Drafts.
+	  individual-submission RFCs and Internet Drafts.
 	</t>
 	<t>
 	  The use of Babel in a Standards Track HOMENET RFC would
@@ -367,6 +386,12 @@
           </t> 
         </section>
         <section title="Babel">
+          <t>
+            The Babel implementation is open source software (MIT
+            licensed, non-copyleft), and the codebase has proven of
+            sufficiently high quality to be extended by people who were
+            not in direct contact with the author.
+          </t>
         </section>
       </section>
       <section title="Willing Customers">
@@ -389,6 +414,15 @@
         <section title="IS-IS">
         </section>
         <section title="Babel">
+          <t>
+            Babel is a simple and flexible routing protocol.  Like most
+            distance-vector protocols, it requires little to no
+            configuration in most topologies, and has proved popular in
+            scenarios where competent network administration was not
+            available.  In addition, it has been shown to be particularly
+            useful in scenarios where non-standard metrics were needed,
+            notably wireless mesh networks and overlay networks.
+          </t>
         </section>
       </section>
       <section title="Complexity Removal">
@@ -427,6 +461,15 @@
           </t>
         </section>
         <section title="Babel">
+          <t>
+            Since Babel requires virtually no configuration, it is
+            particularly suitable to scenarios where a dedicated network
+            administrator is not available.  Additionally, its support for
+            link quality sensing and non-standard metrics makes it
+            particularly appealing in highly heterogeneous networks,
+            (networks built on multiple link-layer technologies with
+            widely varying performance characteristics).
+          </t>
         </section>
       </section>
       <section title="Extensible">
@@ -446,10 +489,11 @@
         <section title="Babel">
           <t>
             While not as elegant as those of IS-IS, the extension
-            mechanisms <xref target="BABEL-EXT"/> built into the
-            Babel protocol have been shown to be a solid basis on which
-            many extensions have been built, including one that needed
-            a non-trivial extension to the space of metrics.
+            mechanisms built into the Babel protocol
+            <xref target="BABEL-EXT"/> have been shown to be a solid basis
+            on which many extensions have been built, including one that
+            needed a non-trivial extension to the space of metrics
+            <xref target="BABEL-Z"/>.
           </t>
         </section>
       </section>
@@ -468,6 +512,12 @@
           </t>
         </section>
         <section title="Babel">
+          <t>
+            Babel has seen a modest amount of deployment, most notably for
+            routing over wireless mesh networks and large-scale overlay
+            networks.  However, it remains a young protocol, certainly
+            much younger than IS-IS.
+          </t>
         </section>
       </section>
     </section>
