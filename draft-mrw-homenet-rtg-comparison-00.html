@@ -441,7 +441,7 @@
   <meta name="generator" content="xml2rfc version 2.4.8 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Wasserman, M. and C. Hopps" />
+  <meta name="dct.creator" content="Wasserman, M., Hopps, C., and J. Chroboczek" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-mrw-homenet-rtg-comparison-00.txt" />
   <meta name="dct.issued" scheme="ISO8601" content="2014-12-29" />
   <meta name="dct.abstract" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
@@ -469,6 +469,14 @@
 <tr>
   <td class="left">Expires: July 2, 2015</td>
   <td class="right">Deutsche Telekom</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">J. Chroboczek</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">University of Paris-Diderot (Paris 7)</td>
 </tr>
 <tr>
   <td class="left"></td>
@@ -572,15 +580,16 @@
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> Introduction</h1>
 <p id="rfc.section.1.p.1">This document compares IS-IS (ISO/IEC 10589:2002) and Babel <a href="#RFC6126">[RFC6126]</a> across several criteria related to their use in home networks, as defined by the HOMENET WG (HOMENETs).  </p>
-<p id="rfc.section.1.p.2">Although there are substantial difference between the IS-IS and Babel routing protocols, both routing protocols work well, and either of them could be used in a home network.  There are many characteristics of these protocols that make them more or less suitable for use in HOMENETs, as defined in (reference homenet architecture and HNCP documents), and those characteristics are explored in this document.  </p>
+<p id="rfc.section.1.p.2">Although there are substantial differences between the IS-IS and Babel routing protocols, both routing protocols work well, and either of them could be used in a home network.  There are many characteristics of these protocols that make them more or less suitable for use in HOMENETs, as defined in (reference homenet architecture and HNCP documents), and those characteristics are explored in this document.  </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Protocols and Extensions Included in Comparison</h1>
 <p id="rfc.section.2.p.1">Both IS-IS and Babel are living protocols that are updated and extended over time.  This section lists the extensions that were considered in this comparison.  Additional protocol extensions could affect some of the information included in this document.  </p>
 <h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> IS-IS Protocol and Extensions</h1>
 <p id="rfc.section.2.1.p.1">In addition to the base IS-IS protocol specification (ISO/IEC 10589:2002), this comparison considers the following IS-IS extensions: </p>
 <h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> Babel Protocol and Extensions</h1>
 <p id="rfc.section.2.2.p.1">In addition to the base Babel Protocol specification (RFC 6126), this comparison considers the following Babel extensions: </p>
+<p id="rfc.section.2.2.p.2">Source-Specific Routing <a href="#BABEL-SS">[BABEL-SS]</a>, described in more detail in <a href="#SS-ROUTING">[SS-ROUTING]</a>.</p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Routing Algorithms</h1>
-<p id="rfc.section.3.p.1">IS-IS is a Link State routing protocol, and Babel is a Distance Vector routing protocol. There are some differences between these algorithms, particularly in terms of scalability, how much information is exchanged when the routing topology changes, and how far topology changes are propagated.  [chopps: Perhaps we should see if we can find an external reference for comparing DVRP to link-state RPs for this section].  </p>
+<p id="rfc.section.3.p.1">IS-IS is a Link State routing protocol, and Babel is a Loop-Avoiding Distance Vector routing protocol. There are some differences between these algorithms, particularly in terms of scalability, how much information is exchanged when the routing topology changes, and how far topology changes are propagated.  [chopps: Perhaps we should see if we can find an external reference for comparing DVRP to link-state RPs for this section].  [jch: mention that distance-vector collapses in very dense networks, where a single node has hundreds or thousands of neighbours, but scales well to large networks as long as they are not too dense.  IS-IS has no such problem, due to the Designated Router mechanism.] </p>
 <h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> Link State Algorithm</h1>
 <p id="rfc.section.3.1.p.1">[XXX: chopps]</p>
 <h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> Distance Vector Algorithm (Babel)</h1>
@@ -592,26 +601,31 @@
 <p id="rfc.section.4.1.p.1">[XXX: chopps]</p>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Source Specific Routing in Babel</h1>
 <h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Discussion</h1>
-<p id="rfc.section.4.3.p.1">Reports indicate that both IS-IS and Babel have critical issues (routing loops) in a mixed environment where some routers support Source-Specific Routing, and some routers do not.  However, this is not likely to be a problem for Homenet, as we will require Source-Specific Routing on all routers.  </p>
+<p id="rfc.section.4.3.p.1">Babel's source-speicific extensions were carefully designed so that source-specific and ordinary (non-specific) routers can coexist in a single routing domain, without routing pathologies such as routing loops.  Interoperability between plain Babel and Source-Specific Babel is described in detail in Section ??? of <a href="#SS-ROUTING">[SS-ROUTING]</a>.  Reports indicate that both IS-IS has critical issues (routing loops) in a mixed environment where some routers support Source-Specific Routing, and some routers do not.  However, this is not likely to be a problem for Homenet, as we will require Source-Specific Routing on all routers.  </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> Support for Link Metrics</h1>
 <h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Link Metrics in IS-IS</h1>
 <p id="rfc.section.5.1.p.1">IS-IS supports 2 types of link metrics a legacy link metric (which should probably not be considered for HOMENET use) and a modern extended (24-bit) link metric. Additionally multi-topology support allows for a variable number of metrics per link.  </p>
 <h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Link Metrics in Babel</h1>
+<p id="rfc.section.5.2.p.1">In Babel, metrics are unsigned 16-bit integers, which means that metrics are arbitrary integers between 0 and 65534 (the value 65535 is reserved to mean "infinity").  If needed, the Babel extension mechanism can be used to extend the metric space in arbitrary ways (not just integers), which has already been done by the radio interference extensions to Babel <a href="#BABEL-Z">[BABEL-Z]</a>.</p>
 <h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Discussion</h1>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> Support for Attached Stub Networks</h1>
 <h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> IS-IS Support for Stub Networks</h1>
 <p id="rfc.section.6.1.p.1">A stub network in IS-IS is supported by the advertisement of reachability to a prefix by a router in it's LSP.  </p>
 <h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Babel Supportt for Stub Networks</h1>
+<p id="rfc.section.6.2.p.1">Babel supports flexible filtering of routes, and a stub network can be designated by simply setting up the necessary filtering rules.  For resource-limited deployments, a minimalistic, stub-only implementation of Babel is available.</p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Security Features</h1>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> Security Features in IS-IS</h1>
 <p id="rfc.section.7.1.p.1">IS-IS offers multiple levels of security from none, to simple clear-text (password) authentication, to fully generic cryptographic authentication using any number of hashing algorithms (e.g., HMAC-MD5, HMAC-SHA1, ... HMAC-SHA512) based on security associations (link, area and domain scoped).  </p>
 <h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> Security Features in Babel</h1>
+<p>
+  <a href="#RFC7298">[RFC7298]</a>
+</p>
 <h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> Support for Multicast</h1>
 <p id="rfc.section.8.p.1">Although the HOMENET WG has not yet determined how/if to support multicast in HOMENET Networks, it might be desirable to pick a routing protocol that supports multicast, so that it will be easier to add multicast support in the future.  </p>
 <h1 id="rfc.section.8.1"><a href="#rfc.section.8.1">8.1.</a> Multicast Routing in IS-IS</h1>
 <p id="rfc.section.8.1.p.1">IS-IS supports multicast routing.  [XXX: chopps: what do we mean by supporting multicast routing?] </p>
 <h1 id="rfc.section.8.2"><a href="#rfc.section.8.2">8.2.</a> Multicast Routing in Babel</h1>
-<p id="rfc.section.8.2.p.1">Does Babel support multicast routing at all?  It is not mentioned in the published RFC.  </p>
+<p id="rfc.section.8.2.p.1">There is no support for multicast routing in Babel.  </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> Implementation Status</h1>
 <p id="rfc.section.9.p.1">There are Homenet implementations of both IS-IS and Babel.  </p>
 <p id="rfc.section.9.p.2">There are several independent, interoperable implementations of IS-IS (all major router vendors implement IS-IS), including multiple open source implementations.  There is one open source implementation of Babel.  </p>
@@ -621,6 +635,8 @@
 <p id="rfc.section.10.1.p.2">For HOMENET we could use a very simple level-2 only implementation supporting a common topology supporting IPv4 and IPv6 over broadcast (i.e., ethernet) link types. Additionally, we would need only support the latest extended metric TLV (i.e., not implement legacy metric support). Implemented as such the code size should be very manageable.  </p>
 <p id="rfc.section.10.1.p.3">The state actually required by IS-IS is not large, and primarily correlates to the number of routers in the network (for LSP storage). The protocol stores it's own link and adjacency data which is expected to be negligible. Additionally, the protocol stores received and generated LSPs, and typically an SPF tree with prefix information attached.  This state correlates directly to the number of routers and prefixes in the network. Each router in the network generates, a single LSP (possibly fragmented into segments) with prefix information, a single copy of these LSPs is stored by each router in the network regardless of the number of links, adjacencies or the distance (or number of hops) from the storing router to the advertising router.  </p>
 <h1 id="rfc.section.10.2"><a href="#rfc.section.10.2">10.2.</a> Babel Code and State Size</h1>
+<p id="rfc.section.10.2.p.1">The standard implementation of Babel consists of roughly 9000 lines of C and compiles to less than 100kB (dynamically linked against libc) on AMD64.  The stub-only implementation consists of 900 lines and compiles to 12kB.</p>
+<p id="rfc.section.10.2.p.2">The amount of state stored by a Babel router is at worst one routing table entry for each destination and each neighbour.  In the standard implementation, one routing entry occupies roughly 80 bytes of core, but that could easily be reduced by removing support for extensions irrelevant to Homenet.</p>
 <h1 id="rfc.section.11"><a href="#rfc.section.11">11.</a> Scalablity on IEEE 802.11 Wireless Networks</h1>
 <h1 id="rfc.section.11.1"><a href="#rfc.section.11.1">11.1.</a> IS-IS Scalability on 802.11</h1>
 <p id="rfc.section.11.1.p.1">IS-IS is in active use in in the Internet in large non-hierachical (i.e., level-2 or single area level-1) deployments with hundreds of nodes. The protocol has proven to be very scalable.  </p>
@@ -630,7 +646,7 @@
 <h1 id="rfc.section.12.1"><a href="#rfc.section.12.1">12.1.</a> IS-IS Standardization</h1>
 <p id="rfc.section.12.1.p.1">IS-IS is an ISO Standard documented in ISO/IEC 10589:2002.  There is an active IETF IS-IS Working Group (ISIS) that maintains and extends the IS-IS protocol, and the IS-IS protocol has been extended in several ISIS Working Group documents.  </p>
 <h1 id="rfc.section.12.2"><a href="#rfc.section.12.2">12.2.</a> Babel Standardization Status</h1>
-<p id="rfc.section.12.2.p.1">Babel is documented in an Experimental RFC (RFC 6126) published in 2011, and it has been updated in several individual-submission RFCs.  </p>
+<p id="rfc.section.12.2.p.1">Babel is documented in an Experimental RFC (RFC 6126) published in 2011, and it has been updated in several individual-submission Internet Drafts.  </p>
 <p id="rfc.section.12.2.p.2">The use of Babel in a Standards Track HOMENET RFC would require a "downref" to non-Standards Track documents.  It would also be necessary to publish the extensions that are needed for the HOMENET use case as RFCs.  </p>
 <h1 id="rfc.section.13"><a href="#rfc.section.13">13.</a> Evaluation of RFC 5218 Criteria</h1>
 <h1 id="rfc.section.13.1"><a href="#rfc.section.13.1">13.1.</a> Critical Success Factors</h1>
@@ -672,6 +688,8 @@
 <h1 id="rfc.section.13.5.1"><a href="#rfc.section.13.5.1">13.5.1.</a> IS-IS</h1>
 <p id="rfc.section.13.5.1.p.1">As mentioned previously IS-IS can be significantly and easily paired down to fit the more limited scope of homenet use.  </p>
 <h1 id="rfc.section.13.5.2"><a href="#rfc.section.13.5.2">13.5.2.</a> Babel</h1>
+<p id="rfc.section.13.5.2.p.1">Babel is a fairly simple protocol -- RFC 6126 is just 40 pages long (not counting informative appendices), and it has been successfully explained to fourth year university students in less than two hours.  </p>
+<p id="rfc.section.13.5.2.p.2">The stub-only implementation of Babel consists of 900 lines of C code, and has deliberately been kept as simple as possible.  We expect a competent engineer to get up to speed with it within hours.</p>
 <h1 id="rfc.section.13.6"><a href="#rfc.section.13.6">13.6.</a> Killer App</h1>
 <p id="rfc.section.13.6.p.1">Is there a potential killer app?  Or can the technology work underneath existing unmodified applications? </p>
 <h1 id="rfc.section.13.6.1"><a href="#rfc.section.13.6.1">13.6.1.</a> IS-IS</h1>
@@ -682,6 +700,7 @@
 <h1 id="rfc.section.13.7.1"><a href="#rfc.section.13.7.1">13.7.1.</a> IS-IS</h1>
 <p id="rfc.section.13.7.1.p.1">IS-IS has been shown to be incredibly extensible, originally designed for a completely different protocol stack (OSI) it was easily adapted for IP use, then to multiple address families (IPv4, IPv6) and multi-topology. Indeed one of the major drivers of IS-IS's success is its extensibility and adaptability.  </p>
 <h1 id="rfc.section.13.7.2"><a href="#rfc.section.13.7.2">13.7.2.</a> Babel</h1>
+<p id="rfc.section.13.7.2.p.1">While not as elegant as those of IS-IS, the extension mechanisms <a href="#BABEL-EXT">[BABEL-EXT]</a> built into the Babel protocol have been shown to be a solid basis on which many extensions have been built, including one that needed a non-trivial extension to the space of metrics.  </p>
 <h1 id="rfc.section.13.8"><a href="#rfc.section.13.8">13.8.</a> Success Predictable</h1>
 <p id="rfc.section.13.8.p.1">If it is not known whether the protocol will be successful, should the market decide first?  Or should the IETF work on multiple alternatives and let the market decide among them?  Are there factors listed in this document that may predict which is more likely to succeed? </p>
 <h1 id="rfc.section.13.8.1"><a href="#rfc.section.13.8.1">13.8.1.</a> IS-IS</h1>
@@ -692,9 +711,39 @@
   <tbody>
     <tr>
       <td class="reference">
+        <b id="BABEL-EXT">[BABEL-EXT]</b>
+      </td>
+      <td class="top"><a>Chroboczek, J.</a>, "<a>Extension Mechanism for the Babel Routing Protocol</a>", Internet Draft draft-chroboczek-babel-extension-mechanism-03, June 2013.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="BABEL-SS">[BABEL-SS]</b>
+      </td>
+      <td class="top"><a>Boutier, M.</a> and <a>J. Chroboczek</a>, "<a>Source-Specific Routing in Babel</a>", Internet Draft draft-boutier-babel-source-specific-00, November 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="BABEL-Z">[BABEL-Z]</b>
+      </td>
+      <td class="top"><a>Chroboczek, J.</a>, "<a>Diversity Routing for the Babel Routing Protocol</a>", Internet Draft draft-chroboczek-babel-diversity-routing-00, July 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC6126">[RFC6126]</b>
       </td>
       <td class="top"><a>Chroboczek, J.</a>, "<a href="http://tools.ietf.org/html/rfc6126">The Babel Routing Protocol</a>", RFC 6126, April 2011.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7298">[RFC7298]</b>
+      </td>
+      <td class="top"><a>Ovsienko, D.</a>, "<a href="http://tools.ietf.org/html/rfc7298">Babel Hashed Message Authentication Code (HMAC) Cryptographic Authentication</a>", RFC 7298, July 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="SS-ROUTING">[SS-ROUTING]</b>
+      </td>
+      <td class="top"><a>Boutier, M.</a> and <a>J. Chroboczek</a>, "<a>Source-sensitive routing</a>", December 2014.</td>
     </tr>
   </tbody>
 </table>
@@ -746,6 +795,27 @@
 	  <span class="country-name vcardline"></span>
 	</span>
 	<span class="vcardline">EMail: <a href="mailto:chopps@rawdofmt.org">chopps@rawdofmt.org</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Juliusz Chroboczek</span> 
+	  <span class="n hidden">
+		<span class="family-name">Chroboczek</span>
+	  </span>
+	</span>
+	<span class="org vcardline">University of Paris-Diderot (Paris 7)</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:jch@pps.univ-paris-diderot.fr">jch@pps.univ-paris-diderot.fr</a></span>
 
   </address>
 </div>

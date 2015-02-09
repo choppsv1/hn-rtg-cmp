@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 	  <!ENTITY rfc6126 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6126.xml'>
+	  <!ENTITY rfc7298 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7298.xml'>
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="yes"?>
@@ -35,6 +36,12 @@
         <email>chopps@rawdofmt.org</email>
       </address>
     </author>
+    <author initials="J." surname="Chroboczek" fullname="Juliusz Chroboczek">
+      <organization>University of Paris-Diderot (Paris 7)</organization>
+      <address>
+        <email>jch@pps.univ-paris-diderot.fr</email>
+      </address>
+    </author>
     <date day="29" month="December" year="2014"/>
     <area>Internet</area>
     <workgroup>Homenet Working Group</workgroup>
@@ -59,7 +66,7 @@
 	(HOMENETs).
       </t>
       <t>
-	Although there are substantial difference between the IS-IS
+	Although there are substantial differences between the IS-IS
 	and Babel routing protocols, both routing protocols work well,
 	and either of them could be used in a home network.  There are
 	many characteristics of these protocols that make them more or
@@ -89,19 +96,26 @@
 	  6126), this comparison considers the following Babel 
 	  extensions:
 	</t>
+        <t>Source-Specific Routing <xref target="BABEL-SS"/>, described in
+        more detail in <xref target="SS-ROUTING"/>.</t>
       </section>
     </section>
     <section title="Routing Algorithms">
       <t>
-	IS-IS is a Link State routing protocol, and Babel is a
-	Distance Vector routing protocol. There are some differences
-	between these algorithms, particularly in terms of
-	scalability, how much information is exchanged when the
-	routing topology changes, and how far topology changes are
-	propagated.
+	IS-IS is a Link State routing protocol, and Babel is
+	a Loop-Avoiding Distance Vector routing protocol. There are some
+	differences between these algorithms, particularly in terms of
+	scalability, how much information is exchanged when the routing
+	topology changes, and how far topology changes are propagated.
 
         [chopps: Perhaps we should see if we can find an external reference for
         comparing DVRP to link-state RPs for this section].
+
+        [jch: mention that distance-vector collapses in very dense
+        networks, where a single node has hundreds or thousands of
+        neighbours, but scales well to large networks as long as they are
+        not too dense.  IS-IS has no such problem, due to the Designated
+        Router mechanism.]
       </t>
       <section title="Link State Algorithm">
         <t>[XXX: chopps]</t>
@@ -127,11 +141,18 @@
       </section>
       <section title="Discussion">
         <t>
-	  Reports indicate that both IS-IS and Babel have critical
-	  issues (routing loops) in a mixed environment where some
-	  routers support Source-Specific Routing, and some routers do
-	  not.  However, this is not likely to be a problem for Homenet,
-	  as we will require Source-Specific Routing on all routers.
+          Babel's source-speicific extensions were carefully designed so
+          that source-specific and ordinary (non-specific) routers can
+          coexist in a single routing domain, without routing pathologies
+          such as routing loops.  Interoperability between plain Babel and
+          Source-Specific Babel is described in detail in Section ??? of
+          <xref target="SS-ROUTING"/>.
+
+	  Reports indicate that both IS-IS has critical issues (routing
+	  loops) in a mixed environment where some routers support
+	  Source-Specific Routing, and some routers do not.  However, this
+	  is not likely to be a problem for Homenet, as we will require
+	  Source-Specific Routing on all routers.
         </t>
       </section>
     </section>
@@ -145,6 +166,14 @@
         </t>
       </section>
       <section title="Link Metrics in Babel">
+        <t>
+          In Babel, metrics are unsigned 16-bit integers, which means that
+          metrics are arbitrary integers between 0 and 65534 (the value
+          65535 is reserved to mean "infinity").  If needed, the Babel
+          extension mechanism can be used to extend the metric space in
+          arbitrary ways (not just integers), which has already been done
+          by the radio interference extensions to Babel <xref
+          target="BABEL-Z"/>.</t>
       </section>
       <section title="Discussion">
       </section>
@@ -157,6 +186,10 @@
         </t>
       </section>
       <section title="Babel Supportt for Stub Networks">
+        <t>Babel supports flexible filtering of routes, and a stub network
+        can be designated by simply setting up the necessary filtering
+        rules.  For resource-limited deployments, a minimalistic,
+        stub-only implementation of Babel is available.</t>
       </section>
     </section>
     <section title="Security Features">
@@ -170,6 +203,7 @@
         </t>
       </section>
       <section title="Security Features in Babel">
+        <t><xref target="RFC7298"/></t>
       </section>
     </section>
     <section title="Support for Multicast">
@@ -187,8 +221,7 @@
       </section>
       <section title="Multicast Routing in Babel">
 	<t>
-	  Does Babel support multicast routing at all?  It is not mentioned
-	  in the published RFC.
+          There is no support for multicast routing in Babel.
 	</t>
       </section>
     </section>
@@ -238,6 +271,15 @@
 	</t>
       </section>
       <section title="Babel Code and State Size">
+        <t>The standard implementation of Babel consists of roughly 9000
+        lines of C and compiles to less than 100kB (dynamically linked
+        against libc) on AMD64.  The stub-only implementation consists of
+        900 lines and compiles to 12kB.</t>
+        <t>The amount of state stored by a Babel router is at worst one
+        routing table entry for each destination and each neighbour.  In
+        the standard implementation, one routing entry occupies roughly 80
+        bytes of core, but that could easily be reduced by removing
+        support for extensions irrelevant to Homenet.</t>
       </section>
     </section>
     <section title="Scalablity on IEEE 802.11 Wireless Networks">
@@ -267,7 +309,7 @@
 	<t>
 	  Babel is documented in an Experimental RFC (RFC 6126)
 	  published in 2011, and it has been updated in several
-	  individual-submission RFCs.
+	  individual-submission Internet Drafts.
 	</t>
 	<t>
 	  The use of Babel in a Standards Track HOMENET RFC would
@@ -360,6 +402,17 @@
           </t>
         </section>
         <section title="Babel">
+          <t>
+            Babel is a fairly simple protocol -- RFC 6126 is just 40 pages
+            long (not counting informative appendices), and it has been
+            successfully explained to fourth year university students in
+            less than two hours.
+          </t>
+          <t>
+            The stub-only implementation of Babel consists of 900 lines of
+            C code, and has deliberately been kept as simple as possible.
+            We expect a competent engineer to get up to speed with it
+            within hours.</t>
         </section>
       </section>
       <section title="Killer App">
@@ -391,6 +444,13 @@
           </t>
         </section>
         <section title="Babel">
+          <t>
+            While not as elegant as those of IS-IS, the extension
+            mechanisms <xref target="BABEL-EXT"/> built into the
+            Babel protocol have been shown to be a solid basis on which
+            many extensions have been built, including one that needed
+            a non-trivial extension to the space of metrics.
+          </t>
         </section>
       </section>
       <section title="Success Predictable">
@@ -415,7 +475,43 @@
   <back>
     <references title="Informative References">
       &rfc6126;
-    </references>
 
+      &rfc7298;
+
+      <reference anchor="BABEL-SS"><front>
+        <title>Source-Specific Routing in Babel</title>
+        <author fullname="Matthieu Boutier" initials="M." surname="Boutier"/>
+        <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
+        <date year="2014" month="November"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-boutier-babel-source-specific-00"/>
+      </reference>
+
+      <reference anchor="SS-ROUTING">
+        <front>
+          <title>Source-sensitive routing</title>
+          <author initials="M." surname="Boutier" fullname="Matthieu Boutier"/>
+          <author initials="J." surname="Chroboczek" fullname="Juliusz Chroboczek"/>
+          <date year="2014" month="December"/>
+        </front>
+      </reference>
+
+      <reference anchor="BABEL-EXT"><front>
+        <title>Extension Mechanism for the Babel Routing Protocol</title>
+        <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
+        <date month="June" year="2013"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-chroboczek-babel-extension-mechanism-03"/>
+      </reference>
+
+      <reference anchor="BABEL-Z"><front>
+        <title abbrev="Babel Diversity Routing">Diversity Routing for the Babel
+        Routing Protocol</title>
+        <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
+        <date year="2014" month="July"/>
+        </front>
+        <seriesInfo name="Internet Draft" value="draft-chroboczek-babel-diversity-routing-00"/>
+      </reference>
+    </references>
   </back>
 </rfc>
