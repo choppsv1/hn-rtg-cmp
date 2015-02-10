@@ -5,10 +5,10 @@
 Homenet Working Group                                       M. Wasserman
 Internet-Draft                                         Painless Security
 Intended status: Standards Track                                C. Hopps
-Expires: July 2, 2015                                   Deutsche Telekom
+Expires: August 5, 2014                                 Deutsche Telekom
                                                            J. Chroboczek
                                    University of Paris-Diderot (Paris 7)
-                                                       December 29, 2014
+                                                           February 2014
 
 
                    HOMENET IS-IS and Babel Comparison
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on July 2, 2015.
+   This Internet-Draft will expire on August 5, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 1]
+Wasserman, et al.        Expires August 5, 2014                 [Page 1]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
    to this document.  Code Components extracted from this document must
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 2]
+Wasserman, et al.        Expires August 5, 2014                 [Page 2]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
      13.3.  Willing Customers  . . . . . . . . . . . . . . . . . . .  12
@@ -165,9 +165,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 3]
+Wasserman, et al.        Expires August 5, 2014                 [Page 3]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
 2.2.  Babel Protocol and Extensions
@@ -221,9 +221,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 4]
+Wasserman, et al.        Expires August 5, 2014                 [Page 4]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
    the network into multiple "areas", and performing distance-vector
@@ -277,9 +277,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 5]
+Wasserman, et al.        Expires August 5, 2014                 [Page 5]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
 5.  Support for Link Metrics
@@ -333,9 +333,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 6]
+Wasserman, et al.        Expires August 5, 2014                 [Page 6]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
 7.2.  Security Features in Babel
@@ -389,9 +389,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 7]
+Wasserman, et al.        Expires August 5, 2014                 [Page 7]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
    each of which has XXX neighbours, the Homenet implementation of IS-IS
@@ -445,9 +445,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 8]
+Wasserman, et al.        Expires August 5, 2014                 [Page 8]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
    100 bytes of memory.  To put these figures into perspective, in a
@@ -501,9 +501,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 9]
+Wasserman, et al.        Expires August 5, 2014                 [Page 9]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
 12.2.  Babel Standardization Status
@@ -557,9 +557,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 10]
+Wasserman, et al.        Expires August 5, 2014                [Page 10]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
       Threats Sufficiently Mitigated: Yes.
@@ -613,9 +613,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 11]
+Wasserman, et al.        Expires August 5, 2014                [Page 11]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
    As all major routing vendors have IS-IS implementations as well as
@@ -669,9 +669,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 12]
+Wasserman, et al.        Expires August 5, 2014                [Page 12]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
 13.5.  Complexity Removal
@@ -725,9 +725,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 13]
+Wasserman, et al.        Expires August 5, 2014                [Page 13]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
 13.7.1.  IS-IS
@@ -781,9 +781,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 14]
+Wasserman, et al.        Expires August 5, 2014                [Page 14]
 
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2014
 
 
    [BABEL-SS]
@@ -837,4 +837,4 @@ Authors' Addresses
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 15]
+Wasserman, et al.        Expires August 5, 2014                [Page 15]
