@@ -103,7 +103,7 @@
     <section title="Routing Algorithms">
       <t>
 	IS-IS is a Link State routing protocol, and Babel is
-	a Loop-Avoiding Distance Vector routing protocol. There are some
+	a Loop-avoiding Distance Vector routing protocol. There are some
 	differences between these algorithms, particularly in terms of
 	scalability, how much information is exchanged when the routing
 	topology changes, and how far topology changes are propagated.
@@ -119,11 +119,12 @@
       </section>
       <section title="Algorithm Comparison">
         <t>
-          Distance vector scales beautifully to very large networks -- the
-          amount of state is linear in the number of nodes.  It does have
-          issues with very dense deployments, where a single node has
-          thousands of direct neighbours; such deployments are unlikely,
-          and clearly outside the scope of Homenet.
+          Loop-avoiding Distance Vector scales beautifully to very large
+          networks -- the amount of state is linear in the number of
+          nodes, and does not need to be propagated in a timely manner.
+          It scales badly in extremely dense deployments, where a single
+          node has thousands of direct neighbours; such deployments are
+          unlikely, and clearly outside the scope of Homenet.
         </t>
         <t>
           Naive link state has somewhat worse scaling properties, since it
@@ -148,12 +149,15 @@
         <t>[XXX: chopps]</t>
       </section>
       <section title="Source Specific Routing in Babel">
-        <t>The Source-specific extension to the Babel routing protocol
-        <xref target="BABEL-SS"/> has been implemented for more than
-        a year, and has been made widely available and widely deployed as
-        part of OpenWRT and CeroWRT.  The implementation is currently
-        being merged into the standard Babel implementation, and is
-        scheduled to be included in version 1.6.</t>
+        <t>
+          The Source-specific extension to the Babel routing protocol
+          <xref target="BABEL-SS"/> has been implemented for over a year,
+          has been made widely available and has seen a fair amount
+          deployment as part of OpenWRT and CeroWRT.  The implementation
+          is currently being merged into the standard Babel
+          implementation, and is scheduled to be included in version 1.6
+          (planned for March 2015).
+        </t>
       </section>
       <section title="Discussion">
         <t>
@@ -163,12 +167,16 @@
           such as routing loops.  Interoperability between plain Babel and
           Source-Specific Babel is described in detail in Section VI.A of
           <xref target="SS-ROUTING"/>.
-
-	  Reports indicate that IS-IS has critical issues (routing loops)
-	  in a mixed environment where some routers support
-	  Source-Specific Routing, and some routers do not.  However, this
-	  is not likely to be a problem for Homenet, as we will require
-	  Source-Specific Routing on all routers.
+        </t>
+        <t>
+	  Reports indicate that source-specific IS-IS has critical issues
+	  (routing loops) in a mixed environment where some routers
+	  support Source-Specific Routing, and some routers do not.
+	  However, this is not likely to be a problem for Homenet, as we
+	  will require Source-Specific Routing on all routers.
+        </t>
+        <t>
+          [How will we enforce that? -- jch]
         </t>
       </section>
     </section>
@@ -256,14 +264,14 @@
       </t>
       <t>
         Only the Homenet implementation of IS-IS supports source-specific
-        routing, which is a hard requirement for Homenet.  Is
+        routing, which is a hard requirement for Homenet.  If
         source-specific routing is not required, there are several
         independent, interoperable implementations of IS-IS (all major
         router vendors implement IS-IS), including some open source
         implementations.
       </t>
       <t>
-        There are multiple open source implementations of Babel, ntwo of
+        There are multiple open source implementations of Babel, two of
         which support source-specific routing.  However, they were both
         originally derived from the same codebase.
       </t>
@@ -328,7 +336,7 @@
         roughly 100 bytes of memory.  To put these figures into
         perspective, in a network with 1000 nodes, a Babel router with 10
         neighbours needs roughly a megabyte of memory to store its routing
-        table.</t>
+        table (not counting malloc overhead).</t>
         <t>The stub-only implementation of Babel consists of 900 lines of
         C and compiles to 12kB (dynamically linked).  Its memory usage is
         constant (it doesn't perform any dynamic allocation).</t>
@@ -393,12 +401,12 @@
     <section title="Evaluation of RFC 5218 Criteria">
       <section title="Critical Success Factors">
         <t>
-          [I'm not sure I understand what needs to be written here.
-          Please explain. -- jch]
-        </t>
-        <t>
           Does the protocol exhibit one or more of the critical initial
           success factors?
+        </t>
+        <t>
+          [I'm not sure I understand what that means.  Please explain. --
+          jch]
         </t>
         <section title="IS-IS">
           <t>
@@ -438,7 +446,8 @@
         <section title="IS-IS">
           <t>
             There is only one implementation of source-specific routing
-            for IS-iS.
+            for IS-IS.  [Has it ever been extended by people who are not
+            the authors?  If so, who? -- jch]
           </t>
           <t>
             [I suggest the rest of this section should be removed. -- jch]
@@ -455,8 +464,8 @@
           <t>
             The Babel implementation is open source software (MIT
             licensed, non-copyleft), and the codebase has proven of
-            sufficiently high quality to be extended by people who were
-            not in direct contact with the author.
+            sufficiently high quality to be easily extended by people who
+            were not in direct contact with the author <xref target="RFC7298"/>.
           </t>
         </section>
       </section>
@@ -566,11 +575,12 @@
         </section>
         <section title="Babel">
           <t>
-            While not as elegant as those of IS-IS, the extension
-            mechanisms built into the Babel protocol
+            The extension mechanisms built into the Babel protocol
             <xref target="BABEL-EXT"/> have been shown to be a solid basis
-            on which many extensions have been built, including one that
-            needed a non-trivial extension to the space of metrics
+            on which many backwards-compatible extensions have been built,
+            including one that fundamentally changes the structure of
+            announcements <xref target="BABEL-SS"/> and one that needed
+            a non-trivial extension to the space of metrics
             <xref target="BABEL-Z"/>.
           </t>
         </section>
@@ -620,7 +630,7 @@
       <seriesInfo name="Internet Draft" value="draft-boutier-babel-source-specific-00"/>
       </reference>
 
-      <reference anchor="SS-ROUTING">
+      <reference anchor="SS-ROUTING" target="http://arxiv.org/abs/1403.0445">
         <front>
           <title>Source-sensitive routing</title>
           <author initials="M." surname="Boutier" fullname="Matthieu Boutier"/>
