@@ -2,6 +2,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 	  <!ENTITY rfc6126 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6126.xml'>
 	  <!ENTITY rfc7298 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7298.xml'>
+	  <!ENTITY rfc1142 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1142.xml'>
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="yes"?>
@@ -60,10 +61,10 @@
   <middle>
     <section title="Introduction"> 
       <t>
-	This document compares IS-IS (ISO/IEC 10589:2002) and Babel
-	<xref target="RFC6126"/> across several criteria related to
-	their use in home networks, as defined by the HOMENET WG
-	(HOMENETs).
+	This document compares IS-IS (ISO/IEC 10589:2002) <xref
+	target="RFC1142"/> and Babel <xref target="RFC6126"/> across
+	several criteria related to their use in home networks, as
+	defined by the HOMENET WG (HOMENETs).
       </t>
       <t>
 	Although there are substantial differences between the IS-IS
@@ -96,8 +97,13 @@
 	  6126), this comparison considers the following Babel 
 	  extensions:
 	</t>
-        <t>Source-Specific Routing <xref target="BABEL-SS"/>, described in
-        more detail in <xref target="SS-ROUTING"/>.</t>
+        <t>
+	  Source-Specific Routing <xref target="BABEL-SS"/>, described in
+          more detail in <xref target="SS-ROUTING"/>.
+	</t>
+	<t>
+	  Extension Mechanism for the Babel Routing Protocol<xref target="BABEL-EXT"/>
+	</t>
       </section>
     </section>
     <section title="Routing Algorithms">
@@ -118,12 +124,28 @@
         Router mechanism.]
       </t>
       <section title="Link State Algorithm">
-        <t>[XXX: chopps]</t>
+        <t>
+	  Link state algorithms distribute information for each
+	  node to compute a tree representing the entire network.
+	</t>
+	<t>
+	  Link state algorithms scale well in both very large and
+	  very dense networks.
+	</t>
       </section>
-      <section title="Distance Vector Algorithm (Babel)">
-      </section>
-      <section title="Algorithm Comparison">
-        <t>[XXX: chopps]</t>
+      <section title="Distance-Vector Algorithm (Babel)">
+	<t>
+	  Distance-vector algorithms distribute information about the 
+	  path length to reach each destination through a given 
+	  neighbor.  Packets are forwarded to the neighbor who is 
+	  advertising the shortest path to reach the destination.
+	</t>
+	<t>
+	  Distance-vector algorithms scale well to large networks as
+	  long as they are not very densely connected.  However, they
+	  collapse in very dense networks, where a single node has
+	  hundreds or thousands of neighbors.
+	</t>
       </section>
     </section>
     <section title="Support for Source-Specific Routing">
@@ -134,26 +156,28 @@
 	packets to the wrong outbound network could result in packets
 	being dropped due to ISP ingress filtering rules.
       </t>
+      <t>
+	Both Babel and IS-IS have extensions for source-specific routing.
+      </t>
       <section title="Source Specific Routing in IS-IS">
         <t>[XXX: chopps]</t>
-      </section>
-      <section title="Source Specific Routing in Babel">
-      </section>
-      <section title="Discussion">
         <t>
-          Babel's source-specific extensions were carefully designed so
-          that source-specific and ordinary (non-specific) routers can
-          coexist in a single routing domain, without routing pathologies
-          such as routing loops.  Interoperability between plain Babel and
-          Source-Specific Babel is described in detail in Section VI.A of
-          <xref target="SS-ROUTING"/>.
-
 	  Reports indicate that IS-IS has critical issues (routing loops)
 	  in a mixed environment where some routers support
 	  Source-Specific Routing, and some routers do not.  However, this
 	  is not likely to be a problem for Homenet, as we will require
 	  Source-Specific Routing on all routers.
         </t>
+      </section>
+      <section title="Source Specific Routing in Babel">
+	<t>
+          Babel's source-specific extensions were carefully designed so
+          that source-specific and ordinary (non-specific) routers can
+          coexist in a single routing domain, without routing pathologies
+          such as routing loops.  Interoperability between plain Babel and
+          Source-Specific Babel is described in detail in Section VI.A of
+          <xref target="SS-ROUTING"/>.
+	</t>
       </section>
     </section>
     <section title="Support for Link Metrics">
@@ -175,8 +199,6 @@
           by the radio interference extensions to Babel <xref
           target="BABEL-Z"/>.</t>
       </section>
-      <section title="Discussion">
-      </section>
     </section>
     <section title="Support for Attached Stub Networks">
       <section title="IS-IS Support for Stub Networks">
@@ -186,10 +208,13 @@
         </t>
       </section>
       <section title="Babel Supportt for Stub Networks">
-        <t>Babel supports flexible filtering of routes, and a stub network
-        can be designated by simply setting up the necessary filtering
-        rules.  For resource-limited deployments, a minimalistic,
-        stub-only implementation of Babel is available.</t>
+        <t>
+	  Babel supports flexible filtering of routes, and a stub
+	  network can be designated by simply setting up the necessary
+	  filtering rules.  For resource-limited deployments, a
+	  minimalistic, stub-only implementation of Babel is
+	  available.
+	</t>
       </section>
     </section>
     <section title="Security Features">
@@ -203,8 +228,10 @@
         </t>
       </section>
       <section title="Security Features in Babel">
-        <t>Babel supports an extensible HMAC-based cryptographic
-        authentication mechanism <xref target="RFC7298"/>.</t>
+        <t>
+	  Babel supports an extensible HMAC-based cryptographic
+	  authentication mechanism <xref target="RFC7298"/>.
+	</t>
       </section>
     </section>
     <section title="Support for Multicast">
@@ -277,19 +304,25 @@
 	</t>
       </section>
       <section title="Babel Code and State Size">
-        <t>The standard implementation of Babel, which implements multiple
-        extensions to the protocol, consists of roughly 9000 lines of
-        C and compiles to less than 100kB (dynamically linked against
-        libc) on AMD64.  The stub-only implementation consists of 900
-        lines and compiles to 12kB (dynamically linked).</t>
-        <t>The amount of state stored by a Babel router is at worst one
-        routing table entry for each destination and each neighbour.  In
-        the standard implementation, one routing entry occupies roughly
-        100 bytes of memory, but that could easily be reduced by removing
-        support for extensions irrelevant to Homenet.  To put these
-        figures into perspective, in a network with 1000 nodes, a Babel
-        router with 10 neighbours needs roughly a megabyte of memory to
-        store its routing table.</t>
+        <t>
+	  The standard implementation of Babel, which implements
+	  multiple extensions to the protocol, consists of roughly
+	  9000 lines of C and compiles to less than 100kB (dynamically
+	  linked against libc) on AMD64.  The stub-only implementation
+	  consists of 900 lines and compiles to 12kB (dynamically
+	  linked).
+	</t>
+        <t>
+	  The amount of state stored by a Babel router is at worst one
+	  routing table entry for each destination and each neighbour.
+	  In the standard implementation, one routing entry occupies
+	  roughly 100 bytes of memory, but that could easily be
+	  reduced by removing support for extensions irrelevant to
+	  Homenet.  To put these figures into perspective, in a
+	  network with 1000 nodes, a Babel router with 10 neighbours
+	  needs roughly a megabyte of memory to store its routing
+	  table.
+	</t>
       </section>
     </section>
     <section title="Scalablity on IEEE 802.11 Wireless Networks">
@@ -299,6 +332,10 @@
           (i.e., level-2 or single area level-1) deployments with hundreds of
           nodes. The protocol has proven to be very scalable.
         </t>
+	<t>
+	  Do we have any information about the scaling of IS-IS on 802.11
+	  networks, in particular?
+	</t>
       </section>
       <section title="Babel Scalability on 802.11">
 	<t>
@@ -344,7 +381,7 @@
           Does the protocol exhibit one or more of the critical initial
           success factors?
         </t>
-        <section title="IS-IS">
+        <section title="IS-IS Success Factors">
           <t>
             IS-IS exhibits the following critical initial success factors:
             <list>
@@ -357,7 +394,7 @@
               </list>
               </t>
               <t>Incremental Deployment: Yes.</t>
-              <t>Open Code Availability: Yes.</t>
+              <t>Open Code Availability: Yes. Multiple implementations.</t>
               <t>Freedom from Usage Restrictions: Yes.</t>
               <t>Open Specification Availability: Yes.</t>
               <t>Open Maintenance Processes: Yes.</t>
@@ -368,7 +405,29 @@
             </list>
           </t>
         </section>
-        <section title="Babel">
+        <section title="Babel Success Factos">
+          <t>
+            Babel exhibits the following critical initial success factors:
+            <list>
+              <t>Positive Net Value:
+              <list>
+                <t> Hardware cost: None. </t>
+                <t> Operational interface: ??. </t>
+                <t> Retraining: None. </t>
+                <t> Business dependencies: None. </t>
+              </list>
+              </t>
+              <t>Incremental Deployment: Yes.</t>
+              <t>Open Code Availability: Yes. One implementation.</t>
+              <t>Freedom from Usage Restrictions: Yes.</t>
+              <t>Open Specification Availability: Yes.</t>
+              <t>Open Maintenance Processes: No.</t>
+              <t>Good Technical Design: Yes, but less widely deployed/proven than IS-IS.</t>
+              <t>Extensible: Yes.</t>
+              <t>No Hard Scalability bound: No.</t>
+              <t>Threats Sufficiently Mitigated: ??.</t>
+            </list>
+          </t>
         </section>
       </section>
       <section title="Willing Implementors">
@@ -401,7 +460,7 @@
         </t>
         <section title="IS-IS">
           <t>
-            Yes.
+            Yes.  IS-IS is already widely deployed in operational networks.
           </t>
         </section>
         <section title="Babel">
@@ -562,6 +621,9 @@
         </front>
         <seriesInfo name="Internet Draft" value="draft-chroboczek-babel-diversity-routing-00"/>
       </reference>
+
+      &rfc1142;
+
     </references>
   </back>
 </rfc>

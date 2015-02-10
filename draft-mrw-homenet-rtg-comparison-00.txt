@@ -71,41 +71,41 @@ Table of Contents
      2.2.  Babel Protocol and Extensions . . . . . . . . . . . . . .   4
    3.  Routing Algorithms  . . . . . . . . . . . . . . . . . . . . .   4
      3.1.  Link State Algorithm  . . . . . . . . . . . . . . . . . .   4
-     3.2.  Distance Vector Algorithm (Babel) . . . . . . . . . . . .   4
-     3.3.  Algorithm Comparison  . . . . . . . . . . . . . . . . . .   4
-   4.  Support for Source-Specific Routing . . . . . . . . . . . . .   4
-     4.1.  Source Specific Routing in IS-IS  . . . . . . . . . . . .   4
+     3.2.  Distance-Vector Algorithm (Babel) . . . . . . . . . . . .   4
+   4.  Support for Source-Specific Routing . . . . . . . . . . . . .   5
+     4.1.  Source Specific Routing in IS-IS  . . . . . . . . . . . .   5
      4.2.  Source Specific Routing in Babel  . . . . . . . . . . . .   5
-     4.3.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Support for Link Metrics  . . . . . . . . . . . . . . . . . .   5
      5.1.  Link Metrics in IS-IS . . . . . . . . . . . . . . . . . .   5
      5.2.  Link Metrics in Babel . . . . . . . . . . . . . . . . . .   5
-     5.3.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .   5
-   6.  Support for Attached Stub Networks  . . . . . . . . . . . . .   5
-     6.1.  IS-IS Support for Stub Networks . . . . . . . . . . . . .   5
-     6.2.  Babel Supportt for Stub Networks  . . . . . . . . . . . .   5
+   6.  Support for Attached Stub Networks  . . . . . . . . . . . . .   6
+     6.1.  IS-IS Support for Stub Networks . . . . . . . . . . . . .   6
+     6.2.  Babel Supportt for Stub Networks  . . . . . . . . . . . .   6
    7.  Security Features . . . . . . . . . . . . . . . . . . . . . .   6
      7.1.  Security Features in IS-IS  . . . . . . . . . . . . . . .   6
      7.2.  Security Features in Babel  . . . . . . . . . . . . . . .   6
    8.  Support for Multicast . . . . . . . . . . . . . . . . . . . .   6
      8.1.  Multicast Routing in IS-IS  . . . . . . . . . . . . . . .   6
      8.2.  Multicast Routing in Babel  . . . . . . . . . . . . . . .   6
-   9.  Implementation Status . . . . . . . . . . . . . . . . . . . .   6
+   9.  Implementation Status . . . . . . . . . . . . . . . . . . . .   7
    10. Code and State Size . . . . . . . . . . . . . . . . . . . . .   7
      10.1.  IS-IS Code and State Size  . . . . . . . . . . . . . . .   7
-     10.2.  Babel Code and State Size  . . . . . . . . . . . . . . .   7
+     10.2.  Babel Code and State Size  . . . . . . . . . . . . . . .   8
    11. Scalablity on IEEE 802.11 Wireless Networks . . . . . . . . .   8
      11.1.  IS-IS Scalability on 802.11  . . . . . . . . . . . . . .   8
      11.2.  Babel Scalability on 802.11  . . . . . . . . . . . . . .   8
    12. Standardization Status  . . . . . . . . . . . . . . . . . . .   8
      12.1.  IS-IS Standardization  . . . . . . . . . . . . . . . . .   8
-     12.2.  Babel Standardization Status . . . . . . . . . . . . . .   8
-   13. Evaluation of RFC 5218 Criteria . . . . . . . . . . . . . . .   8
-     13.1.  Critical Success Factors . . . . . . . . . . . . . . . .   8
-       13.1.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .   9
-       13.1.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .   9
-     13.2.  Willing Implementors . . . . . . . . . . . . . . . . . .   9
-       13.2.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .   9
+     12.2.  Babel Standardization Status . . . . . . . . . . . . . .   9
+   13. Evaluation of RFC 5218 Criteria . . . . . . . . . . . . . . .   9
+     13.1.  Critical Success Factors . . . . . . . . . . . . . . . .   9
+       13.1.1.  IS-IS Success Factors  . . . . . . . . . . . . . . .   9
+       13.1.2.  Babel Success Factos . . . . . . . . . . . . . . . .  10
+     13.2.  Willing Implementors . . . . . . . . . . . . . . . . . .  10
+       13.2.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  10
+       13.2.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  11
+     13.3.  Willing Customers  . . . . . . . . . . . . . . . . . . .  11
+       13.3.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 
 
@@ -114,33 +114,30 @@ Wasserman, et al.         Expires July 2, 2015                  [Page 2]
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
-       13.2.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  10
-     13.3.  Willing Customers  . . . . . . . . . . . . . . . . . . .  10
-       13.3.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  10
-       13.3.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  10
-     13.4.  Potential Niches . . . . . . . . . . . . . . . . . . . .  10
-       13.4.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  10
-       13.4.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  10
-     13.5.  Complexity Removal . . . . . . . . . . . . . . . . . . .  10
-       13.5.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  10
-       13.5.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  10
-     13.6.  Killer App . . . . . . . . . . . . . . . . . . . . . . .  11
-       13.6.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  11
-       13.6.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  11
-     13.7.  Extensible . . . . . . . . . . . . . . . . . . . . . . .  11
-       13.7.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  11
-       13.7.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  11
-     13.8.  Success Predictable  . . . . . . . . . . . . . . . . . .  12
-       13.8.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  12
-       13.8.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  12
-   14. Informative References  . . . . . . . . . . . . . . . . . . .  12
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  13
+       13.3.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  11
+     13.4.  Potential Niches . . . . . . . . . . . . . . . . . . . .  11
+       13.4.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  11
+       13.4.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  11
+     13.5.  Complexity Removal . . . . . . . . . . . . . . . . . . .  11
+       13.5.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  11
+       13.5.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  11
+     13.6.  Killer App . . . . . . . . . . . . . . . . . . . . . . .  12
+       13.6.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  12
+       13.6.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  12
+     13.7.  Extensible . . . . . . . . . . . . . . . . . . . . . . .  12
+       13.7.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  12
+       13.7.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  12
+     13.8.  Success Predictable  . . . . . . . . . . . . . . . . . .  13
+       13.8.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  13
+       13.8.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  13
+   14. Informative References  . . . . . . . . . . . . . . . . . . .  13
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Introduction
 
-   This document compares IS-IS (ISO/IEC 10589:2002) and Babel [RFC6126]
-   across several criteria related to their use in home networks, as
-   defined by the HOMENET WG (HOMENETs).
+   This document compares IS-IS (ISO/IEC 10589:2002) [RFC1142] and Babel
+   [RFC6126] across several criteria related to their use in home
+   networks, as defined by the HOMENET WG (HOMENETs).
 
    Although there are substantial differences between the IS-IS and
    Babel routing protocols, both routing protocols work well, and either
@@ -165,6 +162,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
+
+
+
 Wasserman, et al.         Expires July 2, 2015                  [Page 3]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
@@ -177,6 +177,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
    Source-Specific Routing [BABEL-SS], described in more detail in
    [SS-ROUTING].
+
+   Extension Mechanism for the Babel Routing Protocol[BABEL-EXT]
 
 3.  Routing Algorithms
 
@@ -194,25 +196,23 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 3.1.  Link State Algorithm
 
-   [XXX: chopps]
+   Link state algorithms distribute information for each node to compute
+   a tree representing the entire network.
 
-3.2.  Distance Vector Algorithm (Babel)
+   Link state algorithms scale well in both very large and very dense
+   networks.
 
-3.3.  Algorithm Comparison
+3.2.  Distance-Vector Algorithm (Babel)
 
-   [XXX: chopps]
+   Distance-vector algorithms distribute information about the path
+   length to reach each destination through a given neighbor.  Packets
+   are forwarded to the neighbor who is advertising the shortest path to
+   reach the destination.
 
-4.  Support for Source-Specific Routing
-
-   Source-Specific Routing is a hard requirement for HOMENETs, as it
-   will allow traffic to be routed to the correct outbound network based
-   on host source address selection.  Routing packets to the wrong
-   outbound network could result in packets being dropped due to ISP
-   ingress filtering rules.
-
-4.1.  Source Specific Routing in IS-IS
-
-   [XXX: chopps]
+   Distance-vector algorithms scale well to large networks as long as
+   they are not very densely connected.  However, they collapse in very
+   dense networks, where a single node has hundreds or thousands of
+   neighbors.
 
 
 
@@ -226,20 +226,33 @@ Wasserman, et al.         Expires July 2, 2015                  [Page 4]
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
-4.2.  Source Specific Routing in Babel
+4.  Support for Source-Specific Routing
 
-4.3.  Discussion
+   Source-Specific Routing is a hard requirement for HOMENETs, as it
+   will allow traffic to be routed to the correct outbound network based
+   on host source address selection.  Routing packets to the wrong
+   outbound network could result in packets being dropped due to ISP
+   ingress filtering rules.
+
+   Both Babel and IS-IS have extensions for source-specific routing.
+
+4.1.  Source Specific Routing in IS-IS
+
+   [XXX: chopps]
+
+   Reports indicate that IS-IS has critical issues (routing loops) in a
+   mixed environment where some routers support Source-Specific Routing,
+   and some routers do not.  However, this is not likely to be a problem
+   for Homenet, as we will require Source-Specific Routing on all
+   routers.
+
+4.2.  Source Specific Routing in Babel
 
    Babel's source-specific extensions were carefully designed so that
    source-specific and ordinary (non-specific) routers can coexist in a
    single routing domain, without routing pathologies such as routing
    loops.  Interoperability between plain Babel and Source-Specific
    Babel is described in detail in Section VI.A of [SS-ROUTING].
-   Reports indicate that IS-IS has critical issues (routing loops) in a
-   mixed environment where some routers support Source-Specific Routing,
-   and some routers do not.  However, this is not likely to be a problem
-   for Homenet, as we will require Source-Specific Routing on all
-   routers.
 
 5.  Support for Link Metrics
 
@@ -259,7 +272,15 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    (not just integers), which has already been done by the radio
    interference extensions to Babel [BABEL-Z].
 
-5.3.  Discussion
+
+
+
+
+
+Wasserman, et al.         Expires July 2, 2015                  [Page 5]
+
+Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+
 
 6.  Support for Attached Stub Networks
 
@@ -274,13 +295,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    be designated by simply setting up the necessary filtering rules.
    For resource-limited deployments, a minimalistic, stub-only
    implementation of Babel is available.
-
-
-
-Wasserman, et al.         Expires July 2, 2015                  [Page 5]
-
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
-
 
 7.  Security Features
 
@@ -313,6 +327,17 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
    There is no support for multicast routing in Babel.
 
+
+
+
+
+
+
+Wasserman, et al.         Expires July 2, 2015                  [Page 6]
+
+Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+
+
 9.  Implementation Status
 
    There are Homenet implementations of both IS-IS and Babel.
@@ -325,18 +350,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    are all derived from Chroboczek's original implementation.  The stub-
    only implementation is an independent strain, but it was again
    written by Chroboczek.
-
-
-
-
-
-
-
-
-Wasserman, et al.         Expires July 2, 2015                  [Page 6]
-
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
-
 
 10.  Code and State Size
 
@@ -372,6 +385,15 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    or the distance (or number of hops) from the storing router to the
    advertising router.
 
+
+
+
+
+Wasserman, et al.         Expires July 2, 2015                  [Page 7]
+
+Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+
+
 10.2.  Babel Code and State Size
 
    The standard implementation of Babel, which implements multiple
@@ -386,14 +408,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    memory, but that could easily be reduced by removing support for
    extensions irrelevant to Homenet.  To put these figures into
    perspective, in a network with 1000 nodes, a Babel router with 10
-
-
-
-Wasserman, et al.         Expires July 2, 2015                  [Page 7]
-
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
-
-
    neighbours needs roughly a megabyte of memory to store its routing
    table.
 
@@ -404,6 +418,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    IS-IS is in active use in in the Internet in large non-hierachical
    (i.e., level-2 or single area level-1) deployments with hundreds of
    nodes.  The protocol has proven to be very scalable.
+
+   Do we have any information about the scaling of IS-IS on 802.11
+   networks, in particular?
 
 11.2.  Babel Scalability on 802.11
 
@@ -424,6 +441,15 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    the IS-IS protocol, and the IS-IS protocol has been extended in
    several ISIS Working Group documents.
 
+
+
+
+
+Wasserman, et al.         Expires July 2, 2015                  [Page 8]
+
+Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+
+
 12.2.  Babel Standardization Status
 
    Babel is documented in an Experimental RFC (RFC 6126) published in
@@ -442,15 +468,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    Does the protocol exhibit one or more of the critical initial success
    factors?
 
-
-
-
-Wasserman, et al.         Expires July 2, 2015                  [Page 8]
-
-Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
-
-
-13.1.1.  IS-IS
+13.1.1.  IS-IS Success Factors
 
    IS-IS exhibits the following critical initial success factors:
 
@@ -466,7 +484,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
       Incremental Deployment: Yes.
 
-      Open Code Availability: Yes.
+      Open Code Availability: Yes. Multiple implementations.
 
       Freedom from Usage Restrictions: Yes.
 
@@ -481,9 +499,47 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
       No Hard Scalability bound: Yes.
 
+
+
+Wasserman, et al.         Expires July 2, 2015                  [Page 9]
+
+Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
+
+
       Threats Sufficiently Mitigated: Yes.
 
-13.1.2.  Babel
+13.1.2.  Babel Success Factos
+
+   Babel exhibits the following critical initial success factors:
+
+      Positive Net Value:
+
+         Hardware cost: None.
+
+         Operational interface: ??.
+
+         Retraining: None.
+
+         Business dependencies: None.
+
+      Incremental Deployment: Yes.
+
+      Open Code Availability: Yes. One implementation.
+
+      Freedom from Usage Restrictions: Yes.
+
+      Open Specification Availability: Yes.
+
+      Open Maintenance Processes: No.
+
+      Good Technical Design: Yes, but less widely deployed/proven than
+      IS-IS.
+
+      Extensible: Yes.
+
+      No Hard Scalability bound: No.
+
+      Threats Sufficiently Mitigated: ??.
 
 13.2.  Willing Implementors
 
@@ -501,7 +557,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                  [Page 9]
+Wasserman, et al.         Expires July 2, 2015                 [Page 10]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
@@ -520,7 +576,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 13.3.1.  IS-IS
 
-   Yes.
+   Yes.  IS-IS is already widely deployed in operational networks.
 
 13.3.2.  Babel
 
@@ -557,7 +613,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 10]
+Wasserman, et al.         Expires July 2, 2015                 [Page 11]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
@@ -613,7 +669,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 11]
+Wasserman, et al.         Expires July 2, 2015                 [Page 12]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
@@ -654,6 +710,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
               Protocol", Internet Draft draft-chroboczek-babel-
               diversity-routing-00, July 2014.
 
+   [RFC1142]  Oran, D., "OSI IS-IS Intra-domain Routing Protocol", RFC
+              1142, February 1990.
+
    [RFC6126]  Chroboczek, J., "The Babel Routing Protocol", RFC 6126,
               April 2011.
 
@@ -666,10 +725,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
 
 
-
-
-
-Wasserman, et al.         Expires July 2, 2015                 [Page 12]
+Wasserman, et al.         Expires July 2, 2015                 [Page 13]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
@@ -725,4 +781,4 @@ Authors' Addresses
 
 
 
-Wasserman, et al.         Expires July 2, 2015                 [Page 13]
+Wasserman, et al.         Expires July 2, 2015                 [Page 14]
