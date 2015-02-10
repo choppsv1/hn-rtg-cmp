@@ -371,11 +371,11 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
 
    The Homenet implementation of IS-IS consists of 7000 lines of Erlang
    code and has an installed size of over 11MB.  Its initial memory
-   usage is 22MB, and its working set increases by XXX bytes for each
-   new edge in the network graph.  To put these numbers into
-   perspective, in a network with XXX nodes each of which has XXX
-   neighbours, the Homenet implementation of IS-IS requires XXX bytes
-   for its data structures.
+   usage (as reported by the operating system) is 22MB, and its working
+   set increases by XXX bytes for each new edge in the network graph.
+   To put these numbers into perspective, in a network with XXX nodes
+   each of which has XXX neighbours, the Homenet implementation of IS-IS
+   requires XXX bytes for its data structures.
 
    [I suggest removing the rest of this section, since it consists of
    unsubstantiated, vague claims depending on a not-yet-implemented
@@ -424,7 +424,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    The source-specific implementation of Babel, which implements many
    non-Homenet extensions to the protocol, consists of roughly 10000
    lines of C and has an installed size of less than 130kB on AMD-64.
-   Its initial memory usage is 200kB.
+   Its initial memory usage (as reported by the operating system) is
+   300kB.
 
    The amount of state stored by a Babel router is at worst one routing
    table entry for each destination through each neighbour.  In the
@@ -435,10 +436,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      December 2014
    malloc overhead).
 
    The stub-only implementation of Babel consists of 900 lines of C and
-   compiles to 12kB (dynamically linked).  Its memory usage is constant
-   (it doesn't perform any dynamic allocation).
-
-
+   compiles to 12kB (dynamically linked).  Its memory usage (as reported
+   by the operating system) is 200kB, and remains constant (it doesn't
+   perform any dynamic memory allocation).
 
 
 
