@@ -12,7 +12,7 @@ Expires: July 2, 2015                                   Deutsche Telekom
 
 
                    HOMENET IS-IS and Babel Comparison
-              draft-ietf-mrw-homenet-rtg-comparison-00.txt
+                draft-mrw-homenet-rtg-comparison-00.txt
 
 Abstract
 
