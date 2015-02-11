@@ -83,8 +83,11 @@
         be used way beyond their warranty expiry, or even after their
         producer goes bankrupt, which argues in favour of simple protocols
         that can be assumed to continue working without software updates.
-        Mention also that scaling beyond a few dozen nodes is irrelevant
-        for Homenet. -- jch]
+        Mention that we expect the Homenet protocols to be implemented
+        within even smaller devices, such as smart thermostats, so code
+        size is very important.  Mention also that scaling beyond a few
+        dozen nodes is irrelevant for Homenet, but is nonetheless
+        a desirable feature. -- jch]
       </t>
     </section>
     <section title="Protocols and Extensions Included in Comparison">
@@ -725,7 +728,8 @@
         <section title="IS-IS">
           <t>
             For IS-IS the market has already decided that the protocol is
-            successful in a fairly wide variety of deployments.
+            successful in a fairly wide variety of deployments. [We're
+            speaking of source-specific, autoconfiguring IS-IS here? -- jch]
           </t>
         </section>
         <section title="Babel">

@@ -159,9 +159,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    simple, robust protocols with few tuning knobs.  They tend to be used
    way beyond their warranty expiry, or even after their producer goes
    bankrupt, which argues in favour of simple protocols that can be
-   assumed to continue working without software updates.  Mention also
-   that scaling beyond a few dozen nodes is irrelevant for Homenet. --
-   jch]
+   assumed to continue working without software updates.  Mention that
+   we expect the Homenet protocols to be implemented within even smaller
+   devices, such as smart thermostats, so code size is very important.
 
 
 
@@ -169,6 +169,9 @@ Wasserman, et al.        Expires August 15, 2015                [Page 3]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+   Mention also that scaling beyond a few dozen nodes is irrelevant for
+   Homenet, but is nonetheless a desirable feature. -- jch]
 
 2.  Protocols and Extensions Included in Comparison
 
@@ -214,9 +217,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    [Are you speaking of pure link-state, or multi-area link-state here?
    The distinction is important, since you later argue that IS-IS can be
    scaled down to a single-area implementation. -- jch]
-
-
-
 
 
 
@@ -845,7 +845,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 14.8.1.  IS-IS
 
    For IS-IS the market has already decided that the protocol is
-   successful in a fairly wide variety of deployments.
+   successful in a fairly wide variety of deployments.  [We're speaking
+   of source-specific, autoconfiguring IS-IS here? -- jch]
 
 14.8.2.  Babel
 
@@ -888,8 +889,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    [RFC6126]  Chroboczek, J., "The Babel Routing Protocol", RFC 6126,
               April 2011.
 
-   [RFC7298]  Ovsienko, D., "Babel Hashed Message Authentication Code
-              (HMAC) Cryptographic Authentication", RFC 7298, July 2014.
+
 
 
 
@@ -897,6 +897,9 @@ Wasserman, et al.        Expires August 15, 2015               [Page 16]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+   [RFC7298]  Ovsienko, D., "Babel Hashed Message Authentication Code
+              (HMAC) Cryptographic Authentication", RFC 7298, July 2014.
 
    [SS-ROUTING]
               Boutier, M. and J. Chroboczek, "Source-sensitive routing",
@@ -925,9 +928,6 @@ Authors' Addresses
    University of Paris-Diderot (Paris 7)
 
    Email: jch@pps.univ-paris-diderot.fr
-
-
-
 
 
 
