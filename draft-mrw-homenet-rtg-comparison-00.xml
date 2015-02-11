@@ -75,6 +75,17 @@
 	(reference homenet architecture and HNCP documents), and those
 	characteristics are explored in this document.
       </t>
+      <t>
+        [I think that this section should be replaced or augmented with
+        something that speaks about the specifics of plastic home routers.
+        In particular, they are not administered, which argues in favour
+        of simple, robust protocols with few tuning knobs.  They tend to
+        be used way beyond their warranty expiry, or even after their
+        producer goes bankrupt, which argues in favour of simple protocols
+        that can be assumed to continue working without software updates.
+        Mention also that scaling beyond a few dozen nodes is irrelevant
+        for Homenet. -- jch]
+      </t>
     </section>
     <section title="Protocols and Extensions Included in Comparison">
       <t>
@@ -127,16 +138,32 @@
 	  Link state algorithms scale well in both very large and
 	  very dense networks.
 	</t>
+        <t>
+          [Are you speaking of pure link-state, or multi-area link-state
+          here?  The distinction is important, since you later argue that
+          IS-IS can be scaled down to a single-area implementation. -- jch]
+        </t>
       </section>
-      <section title="Distance-Vector Algorithm (Babel)">
+      <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
 	<t>
 	  Distance-vector algorithms distribute information about the 
 	  path length to reach each destination through a given 
 	  neighbor.  Packets are forwarded to the neighbor who is 
 	  advertising the shortest path to reach the destination.
 	</t>
+        <t>
+          Babel, like EIGRP, DSDV and to a certain extent BGP, uses
+          a loop-avoiding distance-vector algorithm: it avoids creating
+          a loop even during reconvergence (there is no "counting to
+          infinity" nor even short-lived "microloops").
+        </t>
       </section>
       <section title="Algorithm Comparison">
+        <t>
+          [Putting this so early in the document gives undue import to
+          scaling issues -- for Homenet, scaling beyond a few dozen nodes
+          is irrelevant, robustness and simplicity are more important. -- jch]
+        </t>
         <t>
           Loop-avoiding Distance Vector scales beautifully to very large
           networks -- the amount of state is linear in the number of
@@ -152,8 +179,30 @@
           nodes.  Real-world link-state protocols work around that issue
           by splitting the network into multiple "areas", and performing
           distance-vector routing between areas.  It is unclear whether
-          this workaround is suitable for Homenet.
+          this workaround is suitable (or even necessary) for Homenet.
         </t>
+      </section>
+    </section>
+    <section title="Autoconfiguration">
+      <t>
+        Home networks are not administered, so a routing protocol needs to
+        be entirely self-configuring in order to be suitable for Homenet.
+      </t>
+      <section title="IS-IS">
+        <t>
+          IS-IS requires a fair amount of manual configuration.  The
+          Homenet variant of IS-IS uses an autoconfiguration extension
+          defined in an Internet Draft <xref target="ISIS-AUTOCONF"/>.
+        </t>
+      </section>
+      <section title="Babel">
+        <t>
+          Babel is a fully self-configuring protocol -- the standard
+          implementation of Babel only requires a list of interfaces in order
+          to start routing.
+        </t>
+      </section>
+      <section title="Discussion">
       </section>
     </section>
     <section title="Support for Source-Specific Routing">
@@ -716,6 +765,14 @@
       </reference>
 
       &rfc1142;
+
+      <reference anchor="ISIS-AUTOCONF"><front>
+        <title>ISIS Auto-Configuration</title>
+        <author fullname="B. Liu" initials="B." surname="Liu"/>
+        <date year="2014" month="October"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
+      </reference>
 
     </references>
   </back>
