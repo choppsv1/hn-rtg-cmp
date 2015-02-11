@@ -269,14 +269,23 @@
       </section>
       <section title="Link Metrics in Babel">
         <t>
-          In Babel, metrics are unsigned 16-bit integers, which means that
-          metrics are arbitrary integers between 0 and 65534 (the value
-          65535 is reserved to mean "infinity"); this has been found to be
-          sufficient even in the chaotic environment of wireless mesh
-          networks.  If needed, the Babel extension mechanism can be used
-          to extend the metric space in arbitrary ways (not just
-          integers), which has already been done by the radio interference
-          extensions to Babel <xref target="BABEL-Z"/>.</t>
+          Since Babel was originally designed for heterogeneous networks,
+          it is able to dynamically assign metrics to links depending on
+          their lower-layer characteristics.  In practice, Babel assigns
+          lower (better) metrics to wired links than to wireless ones,
+          dynamically measures loss rates in order to favour lossless
+          wireless links, favours routes with non-interfering radio
+          frequencies, and avoids high-latency tunnels.
+        </t>
+
+        <t>
+          Obviously, such a wealth of information can lead to
+          contradictory data in edge cases; however, Babel's
+          loop-avoidance mechanisms ensure that the network remains in
+          a consistent state in all cases, and a hysteresis mechanism
+          ensures that, should a feedback loop occur, the frequency of
+          oscillations remains bounded <xref target="DELAY-BASED"/>.
+        </t>
       </section>
     </section>
     <section title="Support for Attached Stub Networks">
@@ -299,6 +308,12 @@
       </section>
     </section>
     <section title="Security Features">
+      <t>
+        [I think this section is badly written.  We should just state
+        whether each protocol supports auth or encryption, and whether it
+        supports symmetric or something more exciting.  Listing password
+        authentication seems silly. -- jch]
+      </t>
       <section title="Security Features in IS-IS">
         <t>
           IS-IS offers multiple levels of security from none, to simple clear-text
@@ -353,11 +368,15 @@
       </t>
       <t>
         There are multiple open source implementations of Babel, two of
-        which support source-specific routing.  However, they were both
-        originally derived from the same codebase.
+        which support source-specific routing.  Both were originally
+        derived from the same codebase.
       </t>
     </section>
     <section title="Code and State Size">
+      <t>
+        [I think we should replace this verbosity by just a comparison table
+        with hard data. -- jch]
+      </t>
       <section title="IS-IS Code and State Size">
         <t>
           The Homenet implementation of IS-IS consists of 7000 lines of
@@ -431,13 +450,8 @@
 	</t>
       </section>
     </section>
-    <section title="Scalablity on IEEE 802.11 Wireless Networks">
-      <t>
-        [I suggest renaming this section to "Performance on 802.11
-        wireless networks.  Are we trying to get homenets to scale to
-        millions of nodes? -- jch]
-      </t>
-      <section title="IS-IS Scalability on 802.11">
+    <section title="Performance on IEEE 802.11 Wireless Networks">
+      <section title="IS-IS Performance on 802.11">
         <t>
           IS-IS is in active use in in the Internet in large non-hierachical
           (i.e., level-2 or single area level-1) deployments with hundreds of
@@ -448,13 +462,15 @@
 	  networks, in particular?
 	</t>
       </section>
-      <section title="Babel Scalability on 802.11">
+      <section title="Babel Performance on 802.11">
 	<t>
           Babel was carefully optimised for 802.11 networks.  In
-          particular, it has (optional) provisions for link quality
-          estimation and (optional) provisions for radio-interference
-          sensitive routing.
-	</t>
+          particular, it performs link quality estimations of wireless
+          links in a manner that works well with the 802.11 MAC.  In
+          addition, Babel has provisions for estimating radio interference
+          <xref target="BABEL-Z"/>, which is essential for providing good
+          performance on multi-hop radio routes.
+        </t>
         <t>
           Babel was designed to work well on pure mesh networks (networks
           where a packet might exit through the same interface as the one
@@ -472,8 +488,9 @@
 	  documents.
 	</t>
         <t>
-          The source-specific extension to IS-IS is standardized as XXX.
-          [Will it require a downref? -- jch]
+          The autoconfiguration and source-specific extensions to IS-IS,
+          which are both hard requirements for Homenet, are at the stage
+          of Internet Drafts.
         </t>
         
       </section>
@@ -510,11 +527,14 @@
               </list>
               </t>
               <t>Incremental Deployment: Yes.</t>
-              <t>Open Code Availability: Yes. Multiple implementations.</t>
+              <t>Open Code Availability: Yes. One implementation of the Homenet
+              extensions, multiple implementations of the base protocol.</t>
               <t>Freedom from Usage Restrictions: Yes.</t>
               <t>Open Specification Availability: Yes.</t>
               <t>Open Maintenance Processes: Yes.</t>
-              <t>Good Technical Design: Proven with extensive deployment and experience.</t>
+              <t>Good Technical Design: Proven with extensive deployment
+              and experience with the base protocol, little deployment of
+              the Homenet extensions.</t>
               <t>Extensible: Yes.</t>
               <t>No Hard Scalability bound: Yes.</t>
               <t>Threats Sufficiently Mitigated: Yes.</t>
@@ -534,13 +554,14 @@
               </list>
               </t>
               <t>Incremental Deployment: Yes.</t>
-              <t>Open Code Availability: Yes. One implementation.</t>
+              <t>Open Code Availability: Yes.  Multiple implementations
+              derived from a common source.</t>
               <t>Freedom from Usage Restrictions: Yes.</t>
               <t>Open Specification Availability: Yes.</t>
               <t>Open Maintenance Processes: No.</t>
-              <t>Good Technical Design: Yes, but less widely deployed/proven than IS-IS.</t>
+              <t>Good Technical Design: Yes.</t>
               <t>Extensible: Yes.</t>
-              <t>No Hard Scalability bound: No.</t>
+              <t>No Hard Scalability bound: Yes.</t>
               <t>Threats Sufficiently Mitigated: ??.</t>
             </list>
           </t>
@@ -553,9 +574,9 @@
         </t>
         <section title="IS-IS">
           <t>
-            There is only one implementation of source-specific routing
-            for IS-IS.  [Has it ever been extended by people who are not
-            the authors?  If so, who? -- jch]
+            There is only one implementation of autoconfiguration and
+            source-specific routing for IS-IS.  [Has it ever been extended
+            by people who are not the authors?  If so, who? -- jch]
           </t>
           <t>
             [I suggest the rest of this section should be removed. -- jch]
@@ -772,6 +793,15 @@
         <date year="2014" month="October"/>
       </front>
       <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
+      </reference>
+
+      <reference anchor="DELAY-BASED" target="http://arxiv.org/abs/1403.3488">
+        <front>
+          <title>A delay-based routing metric</title>
+          <author fullname="Baptiste Jonglez" initials="B." surname="Jonglez"/>
+          <author fullname="Matthieu Boutier" initials="M." surname="Boutier"/>
+          <date year="2014" month="March"/>
+        </front>
       </reference>
 
     </references>
