@@ -406,6 +406,7 @@
 <link href="#rfc.section.11" rel="Chapter" title="11 Code and State Size"/>
 <link href="#rfc.section.11.1" rel="Chapter" title="11.1 IS-IS Code and State Size"/>
 <link href="#rfc.section.11.2" rel="Chapter" title="11.2 Babel Code and State Size"/>
+<link href="#rfc.section.11.3" rel="Chapter" title="11.3 Comparison"/>
 <link href="#rfc.section.12" rel="Chapter" title="12 Performance on IEEE 802.11 Wireless Networks"/>
 <link href="#rfc.section.12.1" rel="Chapter" title="12.1 IS-IS Performance on 802.11"/>
 <link href="#rfc.section.12.2" rel="Chapter" title="12.2 Babel Performance on 802.11"/>
@@ -446,7 +447,7 @@
 
   <meta name="dct.creator" content="Wasserman, M., Hopps, C., and J. Chroboczek" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-mrw-homenet-rtg-comparison-00.txt" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-2-11" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-2-12" />
   <meta name="dct.abstract" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
   <meta name="description" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
 
@@ -470,7 +471,7 @@
   <td class="right">C. Hopps</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 15, 2015</td>
+  <td class="left">Expires: August 16, 2015</td>
   <td class="right">Deutsche Telekom</td>
 </tr>
 <tr>
@@ -483,7 +484,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">February 11, 2015</td>
+  <td class="right">February 12, 2015</td>
 </tr>
 
     	
@@ -503,7 +504,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 15, 2015.</p>
+<p>This Internet-Draft will expire on August 16, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -547,6 +548,7 @@
 <li>11.   <a href="#rfc.section.11">Code and State Size</a></li>
 <li>11.1.   <a href="#rfc.section.11.1">IS-IS Code and State Size</a></li>
 <li>11.2.   <a href="#rfc.section.11.2">Babel Code and State Size</a></li>
+<li>11.3.   <a href="#rfc.section.11.3">Comparison</a></li>
 <li>12.   <a href="#rfc.section.12">Performance on IEEE 802.11 Wireless Networks</a></li>
 <li>12.1.   <a href="#rfc.section.12.1">IS-IS Performance on 802.11</a></li>
 <li>12.2.   <a href="#rfc.section.12.2">Babel Performance on 802.11</a></li>
@@ -679,6 +681,71 @@
 <p id="rfc.section.11.2.p.1">The source-specific implementation of Babel, which implements many non-Homenet extensions to the protocol, consists of roughly 10000 lines of C and has an installed size of less than 130kB on AMD-64.  Its initial memory usage (as reported by the operating system) is 300kB.  </p>
 <p id="rfc.section.11.2.p.2">The amount of state stored by a Babel router is at worst one routing table entry for each destination through each neighbour.  In the source-specific implementation, one routing entry occupies roughly 100 bytes of memory.  To put these figures into perspective, in a network with 1000 nodes, a Babel router with 10 neighbours needs roughly a megabyte of memory to store its routing table (not counting malloc overhead).</p>
 <p id="rfc.section.11.2.p.3">The stub-only implementation of Babel consists of 900 lines of C and compiles to 12kB (dynamically linked).  Its memory usage (as reported by the operating system) is 200kB, and remains constant (it doesn't perform any dynamic memory allocation).  </p>
+<h1 id="rfc.section.11.3"><a href="#rfc.section.11.3">11.3.</a> Comparison</h1>
+<p><a href="#size-comparison">Table 1</a> summarises the sizes of the available Homenet routing protocol implementations.  (Data courtesy of Steven Barth and Markus Stenberg.) </p>
+<div id="rfc.table.1"/>
+<div id="size-comparison"/>
+<table cellpadding="3" cellspacing="0" class="tt full center">
+  <caption>Comparison of Homenet implementation size</caption>
+  <thead>
+    <tr>
+      <th class="center"/>
+      <th class="center">babeld (source-specific)</th>
+      <th class="center">sbabeld (stub-only)</th>
+      <th class="center">AutoISIS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center">Version</td>
+      <td class="center">2598774</td>
+      <td class="center">cc7d681</td>
+      <td class="center">0.8.0</td>
+    </tr>
+    <tr>
+      <td class="center">Date</td>
+      <td class="center">2014-09-08</td>
+      <td class="center">2014-11-21</td>
+      <td class="center">2014-08-26</td>
+    </tr>
+    <tr>
+      <td class="center">Licence</td>
+      <td class="center">MIT</td>
+      <td class="center">MIT</td>
+      <td class="center">Apache 2.0</td>
+    </tr>
+    <tr>
+      <td class="center">Lines of Code</td>
+      <td class="center">10.000</td>
+      <td class="center">1.000</td>
+      <td class="center">7.000</td>
+    </tr>
+    <tr>
+      <td class="center">Pgm. language</td>
+      <td class="center">C</td>
+      <td class="center">C</td>
+      <td class="center">Erlang</td>
+    </tr>
+    <tr>
+      <td class="center">Installed size (AMD64)</td>
+      <td class="center">129kB</td>
+      <td class="center">13kB</td>
+      <td class="center">11.385kB</td>
+    </tr>
+    <tr>
+      <td class="center">Total installed size (excluding libc)</td>
+      <td class="center">129kB</td>
+      <td class="center">13kB</td>
+      <td class="center">14.155kB</td>
+    </tr>
+    <tr>
+      <td class="center">Baseline RSS</td>
+      <td class="center">~300kB</td>
+      <td class="center">~200kB</td>
+      <td class="center">~22.000kB</td>
+    </tr>
+  </tbody>
+</table>
 <h1 id="rfc.section.12"><a href="#rfc.section.12">12.</a> Performance on IEEE 802.11 Wireless Networks</h1>
 <h1 id="rfc.section.12.1"><a href="#rfc.section.12.1">12.1.</a> IS-IS Performance on 802.11</h1>
 <p id="rfc.section.12.1.p.1">IS-IS is in active use in in the Internet in large non-hierachical (i.e., level-2 or single area level-1) deployments with hundreds of nodes. The protocol has proven to be very scalable.  </p>

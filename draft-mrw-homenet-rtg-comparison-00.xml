@@ -460,6 +460,60 @@
 	  perform any dynamic memory allocation).
 	</t>
       </section>
+      <section title="Comparison">
+        <t>
+          <xref target="size-comparison"/> summarises the sizes of
+          the available Homenet routing protocol implementations.  (Data
+          courtesy of Steven Barth and Markus Stenberg.)
+        </t>
+
+        <texttable title="Comparison of Homenet implementation size" anchor="size-comparison">
+          <ttcol align="center"/>
+          <ttcol align="center">babeld (source-specific)</ttcol>
+          <ttcol align="center">sbabeld (stub-only)</ttcol>
+          <ttcol align="center">AutoISIS</ttcol>
+
+          <c>Version</c>
+          <c>2598774</c>
+          <c>cc7d681</c>
+          <c>0.8.0</c>
+
+          <c>Date</c>
+          <c>2014-09-08</c>
+          <c>2014-11-21</c>
+          <c>2014-08-26</c>
+
+          <c>Licence</c>
+          <c>MIT</c>
+          <c>MIT</c>
+          <c>Apache 2.0</c>
+
+          <c>Lines of Code</c>
+          <c>10.000</c>
+          <c>1.000</c>
+          <c>7.000</c>
+
+          <c>Pgm. language</c>
+          <c>C</c>
+          <c>C</c>
+          <c>Erlang</c>
+
+          <c>Installed size (AMD64)</c>
+          <c>129kB</c>
+          <c>13kB</c>
+          <c>11.385kB</c>
+
+          <c>Total installed size (excluding libc)</c>
+          <c>129kB</c>
+          <c>13kB</c>
+          <c>14.155kB</c>
+
+          <c>Baseline RSS</c>
+          <c>~300kB</c>
+          <c>~200kB</c>
+          <c>~22.000kB</c>
+        </texttable>
+      </section>
     </section>
     <section title="Performance on IEEE 802.11 Wireless Networks">
       <section title="IS-IS Performance on 802.11">
