@@ -525,6 +525,10 @@
       </section>
     </section>
     <section title="Evaluation of RFC 5218 Criteria">
+      <t>
+        [I recommend removing this section, it reads like marketese.
+        -- jch]
+      </t>
       <section title="Critical Success Factors">
         <t>
           Does the protocol exhibit one or more of the critical initial
