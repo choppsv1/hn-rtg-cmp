@@ -622,7 +622,7 @@
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Autoconfiguration</h1>
 <p id="rfc.section.4.p.1">Home networks are not administered, so a routing protocol needs to be entirely self-configuring in order to be suitable for Homenet.  </p>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> IS-IS</h1>
-<p id="rfc.section.4.1.p.1">IS-IS requires a fair amount of manual configuration.  The Homenet variant of IS-IS uses an autoconfiguration extension defined in an Internet Draft <a href="#ISIS-AUTOCONF">[ISIS-AUTOCONF]</a>.  </p>
+<p id="rfc.section.4.1.p.1">The only required configuration for IS-IS is a unique area/system identifier. The Homenet variant of IS-IS uses an autoconfiguration extension defined in an Internet Draft <a href="#ISIS-AUTOCONF">[ISIS-AUTOCONF]</a>, to set this value.  </p>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Babel</h1>
 <p id="rfc.section.4.2.p.1">Babel is a fully self-configuring protocol -- the standard implementation of Babel only requires a list of interfaces in order to start routing.  </p>
 <h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Discussion</h1>
@@ -632,15 +632,14 @@
 <h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Source Specific Routing in IS-IS</h1>
 <p id="rfc.section.5.1.p.1">[XXX: chopps]</p>
 <p id="rfc.section.5.1.p.2">Reports indicate that IS-IS has critical issues (routing loops) in a mixed environment where some routers support Source-Specific Routing, and some routers do not.  However, this is not likely to be a problem for Homenet, as we will require Source-Specific Routing on all routers.  </p>
+<p id="rfc.section.5.1.p.3">[How will we enforce that? -- jch] </p>
 <h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Source Specific Routing in Babel</h1>
 <p id="rfc.section.5.2.p.1">The Source-specific extension to the Babel routing protocol <a href="#BABEL-SS">[BABEL-SS]</a> has been implemented for over a year, has been made widely available and has seen a fair amount deployment as part of OpenWRT and CeroWRT.  The implementation is currently being merged into the standard Babel implementation, and is scheduled to be included in version 1.6 (planned for March 2015).  </p>
 <h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Discussion</h1>
 <p id="rfc.section.5.3.p.1">Babel's source-specific extensions were carefully designed so that source-specific and ordinary (non-specific) routers can coexist in a single routing domain, without routing pathologies such as routing loops.  Interoperability between plain Babel and Source-Specific Babel is described in detail in Section VI.A of <a href="#SS-ROUTING">[SS-ROUTING]</a>.  </p>
-<p id="rfc.section.5.3.p.2">Reports indicate that source-specific IS-IS has critical issues (routing loops) in a mixed environment where some routers support Source-Specific Routing, and some routers do not.  However, this is not likely to be a problem for Homenet, as we will require Source-Specific Routing on all routers.  </p>
-<p id="rfc.section.5.3.p.3">[How will we enforce that? -- jch] </p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> Support for Link Metrics</h1>
 <h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> Link Metrics in IS-IS</h1>
-<p id="rfc.section.6.1.p.1">IS-IS supports 2 types of link metrics a legacy link metric (which should probably not be considered for HOMENET use) and a modern extended (24-bit) link metric. Additionally multi-topology support allows for a variable number of metrics per link.  </p>
+<p id="rfc.section.6.1.p.1">The homenet version of IS-IS uses the wide-metric (24-bit) link metric. Additionally IS-IS includes multi-topology support allowing for a variable number of metrics per link, as well as per-link and per-prefix tags allowing for coloring of links and reachability, and finally per-link and per-prefix sub-tlv's allowing for any future additional extensions.  </p>
 <h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Link Metrics in Babel</h1>
 <p id="rfc.section.6.2.p.1">Since Babel was originally designed for heterogeneous networks, it is able to dynamically assign metrics to links depending on their lower-layer characteristics.  In practice, Babel assigns lower (better) metrics to wired links than to wireless ones, dynamically measures loss rates in order to favour lossless wireless links, favours routes with non-interfering radio frequencies, and avoids high-latency tunnels.  </p>
 <p id="rfc.section.6.2.p.2">Obviously, such a wealth of information can lead to contradictory data in edge cases; however, Babel's loop-avoidance mechanisms ensure that the network remains in a consistent state in all cases, and a hysteresis mechanism ensures that, should a feedback loop occur, the frequency of oscillations remains bounded <a href="#DELAY-BASED">[DELAY-BASED]</a>.  </p>
