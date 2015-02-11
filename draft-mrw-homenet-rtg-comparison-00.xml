@@ -85,8 +85,10 @@
         that can be assumed to continue working without software updates.
         Mention that we expect the Homenet protocols to be implemented
         within even smaller devices, such as smart thermostats, so code
-        size is very important.  Mention also that scaling beyond a few
-        dozen nodes is irrelevant for Homenet, but is nonetheless
+        size is very important.  Mention further that home networks tend
+        to be constituted of multiple heterogeneous link technologies --
+        Ethernet, Wifi, Powerline, etc.  Mention also that scaling beyond
+        a few dozen nodes is irrelevant for Homenet, but is nonetheless
         a desirable feature. -- jch]
       </t>
     </section>
@@ -104,6 +106,14 @@
 	  (ISO/IEC 10589:2002), this comparison considers the
 	  following IS-IS extensions:
 	</t>
+        <t><list style="symbols">
+          <t>
+            ISIS Auto-Configuration <xref target="ISIS-AUTOCONF"/>;
+          </t>
+          <t>
+            Source-Specific routing in IS-IS (XXX reference?).
+          </t>
+        </list></t>
       </section>
       <section title="Babel Protocol and Extensions">
 	<t> 
@@ -111,13 +121,16 @@
 	  6126), this comparison considers the following Babel 
 	  extensions:
 	</t>
+        <t><list style="symbols">
+	<t>
+	  Extension Mechanism for the Babel Routing Protocol
+          <xref target="BABEL-EXT"/>;
+	</t>
         <t>
 	  Source-Specific Routing <xref target="BABEL-SS"/>, described in
           more detail in <xref target="SS-ROUTING"/>.
 	</t>
-	<t>
-	  Extension Mechanism for the Babel Routing Protocol<xref target="BABEL-EXT"/>
-	</t>
+        </list></t>
       </section>
     </section>
     <section title="Routing Algorithms">

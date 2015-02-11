@@ -186,15 +186,19 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    10589:2002), this comparison considers the following IS-IS
    extensions:
 
+   o  ISIS Auto-Configuration [ISIS-AUTOCONF];
+
+   o  Source-Specific routing in IS-IS (XXX reference?).
+
 2.2.  Babel Protocol and Extensions
 
    In addition to the base Babel Protocol specification (RFC 6126), this
    comparison considers the following Babel extensions:
 
-   Source-Specific Routing [BABEL-SS], described in more detail in
-   [SS-ROUTING].
+   o  Extension Mechanism for the Babel Routing Protocol [BABEL-EXT];
 
-   Extension Mechanism for the Babel Routing Protocol[BABEL-EXT]
+   o  Source-Specific Routing [BABEL-SS], described in more detail in
+      [SS-ROUTING].
 
 3.  Routing Algorithms
 
@@ -214,10 +218,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    Link state algorithms scale well in both very large and very dense
    networks.
 
-   [Are you speaking of pure link-state, or multi-area link-state here?
-   The distinction is important, since you later argue that IS-IS can be
-   scaled down to a single-area implementation. -- jch]
-
 
 
 
@@ -225,6 +225,10 @@ Wasserman, et al.        Expires August 15, 2015                [Page 4]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+   [Are you speaking of pure link-state, or multi-area link-state here?
+   The distinction is important, since you later argue that IS-IS can be
+   scaled down to a single-area implementation. -- jch]
 
 3.2.  Loop-Avoiding Distance-Vector Algorithm (Babel)
 
@@ -269,10 +273,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    IS-IS requires a fair amount of manual configuration.  The Homenet
    variant of IS-IS uses an autoconfiguration extension defined in an
    Internet Draft [ISIS-AUTOCONF].
-
-
-
-
 
 
 
