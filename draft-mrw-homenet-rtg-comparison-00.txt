@@ -137,7 +137,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
      14.8.  Success Predictable  . . . . . . . . . . . . . . . . . .  16
        14.8.1.  IS-IS  . . . . . . . . . . . . . . . . . . . . . . .  16
        14.8.2.  Babel  . . . . . . . . . . . . . . . . . . . . . . .  17
-   15. Informative References  . . . . . . . . . . . . . . . . . . .  17
+   15. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  17
+   16. Informative References  . . . . . . . . . . . . . . . . . . .  17
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 1.  Introduction
@@ -160,7 +161,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    manufacturer leaves the router business.  This, again, argues in
    favour of simple, robust protocols that are easy to implement and can
    be expected to keep functioning without software updates.
-
 
 
 
@@ -909,7 +909,12 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    However, it remains a young protocol, certainly much younger than IS-
    IS.
 
-15.  Informative References
+15.  Acknowledgments
+
+   The authors are grateful for the input of Steven Barth and Denis
+   Ovsienko.
+
+16.  Informative References
 
    [BABEL-EXT]
               Chroboczek, J., "Extension Mechanism for the Babel Routing
@@ -942,17 +947,16 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    [RFC7298]  Ovsienko, D., "Babel Hashed Message Authentication Code
               (HMAC) Cryptographic Authentication", RFC 7298, July 2014.
 
-   [SS-ROUTING]
-              Boutier, M. and J. Chroboczek, "Source-sensitive routing",
-              December 2014, <http://arxiv.org/abs/1403.0445>.
-
-
 
 
 Wasserman, et al.        Expires August 16, 2015               [Page 17]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+   [SS-ROUTING]
+              Boutier, M. and J. Chroboczek, "Source-sensitive routing",
+              December 2014, <http://arxiv.org/abs/1403.0445>.
 
 Authors' Addresses
 
@@ -977,10 +981,6 @@ Authors' Addresses
    University of Paris-Diderot (Paris 7)
 
    Email: jch@pps.univ-paris-diderot.fr
-
-
-
-
 
 
 
