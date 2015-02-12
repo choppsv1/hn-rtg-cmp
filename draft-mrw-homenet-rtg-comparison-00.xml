@@ -175,9 +175,13 @@
 	  very dense networks.
 	</t>
         <t>
-          [Are you speaking of pure link-state, or multi-area link-state
-          here?  The distinction is important, since you later argue that
-          IS-IS can be scaled down to a single-area implementation. -- jch]
+          [I strongly object to this claim.  The scaling results available
+          in the open litterature apply to hybrid routing -- level 1-2 in
+          IS-IS parlance.  However, later in this document we argue that
+          for Homenet IS-IS should be scaled down by removing level-1
+          support, making it a naive link-state protocol, which is known
+          to have scalability issues unless it is augmented with other
+          mechanisms. -- jch]
         </t>
       </section>
       <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
@@ -271,10 +275,10 @@
           The Source-specific extension to the Babel routing protocol
           <xref target="BABEL-SS"/> has been implemented for over a year,
           has been made widely available and has seen a fair amount
-          deployment as part of OpenWRT and CeroWRT.  The implementation
-          is currently being merged into the standard Babel
-          implementation, and is scheduled to be included in version 1.6
-          (planned for March 2015).
+          deployment as part of OpenWRT and CeroWRT.  The source-specific
+          code is currently in the process of being merged into the
+          standard Babel implementation, and is scheduled to be included
+          in version 1.6 (planned for March 2015).
         </t>
       </section>
       <section title="Discussion">
@@ -582,9 +586,11 @@
       </section>
       <section title="Babel Standardization Status">
 	<t>
-	  Babel is documented in an Experimental RFC (RFC 6126)
-	  published in 2011, and it has been updated in several
-	  individual-submission RFCs and Internet Drafts.
+	  Babel is documented in an Experimental RFC (RFC 6126) published
+	  in 2011, and it has been updated in several
+	  individual-submission RFCs and Internet Drafts.  An Internet
+	  Draft establishing an IANA registry of Babel extensions has been
+	  submitted for publication as an RFC <xref target="BABEL-EXT"/>.
 	</t>
 	<t>
 	  The use of Babel in a Standards Track HOMENET RFC would require
@@ -639,7 +645,8 @@
               <t>Positive Net Value:
               <list>
                 <t> Hardware cost: None. </t>
-                <t> Operational interface: medium. </t>
+                <t> Operational interface: tcpdump and wireshark support,
+                dedicated monitoring software. </t>
                 <t> Retraining: None. </t>
                 <t> Business dependencies: None. </t>
               </list>
@@ -704,9 +711,10 @@
         </section>
         <section title="Babel">
           <t>
-            Babel is currently deployed as part of the OpenWRT and CeroWRT
-            operating systems.  Additionally, the current version is used
-            as a testbed for the Homenet configuration protocol.
+            Source-Specific Babel is currently deployed as part of the
+            OpenWRT and CeroWRT operating systems.  Additionally, the
+            current version is used as a testbed for the Homenet
+            configuration protocol.
           </t>
         </section>
       </section>
@@ -823,8 +831,8 @@
         <section title="Babel">
           <t>
             Source-specific Babel is probably the only source-specific
-            routing protocol that has seen a fair amount of deployment and
-            is being used in production.
+            routing protocol that has seen deployment and is being used in
+            production.
           </t>
           <t>
             Plain Babel has seen a modest amount of deployment, most
