@@ -469,11 +469,13 @@
 	  these figures into perspective, in a network with 1000
 	  nodes, a Babel router with 10 neighbours needs roughly a
 	  megabyte of memory to store its routing table (not counting
-	  malloc overhead).</t> <t>The stub-only implementation of
-	  Babel consists of 900 lines of C and compiles to 12kB
-	  (dynamically linked).  Its memory usage (as reported by the
-	  operating system) is 200kB, and remains constant (it doesn't
-	  perform any dynamic memory allocation).
+	  malloc overhead).
+        </t>
+        <t>
+          The stub-only implementation of Babel consists of 900 lines of
+          C and compiles to 12kB (dynamically linked).  Its memory usage
+          (as reported by the operating system) is 200kB, and remains
+          constant (it doesn't perform any dynamic memory allocation).
 	</t>
       </section>
       <section title="Comparison">
@@ -524,14 +526,22 @@
           <c>~200kB</c>
           <c>~22.000kB</c>
         </texttable>
+        <t>
+          In this table, "Installed size" is the size reported by the
+          package manager for the routing daemon's package(s) (including
+          the 1.6MB of the "Beam" Erlang VM in the case of IS-IS), while
+          "Total installed size" is the sum of the size of the deamon's
+          packages and all its dependencies, excluding the C library.
+        </t>
       </section>
     </section>
     <section title="Performance on IEEE 802.11 Wireless Networks">
       <section title="IS-IS Performance on 802.11">
         <t>
-          IS-IS is in active use in in the Internet in large non-hierachical
-          (i.e., level-2 or single area level-1) deployments with hundreds of
-          nodes. The protocol has proven to be very scalable.
+          IS-IS is in active use in in the Internet in large
+          non-hierachical (i.e., level-2 or single area level-1)
+          deployments with hundreds of nodes. The protocol has proven to
+          be very scalable.
         </t>
 	<t>
 	  Do we have any information about the performance of IS-IS on 802.11
