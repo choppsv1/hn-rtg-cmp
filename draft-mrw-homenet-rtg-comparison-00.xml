@@ -14,7 +14,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" docName="draft-mrw-homenet-rtg-comparison-00.txt">
+<rfc category="info" docName="draft-mrw-homenet-rtg-comparison-00.txt">
   <front>
     <title>HOMENET IS-IS and Babel Comparison</title>
     <author initials="M." surname="Wasserman" fullname="Margaret Wasserman">
@@ -62,9 +62,9 @@
     <section title="Introduction"> 
       <t>
 	This document compares IS-IS (ISO/IEC 10589:2002) <xref
-	target="RFC1142"/> and Babel <xref target="RFC6126"/> across
-	several criteria related to their use in home networks, as
-	defined by the HOMENET WG (HOMENETs).
+	target="RFC1142"/> and Babel <xref target="RFC6126"/> according to
+	several criteria related to their use in home networks (Homenets),
+	as defined by the Homenet WG.
       </t>
       <t>
         The Homenet environment is different from the environment of
@@ -77,13 +77,13 @@
       <t>
         Another difference is that Homenets are usually built out of
         a specific class of cheap device, the "Plastic Home Router".
-        A PHR's firmware is installed at the factory, and is most likely
-        never updated.  Additionally, experience shows that home routers
-        are often used way beyond their warranty period, and even after
-        their manufacturer leaves the router business.  This, again,
-        argues in favour of simple, robust protocols that are easy to
-        implement and can be expected to keep functioning without software
-        updates.
+        A Plastic Home Router's firmware is installed at the factory, and
+        is most likely never updated.  Additionally, experience shows that
+        home routers are often used way beyond their warranty period, and
+        even after their manufacturer leaves the router business.  This,
+        again, argues in favour of simple, robust protocols that are easy
+        to implement and can be expected to keep functioning without
+        software updates.
       </t>
       <t>
         Homenets are built and grow organically, and often end up
@@ -91,16 +91,16 @@
         performance characteristics (twisted-pair Ethernet, IEEE 802.11
         and its multiple variants, Powerline Ethernet, etc.).  It is
         desirable for a Homenet routing protocol to be able to dynamically
-        optimise paths according to the link technology.
+        optimise paths according to the link characteristics.
       </t>
       <t>
         Contrary to popular perception, the Plastic Home Router is usually
-        equipped with a fairly fast CPU and reasonable amounts of flash
-        and RAM; at the time of writing, a 700MHz MIPS CPU with 16MB of
-        flash and 64MB of RAM is typical.  However, we expect smaller
-        devices to participate in the Homenet protocols, at least as stub
-        routers.  The ability to scale down the Homenet protocols is
-        therefore likely to encourage their wider adoption.
+        equipped with a reasonably fast CPU and reasonable amounts of
+        flash and RAM; at the time of writing, a (non-superscalar) 700MHz
+        MIPS CPU with 16MB of flash and 64MB of RAM is typical.  However,
+        we expect smaller devices to participate in the Homenet protocols,
+        at least as stub routers.  The ability to scale down the Homenet
+        protocols is therefore likely to encourage their wider adoption.
       </t>
       <t>
         Experts appear to disagree on the expected size of a Homenet; we
@@ -109,7 +109,7 @@
         is not likely to be relevant to Homenet in the foreseeable future,
         the Homenet protocols, if successful, will be repurposed to larger
         networks, whether we like it or not, and using a protocol that
-        scales well from the outset may avoid trouble in the future.
+        scales well from the outset may be desirable.
       </t>
     </section>
     <section title="Protocols and Extensions Included in Comparison">
@@ -131,7 +131,7 @@
             ISIS Auto-Configuration <xref target="ISIS-AUTOCONF"/>;
           </t>
           <t>
-            Source-Specific routing in IS-IS (XXX reference?).
+            Source-Specific routing in IS-IS <xref target="ISIS-SS"/>.
           </t>
         </list></t>
       </section>
@@ -228,34 +228,54 @@
           no duplication of state based on the number of adjacencies or unique
           paths to a given prefix.
         </t>
-        <section title="Converence Times">
-          <t>
-            Isn't this important? For example if one is on a phone call over
-            wifi, etc.
-          </t>
-          <section title="IS-IS">
-            <t>
-              Given fast flooding of any change in the network, IS-IS has been
-              shown to acheive sub 200ms end-to-end convergence even in very
-              large provider networks (900+ nodes). Basically the time for
-              convergence is the time to propagate a new LSP from one end of the
-              network to the other plus the SPF (tree computation interval) and
-              FIB loading time. The flooding is done without delay and prior to
-              running the SPF (tree-calculation) algorithm. Thus is roughly
-              proportional to propagation delay across the diameter of the
-              network. The tree calculation is sub 20ms on modern CPUs. FIB load
-              time depends on the FIB hardware and design and not the routing
-              protocol choice.
+      </section>
+    </section>
+    <section title="Converence Times">
+      <t>
+        Isn't this important? For example if one is on a phone call over
+        wifi, etc.
+      </t>
+      <t>
+        [This is somewhat disingenious, since convergence time is
+        dwarfed by the time needed to detect link failure -- which is
+        two hello intervals in Babel (8s by default), and one hold
+        time in IS-IS (30s by default in Cisco's implementation).  We
+        should not be raising expectations by making misleading
+        claims, and I therefore strongly object to this section as it
+        stands now.  -- jch]
+      </t>
+      <section title="IS-IS">
+        <t>
+          Given fast flooding of any change in the network, IS-IS has been
+          shown to acheive sub 200ms end-to-end convergence even in very
+          large provider networks (900+ nodes). Basically the time for
+          convergence is the time to propagate a new LSP from one end of the
+          network to the other plus the SPF (tree computation interval) and
+          FIB loading time. The flooding is done without delay and prior to
+          running the SPF (tree-calculation) algorithm. Thus is roughly
+          proportional to propagation delay across the diameter of the
+          network. The tree calculation is sub 20ms on modern CPUs. FIB load
+          time depends on the FIB hardware and design and not the routing
+          protocol choice.
 
-              We easily should expect sub-second convergence for any change
-              in reachability (addition or subtraction) in any conceivable
-              homenet deployment.
-            </t>
-          </section>
-          <section title="Babel">
-            <t> XXX </t>
-          </section>
-        </section>
+          We easily should expect sub-second convergence for any change
+          in reachability (addition or subtraction) in any conceivable
+          homenet deployment.
+        </t>
+        <t>
+          [Are these numbers for single-area IS-IS?  Recall that we
+          argue in favour of scaling down IS-IS to a level 2 only
+          implementation. -- jch]
+        </t>
+      </section>
+      <section title="Babel">
+        <t>
+          Since Babel maintains a redundant routing table, it is most
+          often able to reconverge almost instantaneously after a link
+          failure (this is similar to e.g. EIGRP).  In the case where
+          no feasible routes are available, Babel reconverges in 20ms
+          per hop to the source.
+        </t>
       </section>
     </section>
     <section title="Autoconfiguration">
@@ -317,8 +337,6 @@
           standard Babel implementation, and is scheduled to be included
           in version 1.6 (planned for March 2015).
         </t>
-      </section>
-      <section title="Discussion">
         <t>
           Babel's source-specific extensions were carefully designed so
           that source-specific and ordinary (non-specific) routers can
@@ -327,6 +345,8 @@
           Source-Specific Babel is described in detail in Section VI.A of
           <xref target="SS-ROUTING"/>.
 	</t>
+      </section>
+      <section title="Discussion">
       </section>
     </section>
     <section title="Support for Link Metrics">
@@ -637,7 +657,8 @@
         <t>
           The autoconfiguration and source-specific extensions to IS-IS,
           which are both hard requirements for Homenet, are documented in
-          Internet Drafts.
+          (non-WG) Internet Drafts <xref target="ISIS-AUTOCONF"/>
+          <xref target="ISIS-SS"/>.
         </t>
         
       </section>
@@ -951,13 +972,6 @@
 
       &rfc1142;
 
-      <reference anchor="ISIS-AUTOCONF"><front>
-        <title>ISIS Auto-Configuration</title>
-        <author fullname="B. Liu" initials="B." surname="Liu"/>
-        <date year="2014" month="October"/>
-      </front>
-      <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
-      </reference>
 
       <reference anchor="DELAY-BASED" target="http://arxiv.org/abs/1403.3488">
         <front>
@@ -968,6 +982,22 @@
         </front>
       </reference>
 
+      <reference anchor="ISIS-AUTOCONF"><front>
+        <title>ISIS Auto-Configuration</title>
+        <author fullname="B. Liu" initials="B." surname="Liu"/>
+        <date year="2014" month="October"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
+      </reference>
+
+      <reference anchor="ISIS-SS"><front>
+        <title>IPv6 Source/Destination Routing using IS-IS</title>
+        <author fullname="F. J. Baker" initials="F. J." surname="Baker"/>
+        <author fullname="D. Lamparter" initials="D." surname="Lamparter"/>
+        <date year="2014" month="October"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-baker-ipv6-isis-dst-src-routing-02"/>
+      </reference>
     </references>
   </back>
 </rfc>
