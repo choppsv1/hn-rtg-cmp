@@ -358,8 +358,9 @@
       </section>
       <section title="Security Features in Babel">
         <t>
-	  Babel supports an extensible HMAC-based cryptographic
-	  authentication mechanism <xref target="RFC7298"/>.
+	  Babel supports symmetric key authentication using an extensible
+	  HMAC-based cryptographic authentication mechanism <xref
+	  target="RFC7298"/>.
 	</t>
       </section>
     </section>

@@ -431,8 +431,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 8.2.  Security Features in Babel
 
-   Babel supports an extensible HMAC-based cryptographic authentication
-   mechanism [RFC7298].
+   Babel supports symmetric key authentication using an extensible HMAC-
+   based cryptographic authentication mechanism [RFC7298].
 
 9.  Support for Multicast
 
