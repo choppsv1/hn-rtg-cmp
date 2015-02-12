@@ -211,7 +211,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
    o  ISIS Auto-Configuration [ISIS-AUTOCONF];
 
-   o  Source-Specific routing in IS-IS (XXX reference?).
+   o  Source-Specific routing in IS-IS [ISIS-SS].
 
 2.2.  Babel Protocol and Extensions
 
@@ -710,8 +710,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    several ISIS Working Group documents.
 
    The autoconfiguration and source-specific extensions to IS-IS, which
-   are both hard requirements for Homenet, are documented in Internet
-   Drafts.
+   are both hard requirements for Homenet, are documented in (non-WG)
+   Internet Drafts [ISIS-AUTOCONF] [ISIS-SS].
 
 14.2.  Babel Standardization Status
 
@@ -1034,6 +1034,10 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
               Liu, B., "ISIS Auto-Configuration", Internet Draft draft-
               liu-isis-auto-conf-03, October 2014.
 
+   [ISIS-SS]  Baker, F. and D. Lamparter, "IPv6 Source/Destination
+              Routing using IS-IS", Internet Draft draft-baker-ipv6-
+              isis-dst-src-routing-02, October 2014.
+
    [RFC1142]  Oran, D., "OSI IS-IS Intra-domain Routing Protocol", RFC
               1142, February 1990.
 
@@ -1049,6 +1053,19 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 Authors' Addresses
 
+
+
+
+
+
+
+
+
+Wasserman, et al.        Expires August 16, 2015               [Page 19]
+
+Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
+
+
    Margaret Wasserman
    Painless Security
    356 Abbott Street
@@ -1058,12 +1075,6 @@ Authors' Addresses
    Phone: +1 781 405-7464
    Email: mrw@painless-security.com
    URI:   http://www.painless-security.com
-
-
-
-Wasserman, et al.        Expires August 16, 2015               [Page 19]
-
-Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
    Christian E. Hopps
@@ -1076,17 +1087,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    University of Paris-Diderot (Paris 7)
 
    Email: jch@pps.univ-paris-diderot.fr
-
-
-
-
-
-
-
-
-
-
-
 
 
 

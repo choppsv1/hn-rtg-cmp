@@ -131,7 +131,7 @@
             ISIS Auto-Configuration <xref target="ISIS-AUTOCONF"/>;
           </t>
           <t>
-            Source-Specific routing in IS-IS (XXX reference?).
+            Source-Specific routing in IS-IS <xref target="ISIS-SS"/>.
           </t>
         </list></t>
       </section>
@@ -657,7 +657,8 @@
         <t>
           The autoconfiguration and source-specific extensions to IS-IS,
           which are both hard requirements for Homenet, are documented in
-          Internet Drafts.
+          (non-WG) Internet Drafts <xref target="ISIS-AUTOCONF"/>
+          <xref target="ISIS-SS"/>.
         </t>
         
       </section>
@@ -971,13 +972,6 @@
 
       &rfc1142;
 
-      <reference anchor="ISIS-AUTOCONF"><front>
-        <title>ISIS Auto-Configuration</title>
-        <author fullname="B. Liu" initials="B." surname="Liu"/>
-        <date year="2014" month="October"/>
-      </front>
-      <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
-      </reference>
 
       <reference anchor="DELAY-BASED" target="http://arxiv.org/abs/1403.3488">
         <front>
@@ -988,6 +982,22 @@
         </front>
       </reference>
 
+      <reference anchor="ISIS-AUTOCONF"><front>
+        <title>ISIS Auto-Configuration</title>
+        <author fullname="B. Liu" initials="B." surname="Liu"/>
+        <date year="2014" month="October"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
+      </reference>
+
+      <reference anchor="ISIS-SS"><front>
+        <title>IPv6 Source/Destination Routing using IS-IS</title>
+        <author fullname="F. J. Baker" initials="F. J." surname="Baker"/>
+        <author fullname="D. Lamparter" initials="D." surname="Lamparter"/>
+        <date year="2014" month="October"/>
+      </front>
+      <seriesInfo name="Internet Draft" value="draft-baker-ipv6-isis-dst-src-routing-02"/>
+      </reference>
     </references>
   </back>
 </rfc>
