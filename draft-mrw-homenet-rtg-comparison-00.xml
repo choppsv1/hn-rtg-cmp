@@ -223,9 +223,10 @@
     </section>
     <section title="Converence Times">
       <t>
-        It is yet to be determined if convergence time of the routing protocols
-        is going to be an important factor. We need to determine how link failures
-        will be detected and how quickly this will occur.
+        Convergence time is defined as the amount of time after a link
+        failure is detected during which the network is not fully
+        operational.  It does not include the time necessary to detect
+        a link failure.
       </t>
       <section title="IS-IS">
         <t>
@@ -252,6 +253,17 @@
           failure (this is similar to e.g. EIGRP).  In the case where
           no feasible routes are available, Babel reconverges in 20ms
           per hop to the source.
+        </t>
+      </section>
+      <section title="Discussion">
+        <t>
+          Both protocols have fast convergence.  However, unless there is
+          a high level of integration between the routing protocol and the
+          link layer, the time needed to reconverge is dwarfed by the
+          amount of time needed to detect a link failure, which is the
+          hold time in IS-IS (30s by default), and two hello intervals on
+          Babel wired links (8s by default).  (Babel performs link quality
+          estimation on wireless links.)
         </t>
       </section>
     </section>
