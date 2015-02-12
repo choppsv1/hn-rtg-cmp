@@ -338,17 +338,15 @@
       </t>
 
       <t>
-        In the following example, if the dotted link is a stub network,
-        then it must not be used for transit even if the main link between
-        A and B fails:
+        In the following example, if the dotted link between C and D is
+        a stub network, then it must not be used for transit even if the
+        link between A and B fails:
       </t>
       <figure><artwork><![CDATA[
-     |       |
-     |       |
 ---- A ----- B -----
-      .     .
-       .....
-
+     |       |
+     |       |
+     C ..... D
        ]]></artwork></figure>
       <section title="IS-IS Support for Stub Networks">
         <t>
