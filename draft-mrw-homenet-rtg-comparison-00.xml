@@ -260,6 +260,11 @@
               in reachability (addition or subtraction) in any conceivable
               homenet deployment.
             </t>
+            <t>
+              [Are these numbers for single-area IS-IS?  Recall that we
+              argue in favour of scaling down IS-IS to a level 2 only
+              implementation. -- jch]
+            </t>
           </section>
           <section title="Babel">
             <t>
