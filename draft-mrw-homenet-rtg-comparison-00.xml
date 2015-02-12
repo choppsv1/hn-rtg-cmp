@@ -183,6 +183,11 @@
           known to have scalability issues unless it is augmented with
           other mechanisms. -- jch]
         </t>
+        <t>
+          [chopps: what is the definition of very large? For sub-1000 node
+          networks a single area suffices -- theres no argument about
+          density scaling right?]
+        </t>
       </section>
       <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
 	<t>
@@ -213,16 +218,15 @@
           a single node has thousands of direct neighbours; such
           deployments are unlikely, and clearly outside the scope of
           Homenet.
+
+          [chopps: wouldn't 802.11 be an example of a somewhat dense network?]
         </t>
         <t>
-          Naive (single-area) link state has somewhat worse scaling
-          properties, since it has state that is proportional to the
-          number of edges in the network graph, and requires strict state
-          synchronisation between nodes.  Real-world link-state protocols
-          work around that issue by splitting the network into multiple
-          areas, and performing distance-vector routing between areas.
-          It is unclear whether this workaround is suitable (or even
-          necessary) for Homenet.
+          The IS-IS link state algorithm distributes link and prefix information
+          for each node in a single Logical LSP (possibly fragmented). It uses
+          these LSPs to compute a tree representing the entire network. There is
+          no duplication of state based on the number of adjacencies or unique
+          paths to a given prefix.
         </t>
       </section>
     </section>
