@@ -62,9 +62,9 @@
     <section title="Introduction"> 
       <t>
 	This document compares IS-IS (ISO/IEC 10589:2002) <xref
-	target="RFC1142"/> and Babel <xref target="RFC6126"/> across
-	several criteria related to their use in home networks, as
-	defined by the HOMENET WG (HOMENETs).
+	target="RFC1142"/> and Babel <xref target="RFC6126"/> according to
+	several criteria related to their use in home networks (Homenets),
+	as defined by the Homenet WG.
       </t>
       <t>
         The Homenet environment is different from the environment of
@@ -77,13 +77,13 @@
       <t>
         Another difference is that Homenets are usually built out of
         a specific class of cheap device, the "Plastic Home Router".
-        A PHR's firmware is installed at the factory, and is most likely
-        never updated.  Additionally, experience shows that home routers
-        are often used way beyond their warranty period, and even after
-        their manufacturer leaves the router business.  This, again,
-        argues in favour of simple, robust protocols that are easy to
-        implement and can be expected to keep functioning without software
-        updates.
+        A Plastic Home Router's firmware is installed at the factory, and
+        is most likely never updated.  Additionally, experience shows that
+        home routers are often used way beyond their warranty period, and
+        even after their manufacturer leaves the router business.  This,
+        again, argues in favour of simple, robust protocols that are easy
+        to implement and can be expected to keep functioning without
+        software updates.
       </t>
       <t>
         Homenets are built and grow organically, and often end up
@@ -91,16 +91,16 @@
         performance characteristics (twisted-pair Ethernet, IEEE 802.11
         and its multiple variants, Powerline Ethernet, etc.).  It is
         desirable for a Homenet routing protocol to be able to dynamically
-        optimise paths according to the link technology.
+        optimise paths according to the link characteristics.
       </t>
       <t>
         Contrary to popular perception, the Plastic Home Router is usually
-        equipped with a fairly fast CPU and reasonable amounts of flash
-        and RAM; at the time of writing, a 700MHz MIPS CPU with 16MB of
-        flash and 64MB of RAM is typical.  However, we expect smaller
-        devices to participate in the Homenet protocols, at least as stub
-        routers.  The ability to scale down the Homenet protocols is
-        therefore likely to encourage their wider adoption.
+        equipped with a reasonably fast CPU and reasonable amounts of
+        flash and RAM; at the time of writing, a (non-superscalar) 700MHz
+        MIPS CPU with 16MB of flash and 64MB of RAM is typical.  However,
+        we expect smaller devices to participate in the Homenet protocols,
+        at least as stub routers.  The ability to scale down the Homenet
+        protocols is therefore likely to encourage their wider adoption.
       </t>
       <t>
         Experts appear to disagree on the expected size of a Homenet; we
@@ -109,7 +109,7 @@
         is not likely to be relevant to Homenet in the foreseeable future,
         the Homenet protocols, if successful, will be repurposed to larger
         networks, whether we like it or not, and using a protocol that
-        scales well from the outset may avoid trouble in the future.
+        scales well from the outset may be desirable.
       </t>
     </section>
     <section title="Protocols and Extensions Included in Comparison">
