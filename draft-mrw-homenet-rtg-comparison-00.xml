@@ -233,7 +233,7 @@
       <t>
 	Both Babel and IS-IS have extensions for source-specific routing.
       </t>
-      <section title="Source Specific Routing in IS-IS">
+      <section title="Source-Specific Routing in IS-IS">
         <t>[XXX: chopps]</t>
         <t>
 	  Reports indicate that IS-IS has critical issues (routing loops)
@@ -246,7 +246,7 @@
           [How will we enforce that? -- jch]
         </t>
       </section>
-      <section title="Source Specific Routing in Babel">
+      <section title="Source-Specific Routing in Babel">
         <t>
           The Source-specific extension to the Babel routing protocol
           <xref target="BABEL-SS"/> has been implemented for over a year,
@@ -308,7 +308,7 @@
           prevent the network from being used for transit? -- jch]
         </t>
       </section>
-      <section title="Babel Supportt for Stub Networks">
+      <section title="Babel Support for Stub Networks">
         <t>
 	  Babel supports flexible filtering of routes, and a stub
 	  network can be designated by simply setting up the necessary
@@ -373,9 +373,10 @@
         Only the Homenet implementation of IS-IS supports source-specific
         routing, which is a hard requirement for Homenet.  If
         source-specific routing is not required, there are several
-        independent, interoperable implementations of IS-IS (all major
-        router vendors implement IS-IS), including some open source
-        implementations.
+        independent, interoperable proprietary implementations of IS-IS
+        (all major router vendors implement IS-IS).  We are not aware of
+        any production-quality open-source implementation of IS-IS other
+        than the Homenet one.
       </t>
       <t>
         There are multiple open source implementations of Babel, two of
@@ -384,10 +385,6 @@
       </t>
     </section>
     <section title="Code and State Size">
-      <t>
-        [I think we should replace this verbosity by just a comparison table
-        with hard data. -- jch]
-      </t>
       <section title="IS-IS Code and State Size">
         <t>
           The Homenet implementation of IS-IS consists of 7000 lines of
@@ -489,21 +486,16 @@
           <c>Apache 2.0</c>
 
           <c>Lines of Code</c>
-          <c>10.000</c>
-          <c>1.000</c>
-          <c>7.000</c>
-
-          <c>Pgm. language</c>
-          <c>C</c>
-          <c>C</c>
-          <c>Erlang</c>
+          <c>10.000 (C)</c>
+          <c>1.000 (C)</c>
+          <c>7.000 (Erlang)</c>
 
           <c>Installed size (AMD64)</c>
           <c>129kB</c>
           <c>13kB</c>
           <c>11.385kB</c>
 
-          <c>Total installed size (excluding libc)</c>
+          <c>Total installed size</c>
           <c>129kB</c>
           <c>13kB</c>
           <c>14.155kB</c>
@@ -523,7 +515,7 @@
           nodes. The protocol has proven to be very scalable.
         </t>
 	<t>
-	  Do we have any information about the scaling of IS-IS on 802.11
+	  Do we have any information about the performance of IS-IS on 802.11
 	  networks, in particular?
 	</t>
       </section>
@@ -533,8 +525,8 @@
           particular, it performs link quality estimations of wireless
           links in a manner that works well with the 802.11 MAC.  In
           addition, Babel has provisions for estimating radio interference
-          <xref target="BABEL-Z"/>, which is essential for providing good
-          performance on multi-hop radio routes.
+          <xref target="BABEL-Z"/>, which is essential for providing decent
+          throughput on multi-hop radio routes.
         </t>
         <t>
           Babel was designed to work well on pure mesh networks (networks
@@ -554,8 +546,8 @@
 	</t>
         <t>
           The autoconfiguration and source-specific extensions to IS-IS,
-          which are both hard requirements for Homenet, are at the stage
-          of Internet Drafts.
+          which are both hard requirements for Homenet, are documented in
+          Internet Drafts.
         </t>
         
       </section>
@@ -566,10 +558,10 @@
 	  individual-submission RFCs and Internet Drafts.
 	</t>
 	<t>
-	  The use of Babel in a Standards Track HOMENET RFC would
-	  require a "downref" to non-Standards Track documents.  It
-	  would also be necessary to publish the extensions that are
-	  needed for the HOMENET use case as RFCs.
+	  The use of Babel in a Standards Track HOMENET RFC would require
+	  a "downref" to non-Standards Track documents.  It would also be
+	  necessary to finish publishing the extensions that are needed
+	  for the HOMENET use case as RFCs.
 	</t>
       </section>
     </section>
@@ -596,8 +588,9 @@
               </list>
               </t>
               <t>Incremental Deployment: Yes.</t>
-              <t>Open Code Availability: Yes. One implementation of the Homenet
-              extensions, multiple implementations of the base protocol.</t>
+              <t>Open Code Availability: Yes. One implementation of the
+              Homenet extensions, multiple proprietary implementations of
+              the base protocol.</t>
               <t>Freedom from Usage Restrictions: Yes.</t>
               <t>Open Specification Availability: Yes.</t>
               <t>Open Maintenance Processes: Yes.</t>
@@ -617,7 +610,7 @@
               <t>Positive Net Value:
               <list>
                 <t> Hardware cost: None. </t>
-                <t> Operational interface: ??. </t>
+                <t> Operational interface: medium. </t>
                 <t> Retraining: None. </t>
                 <t> Business dependencies: None. </t>
               </list>
@@ -627,11 +620,12 @@
               derived from a common source.</t>
               <t>Freedom from Usage Restrictions: Yes.</t>
               <t>Open Specification Availability: Yes.</t>
-              <t>Open Maintenance Processes: No.</t>
+              <t>Open Maintenance Processes: IANA registry in the process
+              of being created.</t>
               <t>Good Technical Design: Yes.</t>
               <t>Extensible: Yes.</t>
               <t>No Hard Scalability bound: Yes.</t>
-              <t>Threats Sufficiently Mitigated: ??.</t>
+              <t>Threats Sufficiently Mitigated: probably.</t>
             </list>
           </t>
         </section>
@@ -644,18 +638,16 @@
         <section title="IS-IS">
           <t>
             There is only one implementation of autoconfiguration and
-            source-specific routing for IS-IS.  [Has it ever been extended
-            by people who are not the authors?  If so, who? -- jch]
+            source-specific routing for IS-IS.  There are some other open
+            source implementations of the base protocol, but they are
+            incomplete (as of February 2015).
           </t>
           <t>
-            [I suggest the rest of this section should be removed. -- jch]
-          </t>
-          <t>
-            As all major routing vendors have IS-IS implementations as well as
-            the existence of for sale and open source implementations, the
-            barrier for implmeneting IS-IS for homenet use is quite low. Given
-            this we can assume that willingness to implement modifications (if
-            any) for homenet use is present and strong.
+            As all major routing vendors have (proprietary) IS-IS
+            implementations, the barrier for implmeneting IS-IS for
+            homenet use is probably manageable, assuming that the
+            willingness to implement modifications needed for Homenet
+            use is present.
           </t> 
         </section>
         <section title="Babel">
@@ -702,8 +694,9 @@
             configuration in most topologies, and has proved popular in
             scenarios where competent network administration was not
             available.  In addition, it has been shown to be particularly
-            useful in scenarios where non-standard metrics were needed,
-            notably wireless mesh networks and overlay networks.
+            useful in scenarios where non-standard dynamically computed
+            metrics are beneficial, notably wireless mesh networks and
+            overlay networks.
           </t>
         </section>
       </section>
@@ -713,11 +706,11 @@
         </t>
         <section title="IS-IS">
           <t>
-            As mentioned previously IS-IS can be significantly and easily paired
-            down to fit the more limited scope of homenet use.
-          </t>
-          <t>
-            [Any actual implementations the reader can examine? -- jch]
+            As mentioned previously IS-IS can be significantly and easily
+            pared down to fit the more limited scope of homenet use.
+            However, no such pared down implementation exists, and the
+            subset of the protocol that needs to be implemented has never
+            been formally defined.
           </t>
         </section>
         <section title="Babel">
@@ -741,8 +734,8 @@
         </t>
         <section title="IS-IS">
           <t>
-            As IS-IS already qualifies as successful (bordering on wildly) a killer
-            app is not particularly relevant.
+            As IS-IS already qualifies as successful (bordering on wildly)
+            a killer app is not particularly relevant.
           </t>
         </section>
         <section title="Babel">
@@ -750,7 +743,7 @@
             Since Babel requires virtually no configuration, it is
             particularly suitable to scenarios where a dedicated network
             administrator is not available.  Additionally, its support for
-            link quality sensing and non-standard metrics makes it
+            dynamically computed non-standard metrics makes it
             particularly appealing in highly heterogeneous networks,
             (networks built on multiple link-layer technologies with
             widely varying performance characteristics).
@@ -777,7 +770,7 @@
             <xref target="BABEL-EXT"/> have been shown to be a solid basis
             on which many backwards-compatible extensions have been built,
             including one that fundamentally changes the structure of
-            announcements <xref target="BABEL-SS"/> and one that needed
+            announcements <xref target="BABEL-SS"/> and one that needs
             a non-trivial extension to the space of metrics
             <xref target="BABEL-Z"/>.
           </t>
