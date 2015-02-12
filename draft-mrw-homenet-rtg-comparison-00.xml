@@ -228,6 +228,34 @@
           no duplication of state based on the number of adjacencies or unique
           paths to a given prefix.
         </t>
+        <section title="Converence Times">
+          <t>
+            Isn't this important? For example if one is on a phone call over
+            wifi, etc.
+          </t>
+          <section title="IS-IS">
+            <t>
+              Given fast flooding of any change in the network, IS-IS has been
+              shown to acheive sub 200ms end-to-end convergence even in very
+              large provider networks (900+ nodes). Basically the time for
+              convergence is the time to propagate a new LSP from one end of the
+              network to the other plus the SPF (tree computation interval) and
+              FIB loading time. The flooding is done without delay and prior to
+              running the SPF (tree-calculation) algorithm. Thus is roughly
+              proportional to propagation delay across the diameter of the
+              network. The tree calculation is sub 20ms on modern CPUs. FIB load
+              time depends on the FIB hardware and design and not the routing
+              protocol choice.
+
+              We easily should expect sub-second convergence for any change
+              in reachability (addition or subtraction) in any conceivable
+              homenet deployment.
+            </t>
+          </section>
+          <section title="Babel">
+            <t> XXX </t>
+          </section>
+        </section>
       </section>
     </section>
     <section title="Autoconfiguration">
