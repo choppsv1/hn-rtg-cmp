@@ -623,7 +623,7 @@
 <p id="rfc.section.3.2.p.1">Distance-vector algorithms distribute information about the path length to reach each destination through a given neighbor.  Packets are forwarded to the neighbor who is advertising the shortest path to reach the destination.  </p>
 <p id="rfc.section.3.2.p.2">Babel, like EIGRP, DSDV and to a certain extent BGP, uses a loop-avoiding distance-vector algorithm: it avoids creating a loop even during reconvergence (there is no "counting to infinity", and even short-lived "microloops" are avoided in most cases).  </p>
 <h1 id="rfc.section.3.3"><a href="#rfc.section.3.3">3.3.</a> Algorithm Comparison</h1>
-<p id="rfc.section.3.3.p.1">[Putting this so early in the document gives undue import to scaling issues -- for Homenet, scaling beyond a few dozen nodes is irrelevant, robustness and simplicity are more important. -- jch] </p>
+<p id="rfc.section.3.3.p.1">[Putting this so early in the document gives undue import to scaling issues. -- jch] </p>
 <p id="rfc.section.3.3.p.2">Loop-avoiding Distance Vector scales beautifully to very large networks -- the amount of state is linear in the number of nodes, and, due to the absence of pathologies during reconvergence, does not need to be propagated in a timely manner.  It scales badly in extremely dense deployments, where a single node has thousands of direct neighbours; such deployments are unlikely, and clearly outside the scope of Homenet.  </p>
 <p id="rfc.section.3.3.p.3">Naive (single-area) link state has somewhat worse scaling properties, since it has state that is proportional to the number of edges in the network graph, and requires strict state synchronisation between nodes.  Real-world link-state protocols work around that issue by splitting the network into multiple areas, and performing distance-vector routing between areas.  It is unclear whether this workaround is suitable (or even necessary) for Homenet.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Autoconfiguration</h1>
@@ -639,7 +639,7 @@
 <h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Source-Specific Routing in IS-IS</h1>
 <p id="rfc.section.5.1.p.1">[XXX: chopps]</p>
 <p id="rfc.section.5.1.p.2">Reports indicate that IS-IS has critical issues (routing loops) in a mixed environment where some routers support Source-Specific Routing, and some routers do not.  However, this is not likely to be a problem for Homenet, as we will require Source-Specific Routing on all routers.  </p>
-<p id="rfc.section.5.1.p.3">[How will we enforce that? -- jch] </p>
+<p id="rfc.section.5.1.p.3">[How will we enforce that?  What happens if someone plugs a non-source-specific stub router into a Homenet?  Does the Homenet collapse?  -- jch] </p>
 <h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Source-Specific Routing in Babel</h1>
 <p id="rfc.section.5.2.p.1">The Source-specific extension to the Babel routing protocol <a href="#BABEL-SS">[BABEL-SS]</a> has been implemented for over a year, has been made widely available and has seen a fair amount deployment as part of OpenWRT and CeroWRT.  The source-specific code is currently in the process of being merged into the standard Babel implementation, and is scheduled to be included in version 1.6 (planned for March 2015).  </p>
 <h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Discussion</h1>
@@ -669,7 +669,7 @@
 <p id="rfc.section.8.p.1">[I think this section is badly written.  We should just state whether each protocol supports auth or encryption, and whether it supports symmetric or something more exciting.  Listing password authentication seems silly. -- jch] </p>
 <h1 id="rfc.section.8.1"><a href="#rfc.section.8.1">8.1.</a> Security Features in IS-IS</h1>
 <p id="rfc.section.8.1.p.1">IS-IS offers multiple levels of security from none, to simple clear-text (password) authentication, to fully generic cryptographic authentication using any number of hashing algorithms (e.g., HMAC-MD5, HMAC-SHA1, ... HMAC-SHA512) based on security associations (link, area and domain scoped).  </p>
-<p id="rfc.section.8.1.p.2">[What does that mean?  Just support for HMAC-based authentication, or am I missing something? -- jch]</p>
+<p id="rfc.section.8.1.p.2">[What does that mean?  Just support for symmetric-key HMAC-based authentication, or am I missing something?  And why the mention of areas if we're arguing in favour of a single-area implementation?  -- jch]</p>
 <h1 id="rfc.section.8.2"><a href="#rfc.section.8.2">8.2.</a> Security Features in Babel</h1>
 <p id="rfc.section.8.2.p.1">Babel supports symmetric key authentication using an extensible HMAC-based cryptographic authentication mechanism <a href="#RFC7298">[RFC7298]</a>.  </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> Support for Multicast</h1>
@@ -846,7 +846,7 @@
 <h1 id="rfc.section.14.8"><a href="#rfc.section.14.8">14.8.</a> Success Predictable</h1>
 <p id="rfc.section.14.8.p.1">If it is not known whether the protocol will be successful, should the market decide first?  Or should the IETF work on multiple alternatives and let the market decide among them?  Are there factors listed in this document that may predict which is more likely to succeed? </p>
 <h1 id="rfc.section.14.8.1"><a href="#rfc.section.14.8.1">14.8.1.</a> IS-IS</h1>
-<p id="rfc.section.14.8.1.p.1">For IS-IS the market has already decided that the protocol is successful in a fairly wide variety of deployments. [We're speaking of source-specific, autoconfiguring IS-IS here? -- jch] </p>
+<p id="rfc.section.14.8.1.p.1">For IS-IS the market has already decided that the protocol is successful in a fairly wide variety of deployments. [We're speaking of source-specific, autoconfiguring IS-IS here?  And are we speaking of small, unadministered networks? -- jch] </p>
 <h1 id="rfc.section.14.8.2"><a href="#rfc.section.14.8.2">14.8.2.</a> Babel</h1>
 <p id="rfc.section.14.8.2.p.1">Source-specific Babel is probably the only source-specific routing protocol that has seen deployment and is being used in production.  </p>
 <p id="rfc.section.14.8.2.p.2">Plain Babel has seen a modest amount of deployment, most notably for routing over wireless mesh networks and large-scale overlay networks.  However, it remains a young protocol, certainly much younger than IS-IS.  </p>

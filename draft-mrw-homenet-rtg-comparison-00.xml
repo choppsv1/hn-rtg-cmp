@@ -202,8 +202,7 @@
       <section title="Algorithm Comparison">
         <t>
           [Putting this so early in the document gives undue import to
-          scaling issues -- for Homenet, scaling beyond a few dozen nodes
-          is irrelevant, robustness and simplicity are more important. -- jch]
+          scaling issues. -- jch]
         </t>
         <t>
           Loop-avoiding Distance Vector scales beautifully to very large
@@ -271,7 +270,9 @@
 	  Source-Specific Routing on all routers.
         </t>
         <t>
-          [How will we enforce that? -- jch]
+          [How will we enforce that?  What happens if someone plugs
+          a non-source-specific stub router into a Homenet?  Does the
+          Homenet collapse?  -- jch]
         </t>
       </section>
       <section title="Source-Specific Routing in Babel">
@@ -381,8 +382,10 @@
           ... HMAC-SHA512) based on security associations (link, area and domain
           scoped).
         </t>
-        <t>[What does that mean?  Just support for HMAC-based
-        authentication, or am I missing something? -- jch]</t>
+        <t>[What does that mean?  Just support for symmetric-key
+        HMAC-based authentication, or am I missing something?  And why the
+        mention of areas if we're arguing in favour of a single-area
+        implementation?  -- jch]</t>
       </section>
       <section title="Security Features in Babel">
         <t>
@@ -849,7 +852,8 @@
           <t>
             For IS-IS the market has already decided that the protocol is
             successful in a fairly wide variety of deployments. [We're
-            speaking of source-specific, autoconfiguring IS-IS here? -- jch]
+            speaking of source-specific, autoconfiguring IS-IS here?  And
+            are we speaking of small, unadministered networks? -- jch]
           </t>
         </section>
         <section title="Babel">
