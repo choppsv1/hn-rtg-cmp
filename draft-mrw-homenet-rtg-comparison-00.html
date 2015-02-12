@@ -651,7 +651,16 @@
 <p id="rfc.section.6.2.p.1">Since Babel was originally designed for heterogeneous networks, it is able to dynamically assign metrics to links depending on their lower-layer characteristics.  In practice, Babel assigns lower (better) metrics to wired links than to wireless ones, dynamically measures loss rates in order to favour lossless wireless links, favours routes with non-interfering radio frequencies, and avoids high-latency tunnels.  </p>
 <p id="rfc.section.6.2.p.2">Obviously, such a wealth of information can lead to contradictory data in edge cases; however, Babel's loop-avoidance mechanisms ensure that the network remains in a consistent state in all cases, and a hysteresis mechanism ensures that, should a feedback loop occur, the frequency of oscillations remains bounded <a href="#DELAY-BASED">[DELAY-BASED]</a>.  </p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Support for Attached Stub Networks</h1>
-<p id="rfc.section.7.p.1">[I don't understand why this issue is important for Homenet. -- jch]</p>
+<p id="rfc.section.7.p.1">A stub network is one that is attached to a Homenet, possibly through multiple Homenet routers, but must not be used for transit.  For example, a stub network could be a sensor network which would collapse under the Homenet traffic should it ever be used for transit.  </p>
+<p id="rfc.section.7.p.2">In the following example, if the dotted link is a stub network, then it must not be used for transit even if the main link between A and B fails: </p>
+<pre>
+     |       |
+     |       |
+---- A ----- B -----
+      .     .
+       .....
+
+       </pre>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> IS-IS Support for Stub Networks</h1>
 <p id="rfc.section.7.1.p.1">A stub network in IS-IS is supported by the advertisement of reachability to a prefix by a router in its LSP. [How does this prevent the network from being used for transit? -- jch] </p>
 <h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> Babel Support for Stub Networks</h1>

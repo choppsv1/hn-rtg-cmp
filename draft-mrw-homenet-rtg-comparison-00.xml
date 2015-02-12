@@ -328,7 +328,27 @@
       </section>
     </section>
     <section title="Support for Attached Stub Networks">
-      <t>[I don't understand why this issue is important for Homenet. -- jch]</t>
+      <t>
+        A stub network is one that is attached to a Homenet, possibly
+        through multiple Homenet routers, but must not be used for
+        transit.  For example, a stub network could be a sensor network
+        which would collapse under the Homenet traffic should it ever be
+        used for transit.
+      </t>
+
+      <t>
+        In the following example, if the dotted link is a stub network,
+        then it must not be used for transit even if the main link between
+        A and B fails:
+      </t>
+      <figure><artwork><![CDATA[
+     |       |
+     |       |
+---- A ----- B -----
+      .     .
+       .....
+
+       ]]></artwork></figure>
       <section title="IS-IS Support for Stub Networks">
         <t>
           A stub network in IS-IS is supported by the advertisement of
