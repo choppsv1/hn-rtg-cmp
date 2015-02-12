@@ -410,13 +410,13 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    being merged into the standard Babel implementation, and is scheduled
    to be included in version 1.6 (planned for March 2015).
 
-6.3.  Discussion
-
    Babel's source-specific extensions were carefully designed so that
    source-specific and ordinary (non-specific) routers can coexist in a
    single routing domain, without routing pathologies such as routing
    loops.  Interoperability between plain Babel and Source-Specific
    Babel is described in detail in Section VI.A of [SS-ROUTING].
+
+6.3.  Discussion
 
 7.  Support for Link Metrics
 

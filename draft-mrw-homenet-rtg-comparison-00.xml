@@ -337,8 +337,6 @@
           standard Babel implementation, and is scheduled to be included
           in version 1.6 (planned for March 2015).
         </t>
-      </section>
-      <section title="Discussion">
         <t>
           Babel's source-specific extensions were carefully designed so
           that source-specific and ordinary (non-specific) routers can
@@ -347,6 +345,8 @@
           Source-Specific Babel is described in detail in Section VI.A of
           <xref target="SS-ROUTING"/>.
 	</t>
+      </section>
+      <section title="Discussion">
       </section>
     </section>
     <section title="Support for Link Metrics">
