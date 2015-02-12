@@ -78,7 +78,7 @@ Table of Contents
      4.2.  Babel . . . . . . . . . . . . . . . . . . . . . . . . . .   6
      4.3.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .   6
    5.  Support for Source-Specific Routing . . . . . . . . . . . . .   6
-     5.1.  Source-Specific Routing in IS-IS  . . . . . . . . . . . .   6
+     5.1.  Source-Specific Routing in IS-IS  . . . . . . . . . . . .   7
      5.2.  Source-Specific Routing in Babel  . . . . . . . . . . . .   7
      5.3.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .   7
    6.  Support for Link Metrics  . . . . . . . . . . . . . . . . . .   7
@@ -89,7 +89,7 @@ Table of Contents
      7.2.  Babel Support for Stub Networks . . . . . . . . . . . . .   8
    8.  Security Features . . . . . . . . . . . . . . . . . . . . . .   8
      8.1.  Security Features in IS-IS  . . . . . . . . . . . . . . .   8
-     8.2.  Security Features in Babel  . . . . . . . . . . . . . . .   8
+     8.2.  Security Features in Babel  . . . . . . . . . . . . . . .   9
    9.  Support for Multicast . . . . . . . . . . . . . . . . . . . .   9
      9.1.  Multicast Routing in IS-IS  . . . . . . . . . . . . . . .   9
      9.2.  Multicast Routing in Babel  . . . . . . . . . . . . . . .   9
@@ -250,9 +250,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    [I strongly object to this claim.  The scaling results available in
    the open litterature apply to hybrid routing -- level 1-2 in IS-IS
    parlance.  However, later in this document we argue that for Homenet
-   IS-IS should be scaled down by removing level-1 support, making it a
-   naive link-state protocol, which is known to have scalability issues
-   unless it is augmented with other mechanisms. -- jch]
+   IS-IS should be scaled down by removing multi-area support, making it
+   into a naive link-state protocol, which is known to have scalability
+   issues unless it is augmented with other mechanisms. -- jch]
 
 3.2.  Loop-Avoiding Distance-Vector Algorithm (Babel)
 
@@ -263,8 +263,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
    Babel, like EIGRP, DSDV and to a certain extent BGP, uses a loop-
    avoiding distance-vector algorithm: it avoids creating a loop even
-   during reconvergence (there is no "counting to infinity" nor even
-   short-lived "microloops").
+   during reconvergence (there is no "counting to infinity", and even
+   short-lived "microloops" are avoided in most cases).
 
 3.3.  Algorithm Comparison
 
@@ -273,7 +273,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    irrelevant, robustness and simplicity are more important. -- jch]
 
    Loop-avoiding Distance Vector scales beautifully to very large
-   networks -- the amount of state is linear in the number of nodes, and
+   networks -- the amount of state is linear in the number of nodes,
 
 
 
@@ -282,18 +282,19 @@ Wasserman, et al.        Expires August 16, 2015                [Page 5]
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
-   does not need to be propagated in a timely manner.  It scales badly
-   in extremely dense deployments, where a single node has thousands of
+   and, due to the absence of pathologies during reconvergence, does not
+   need to be propagated in a timely manner.  It scales badly in
+   extremely dense deployments, where a single node has thousands of
    direct neighbours; such deployments are unlikely, and clearly outside
    the scope of Homenet.
 
-   Naive link state has somewhat worse scaling properties, since it has
-   state that is proportional to the number of edges in the network
-   graph, and requires strict state synchronisation between nodes.
-   Real-world link-state protocols work around that issue by splitting
-   the network into multiple "areas", and performing distance-vector
-   routing between areas.  It is unclear whether this workaround is
-   suitable (or even necessary) for Homenet.
+   Naive (single-area) link state has somewhat worse scaling properties,
+   since it has state that is proportional to the number of edges in the
+   network graph, and requires strict state synchronisation between
+   nodes.  Real-world link-state protocols work around that issue by
+   splitting the network into multiple areas, and performing distance-
+   vector routing between areas.  It is unclear whether this workaround
+   is suitable (or even necessary) for Homenet.
 
 4.  Autoconfiguration
 
@@ -325,9 +326,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
    Both Babel and IS-IS have extensions for source-specific routing.
 
-5.1.  Source-Specific Routing in IS-IS
 
-   [XXX: chopps]
+
 
 
 
@@ -337,6 +337,10 @@ Wasserman, et al.        Expires August 16, 2015                [Page 6]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+5.1.  Source-Specific Routing in IS-IS
+
+   [XXX: chopps]
 
    Reports indicate that IS-IS has critical issues (routing loops) in a
    mixed environment where some routers support Source-Specific Routing,
@@ -381,11 +385,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    layer characteristics.  In practice, Babel assigns lower (better)
    metrics to wired links than to wireless ones, dynamically measures
    loss rates in order to favour lossless wireless links, favours routes
-   with non-interfering radio frequencies, and avoids high-latency
-   tunnels.
 
-   Obviously, such a wealth of information can lead to contradictory
-   data in edge cases; however, Babel's loop-avoidance mechanisms ensure
 
 
 
@@ -394,6 +394,11 @@ Wasserman, et al.        Expires August 16, 2015                [Page 7]
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
+   with non-interfering radio frequencies, and avoids high-latency
+   tunnels.
+
+   Obviously, such a wealth of information can lead to contradictory
+   data in edge cases; however, Babel's loop-avoidance mechanisms ensure
    that the network remains in a consistent state in all cases, and a
    hysteresis mechanism ensures that, should a feedback loop occur, the
    frequency of oscillations remains bounded [DELAY-BASED].
@@ -433,11 +438,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    [What does that mean?  Just support for HMAC-based authentication, or
    am I missing something? -- jch]
 
-8.2.  Security Features in Babel
-
-   Babel supports symmetric key authentication using an extensible HMAC-
-   based cryptographic authentication mechanism [RFC7298].
-
 
 
 
@@ -449,6 +449,11 @@ Wasserman, et al.        Expires August 16, 2015                [Page 8]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+8.2.  Security Features in Babel
+
+   Babel supports symmetric key authentication using an extensible HMAC-
+   based cryptographic authentication mechanism [RFC7298].
 
 9.  Support for Multicast
 
@@ -494,17 +499,16 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    each of which has XXX neighbours, the Homenet implementation of IS-IS
    requires XXX bytes for its data structures.
 
-   [I suggest removing the rest of this section, since it consists of
-   unsubstantiated, vague claims depending on a not-yet-implemented
-   version of a not-yet-specified subset of a large protocol. -- jch]
-
-
 
 
 Wasserman, et al.        Expires August 16, 2015                [Page 9]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+   [I suggest removing the rest of this section, since it consists of
+   unsubstantiated, vague claims depending on a not-yet-implemented
+   version of a not-yet-specified subset of a large protocol. -- jch]
 
    The code size of IS-IS depends greatly on what aspects of the
    protocol have been implemented.  IS-IS supports multiple address
@@ -549,11 +553,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    source-specific implementation, one routing entry occupies roughly
    100 bytes of memory.  To put these figures into perspective, in a
    network with 1000 nodes, a Babel router with 10 neighbours needs
-   roughly a megabyte of memory to store its routing table (not counting
-   malloc overhead).
 
-   The stub-only implementation of Babel consists of 900 lines of C and
-   compiles to 12kB (dynamically linked).  Its memory usage (as reported
 
 
 
@@ -562,6 +562,11 @@ Wasserman, et al.        Expires August 16, 2015               [Page 10]
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
+   roughly a megabyte of memory to store its routing table (not counting
+   malloc overhead).
+
+   The stub-only implementation of Babel consists of 900 lines of C and
+   compiles to 12kB (dynamically linked).  Its memory usage (as reported
    by the operating system) is 200kB, and remains constant (it doesn't
    perform any dynamic memory allocation).
 
@@ -605,11 +610,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
    Do we have any information about the performance of IS-IS on 802.11
    networks, in particular?
-
-
-
-
-
 
 
 
@@ -771,10 +771,10 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 14.2.2.  Babel
 
-   The Babel implementation is open source software (MIT licensed, non-
-   copyleft), and the codebase has proven of sufficiently high quality
-   to be easily extended by people who were not in direct contact with
-   the author [RFC7298].
+   The Babel implementation is open source software (MIT licensed), and
+   the codebase has proven of sufficiently high quality to be easily
+   extended by people who were not in direct contact with the author
+   [RFC7298].
 
 
 

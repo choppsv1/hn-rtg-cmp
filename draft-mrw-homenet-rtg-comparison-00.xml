@@ -178,10 +178,10 @@
           [I strongly object to this claim.  The scaling results available
           in the open litterature apply to hybrid routing -- level 1-2 in
           IS-IS parlance.  However, later in this document we argue that
-          for Homenet IS-IS should be scaled down by removing level-1
-          support, making it a naive link-state protocol, which is known
-          to have scalability issues unless it is augmented with other
-          mechanisms. -- jch]
+          for Homenet IS-IS should be scaled down by removing multi-area
+          support, making it into a naive link-state protocol, which is
+          known to have scalability issues unless it is augmented with
+          other mechanisms. -- jch]
         </t>
       </section>
       <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
@@ -195,7 +195,8 @@
           Babel, like EIGRP, DSDV and to a certain extent BGP, uses
           a loop-avoiding distance-vector algorithm: it avoids creating
           a loop even during reconvergence (there is no "counting to
-          infinity" nor even short-lived "microloops").
+          infinity", and even short-lived "microloops" are avoided in most
+          cases).
         </t>
       </section>
       <section title="Algorithm Comparison">
@@ -207,19 +208,22 @@
         <t>
           Loop-avoiding Distance Vector scales beautifully to very large
           networks -- the amount of state is linear in the number of
-          nodes, and does not need to be propagated in a timely manner.
-          It scales badly in extremely dense deployments, where a single
-          node has thousands of direct neighbours; such deployments are
-          unlikely, and clearly outside the scope of Homenet.
+          nodes, and, due to the absence of pathologies during
+          reconvergence, does not need to be propagated in a timely
+          manner.  It scales badly in extremely dense deployments, where
+          a single node has thousands of direct neighbours; such
+          deployments are unlikely, and clearly outside the scope of
+          Homenet.
         </t>
         <t>
-          Naive link state has somewhat worse scaling properties, since it
-          has state that is proportional to the number of edges in the
-          network graph, and requires strict state synchronisation between
-          nodes.  Real-world link-state protocols work around that issue
-          by splitting the network into multiple "areas", and performing
-          distance-vector routing between areas.  It is unclear whether
-          this workaround is suitable (or even necessary) for Homenet.
+          Naive (single-area) link state has somewhat worse scaling
+          properties, since it has state that is proportional to the
+          number of edges in the network graph, and requires strict state
+          synchronisation between nodes.  Real-world link-state protocols
+          work around that issue by splitting the network into multiple
+          areas, and performing distance-vector routing between areas.
+          It is unclear whether this workaround is suitable (or even
+          necessary) for Homenet.
         </t>
       </section>
     </section>
@@ -689,9 +693,9 @@
         <section title="Babel">
           <t>
             The Babel implementation is open source software (MIT
-            licensed, non-copyleft), and the codebase has proven of
-            sufficiently high quality to be easily extended by people who
-            were not in direct contact with the author <xref target="RFC7298"/>.
+            licensed), and the codebase has proven of sufficiently high
+            quality to be easily extended by people who were not in direct
+            contact with the author <xref target="RFC7298"/>.
           </t>
         </section>
       </section>
