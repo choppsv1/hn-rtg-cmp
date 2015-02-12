@@ -14,7 +14,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" docName="draft-mrw-homenet-rtg-comparison-00.txt">
+<rfc category="info" docName="draft-mrw-homenet-rtg-comparison-00.txt">
   <front>
     <title>HOMENET IS-IS and Babel Comparison</title>
     <author initials="M." surname="Wasserman" fullname="Margaret Wasserman">
