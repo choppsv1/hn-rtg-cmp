@@ -75,7 +75,7 @@ Table of Contents
      3.3.  Algorithm Comparison  . . . . . . . . . . . . . . . . . .   6
        3.3.1.  Converence Times  . . . . . . . . . . . . . . . . . .   6
          3.3.1.1.  IS-IS . . . . . . . . . . . . . . . . . . . . . .   6
-         3.3.1.2.  Babel . . . . . . . . . . . . . . . . . . . . . .   6
+         3.3.1.2.  Babel . . . . . . . . . . . . . . . . . . . . . .   7
    4.  Autoconfiguration . . . . . . . . . . . . . . . . . . . . . .   7
      4.1.  IS-IS . . . . . . . . . . . . . . . . . . . . . . . . . .   7
      4.2.  Babel . . . . . . . . . . . . . . . . . . . . . . . . . .   7
@@ -307,6 +307,13 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    Isn't this important?  For example if one is on a phone call over
    wifi, etc.
 
+   [This is somewhat disingenious, since convergence time is dwarfed by
+   the time needed to detect link failure -- which is two hello
+   intervals in Babel (8s by default), and one hold time in IS-IS (30s
+   by default in Cisco's implementation).  We should not be raising
+   expectations by making misleading claims, and I therefore strongly
+   object to this section as it stands now.  -- jch]
+
 3.3.1.1.  IS-IS
 
    Given fast flooding of any change in the network, IS-IS has been
@@ -323,13 +330,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    reachability (addition or subtraction) in any conceivable homenet
    deployment.
 
-3.3.1.2.  Babel
-
-   XXX
-
-
-
-
 
 
 
@@ -337,6 +337,13 @@ Wasserman, et al.        Expires August 16, 2015                [Page 6]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+3.3.1.2.  Babel
+
+   Since Babel maintains a redundant routing table, it is most often
+   able to reconverge almost instantaneously after a link failure (this
+   is similar to e.g.  EIGRP).  In the case where no feasible routes are
+   available, Babel reconverges in 20ms per hop to the source.
 
 4.  Autoconfiguration
 
@@ -378,13 +385,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    for Homenet, as we will require Source-Specific Routing on all
    routers.
 
-   [How will we enforce that?  What happens if someone plugs a non-
-   source-specific stub router into a Homenet?  Does the Homenet
-   collapse?  -- jch]
-
-
-
-
 
 
 
@@ -393,6 +393,10 @@ Wasserman, et al.        Expires August 16, 2015                [Page 7]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
+
+   [How will we enforce that?  What happens if someone plugs a non-
+   source-specific stub router into a Homenet?  Does the Homenet
+   collapse?  -- jch]
 
 5.2.  Source-Specific Routing in Babel
 
@@ -437,10 +441,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    that the network remains in a consistent state in all cases, and a
    hysteresis mechanism ensures that, should a feedback loop occur, the
    frequency of oscillations remains bounded [DELAY-BASED].
-
-
-
-
 
 
 

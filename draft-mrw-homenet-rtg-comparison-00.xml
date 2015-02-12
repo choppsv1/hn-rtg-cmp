@@ -233,6 +233,15 @@
             Isn't this important? For example if one is on a phone call over
             wifi, etc.
           </t>
+          <t>
+            [This is somewhat disingenious, since convergence time is
+            dwarfed by the time needed to detect link failure -- which is
+            two hello intervals in Babel (8s by default), and one hold
+            time in IS-IS (30s by default in Cisco's implementation).  We
+            should not be raising expectations by making misleading
+            claims, and I therefore strongly object to this section as it
+            stands now.  -- jch]
+          </t>
           <section title="IS-IS">
             <t>
               Given fast flooding of any change in the network, IS-IS has been
@@ -253,7 +262,13 @@
             </t>
           </section>
           <section title="Babel">
-            <t> XXX </t>
+            <t>
+              Since Babel maintains a redundant routing table, it is most
+              often able to reconverge almost instantaneously after a link
+              failure (this is similar to e.g. EIGRP).  In the case where
+              no feasible routes are available, Babel reconverges in 20ms
+              per hop to the source.
+            </t>
           </section>
         </section>
       </section>
