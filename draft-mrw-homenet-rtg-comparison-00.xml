@@ -310,6 +310,14 @@
           all homenet IS-IS routers also use a homenet specific area ID and
           cleartext password.
         </t>
+        <t>
+          [I still don't know what happens if somebody plugs
+          a non-source-specific IS-IS router into a Homenet.  Does the
+          Homenet collapse, or will it continue functioning with just the
+          non-specific router being unreachable?  This is perhaps of no
+          interest to Homenet -- I don't know, let the WG decide --, but
+          that's as good a place to put the information as any. -- jch]
+        </t>
       </section>
       <section title="Source-Specific Routing in Babel">
         <t>
