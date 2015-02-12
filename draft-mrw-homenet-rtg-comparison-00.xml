@@ -171,11 +171,13 @@
           other nodes in the network using a flooding algorithm. This database
           of information is then used by each node to compute the best path to
           the other nodes in the network.
-
+	</t>
+        <t>
           An additional benefit of this algorithm is that each node contains the
           full knowledge of the topology of the network. This information can be
           used by other applications outside the routing protocol itself.
-
+	</t>
+        <t>
           Additionally the flooding algorithm has been found as an efficient
           method for other applications to distribute node-specific application
           data, although some care must be taken with this use so as not to
@@ -241,7 +243,8 @@
           propagation delay across the diameter of the network. The tree
           calculation is sub 20ms on modern CPUs. FIB load time depends on the
           FIB hardware and design and not the routing protocol choice.
-
+        </t>
+        <t>
           We easily should expect sub-second convergence for any change
           in reachability (addition or subtraction) in any conceivable
           homenet deployment.
