@@ -187,10 +187,10 @@
 	  Distance-vector algorithms distribute information about the 
 	  path length to reach each destination through a given 
 	  neighbor.  Packets are forwarded to the neighbor who is 
-	  advertising the shortest path to reach the destination.
+	  advertising the best path towards the destination.
 	</t>
         <t>
-          Babel, like EIGRP, DSDV and to a certain extent BGP, uses
+          Babel, like EIGRP, DSDV, and to a certain extent BGP, uses
           a loop-avoiding distance-vector algorithm: it avoids creating
           a loop even during reconvergence (there is no "counting to
           infinity", and even short-lived "microloops" are avoided in most
@@ -203,7 +203,7 @@
           scaling issues. -- jch]
         </t>
         <t>
-          Loop-avoiding Distance Vector scales beautifully to very large
+          Loop-avoiding Distance Vector scales to very large
           networks -- the amount of state is linear in the number of
           nodes, and, due to the absence of pathologies during
           reconvergence, does not need to be propagated in a timely
