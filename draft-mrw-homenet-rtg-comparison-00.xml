@@ -228,54 +228,54 @@
           no duplication of state based on the number of adjacencies or unique
           paths to a given prefix.
         </t>
-        <section title="Converence Times">
-          <t>
-            Isn't this important? For example if one is on a phone call over
-            wifi, etc.
-          </t>
-          <t>
-            [This is somewhat disingenious, since convergence time is
-            dwarfed by the time needed to detect link failure -- which is
-            two hello intervals in Babel (8s by default), and one hold
-            time in IS-IS (30s by default in Cisco's implementation).  We
-            should not be raising expectations by making misleading
-            claims, and I therefore strongly object to this section as it
-            stands now.  -- jch]
-          </t>
-          <section title="IS-IS">
-            <t>
-              Given fast flooding of any change in the network, IS-IS has been
-              shown to acheive sub 200ms end-to-end convergence even in very
-              large provider networks (900+ nodes). Basically the time for
-              convergence is the time to propagate a new LSP from one end of the
-              network to the other plus the SPF (tree computation interval) and
-              FIB loading time. The flooding is done without delay and prior to
-              running the SPF (tree-calculation) algorithm. Thus is roughly
-              proportional to propagation delay across the diameter of the
-              network. The tree calculation is sub 20ms on modern CPUs. FIB load
-              time depends on the FIB hardware and design and not the routing
-              protocol choice.
+      </section>
+    </section>
+    <section title="Converence Times">
+      <t>
+        Isn't this important? For example if one is on a phone call over
+        wifi, etc.
+      </t>
+      <t>
+        [This is somewhat disingenious, since convergence time is
+        dwarfed by the time needed to detect link failure -- which is
+        two hello intervals in Babel (8s by default), and one hold
+        time in IS-IS (30s by default in Cisco's implementation).  We
+        should not be raising expectations by making misleading
+        claims, and I therefore strongly object to this section as it
+        stands now.  -- jch]
+      </t>
+      <section title="IS-IS">
+        <t>
+          Given fast flooding of any change in the network, IS-IS has been
+          shown to acheive sub 200ms end-to-end convergence even in very
+          large provider networks (900+ nodes). Basically the time for
+          convergence is the time to propagate a new LSP from one end of the
+          network to the other plus the SPF (tree computation interval) and
+          FIB loading time. The flooding is done without delay and prior to
+          running the SPF (tree-calculation) algorithm. Thus is roughly
+          proportional to propagation delay across the diameter of the
+          network. The tree calculation is sub 20ms on modern CPUs. FIB load
+          time depends on the FIB hardware and design and not the routing
+          protocol choice.
 
-              We easily should expect sub-second convergence for any change
-              in reachability (addition or subtraction) in any conceivable
-              homenet deployment.
-            </t>
-            <t>
-              [Are these numbers for single-area IS-IS?  Recall that we
-              argue in favour of scaling down IS-IS to a level 2 only
-              implementation. -- jch]
-            </t>
-          </section>
-          <section title="Babel">
-            <t>
-              Since Babel maintains a redundant routing table, it is most
-              often able to reconverge almost instantaneously after a link
-              failure (this is similar to e.g. EIGRP).  In the case where
-              no feasible routes are available, Babel reconverges in 20ms
-              per hop to the source.
-            </t>
-          </section>
-        </section>
+          We easily should expect sub-second convergence for any change
+          in reachability (addition or subtraction) in any conceivable
+          homenet deployment.
+        </t>
+        <t>
+          [Are these numbers for single-area IS-IS?  Recall that we
+          argue in favour of scaling down IS-IS to a level 2 only
+          implementation. -- jch]
+        </t>
+      </section>
+      <section title="Babel">
+        <t>
+          Since Babel maintains a redundant routing table, it is most
+          often able to reconverge almost instantaneously after a link
+          failure (this is similar to e.g. EIGRP).  In the case where
+          no feasible routes are available, Babel reconverges in 20ms
+          per hop to the source.
+        </t>
       </section>
     </section>
     <section title="Autoconfiguration">
