@@ -377,8 +377,6 @@
           the available implementations include support for multicast.
           [XXX: chopps: what do we mean by supporting multicast routing?]
 	</t>
-        <t>[Does the Homenet implementation support multicast?  Does any
-        open source implementation support multicast? -- jch]</t>
       </section>
       <section title="Multicast Routing in Babel">
 	<t>

@@ -456,9 +456,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    available implementations include support for multicast.  [XXX:
    chopps: what do we mean by supporting multicast routing?]
 
-   [Does the Homenet implementation support multicast?  Does any open
-   source implementation support multicast? -- jch]
-
 9.2.  Multicast Routing in Babel
 
    There is no support for multicast routing in Babel.
@@ -498,6 +495,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    protocol have been implemented.  IS-IS supports multiple address
    families as well as completely different protocol stacks (OSI and
    IP), multiple area hierachical operation with automatic virtual link
+   support for repairing area partitions, and multiple link types.
+   Additionally many other protocol features have been added over time
+   to augment the protocol or replace previous behavior.  The protocol
 
 
 
@@ -506,9 +506,6 @@ Wasserman, et al.        Expires August 16, 2015                [Page 9]
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
-   support for repairing area partitions, and multiple link types.
-   Additionally many other protocol features have been added over time
-   to augment the protocol or replace previous behavior.  The protocol
    lends itself well to not only extension, but pairing down of
    features.
 
@@ -552,6 +549,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    compiles to 12kB (dynamically linked).  Its memory usage (as reported
    by the operating system) is 200kB, and remains constant (it doesn't
    perform any dynamic memory allocation).
+
+
+
 
 
 
