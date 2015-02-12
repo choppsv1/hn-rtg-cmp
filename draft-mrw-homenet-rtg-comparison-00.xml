@@ -161,33 +161,26 @@
 	scalability, how much information is exchanged when the routing
 	topology changes, and how far topology changes are propagated.
 
-        [chopps: Perhaps we should see if we can find an external reference for
-        comparing DVRP to link-state RPs for this section].
+        [XXX we should see if we can find an external reference for
+         comparing DVRP to link-state RPs for this section].
 
       </t>
       <section title="Link State Algorithm">
         <t>
-	  Link state algorithms distribute information for each
-	  node to compute a tree representing the entire network.
+	  Link state algorithms distribute information for each node to all
+          other nodes in the network using a flooding algorithm. This database
+          of information is then used by each node to compute the best path to
+          the other nodes in the network.
+
+          An additional benefit of this algorithm is that each node contains the
+          full knowledge of the topology of the network. This information can be
+          used by other applications outside the routing protocol itself.
+
+          Additionally the flooding algorithm has been found as an efficient
+          method for other applications to distribute node-specific application
+          data, although some care must be taken with this use so as not to
+          disrupt the fundamental routing function.
 	</t>
-	<t>
-	  Link state algorithms scale well in both very large and
-	  very dense networks.
-	</t>
-        <t>
-          [I strongly object to this claim.  The scaling results available
-          in the open litterature apply to hybrid routing -- level 1-2 in
-          IS-IS parlance.  However, later in this document we argue that
-          for Homenet IS-IS should be scaled down by removing multi-area
-          support, making it into a naive link-state protocol, which is
-          known to have scalability issues unless it is augmented with
-          other mechanisms. -- jch]
-        </t>
-        <t>
-          [chopps: what is the definition of very large? For sub-1000 node
-          networks a single area suffices -- theres no argument about
-          density scaling right?]
-        </t>
       </section>
       <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
 	<t>
@@ -232,40 +225,26 @@
     </section>
     <section title="Converence Times">
       <t>
-        Isn't this important? For example if one is on a phone call over
-        wifi, etc.
-      </t>
-      <t>
-        [This is somewhat disingenious, since convergence time is
-        dwarfed by the time needed to detect link failure -- which is
-        two hello intervals in Babel (8s by default), and one hold
-        time in IS-IS (30s by default in Cisco's implementation).  We
-        should not be raising expectations by making misleading
-        claims, and I therefore strongly object to this section as it
-        stands now.  -- jch]
+        It is yet to be determined if convergence time of the routing protocols
+        is going to be an important factor. We need to determine how link failures
+        will be detected and how quickly this will occur.
       </t>
       <section title="IS-IS">
         <t>
-          Given fast flooding of any change in the network, IS-IS has been
-          shown to acheive sub 200ms end-to-end convergence even in very
-          large provider networks (900+ nodes). Basically the time for
+          Given fast flooding of any change in the network, IS-IS has been shown
+          to acheive sub 200ms end-to-end convergence even in very large
+          provider networks (single area 900+ nodes). Basically the time for
           convergence is the time to propagate a new LSP from one end of the
-          network to the other plus the SPF (tree computation interval) and
-          FIB loading time. The flooding is done without delay and prior to
-          running the SPF (tree-calculation) algorithm. Thus is roughly
-          proportional to propagation delay across the diameter of the
-          network. The tree calculation is sub 20ms on modern CPUs. FIB load
-          time depends on the FIB hardware and design and not the routing
-          protocol choice.
+          network to the other plus the SPF (tree computation interval) and FIB
+          loading time. The flooding is done without delay and prior to running
+          the SPF (tree-calculation) algorithm. Thus is roughly proportional to
+          propagation delay across the diameter of the network. The tree
+          calculation is sub 20ms on modern CPUs. FIB load time depends on the
+          FIB hardware and design and not the routing protocol choice.
 
           We easily should expect sub-second convergence for any change
           in reachability (addition or subtraction) in any conceivable
           homenet deployment.
-        </t>
-        <t>
-          [Are these numbers for single-area IS-IS?  Recall that we
-          argue in favour of scaling down IS-IS to a level 2 only
-          implementation. -- jch]
         </t>
       </section>
       <section title="Babel">
@@ -313,18 +292,13 @@
 	Both Babel and IS-IS have extensions for source-specific routing.
       </t>
       <section title="Source-Specific Routing in IS-IS">
-        <t>[XXX: chopps]</t>
         <t>
-	  Reports indicate that IS-IS has critical issues (routing loops)
-	  in a mixed environment where some routers support
-	  Source-Specific Routing, and some routers do not.  However, this
-	  is not likely to be a problem for Homenet, as we will require
-	  Source-Specific Routing on all routers.
-        </t>
-        <t>
-          [How will we enforce that?  What happens if someone plugs
-          a non-source-specific stub router into a Homenet?  Does the
-          Homenet collapse?  -- jch]
+          IS-IS support for source specific routing is implemented with the
+          addition of a sub-TLV to a reachability (prefix) TLV. The
+          implementation assumes that all IS-IS routers have support for the
+          sub-TLV. This assumption is safe to make due to the requirement that
+          all homenet IS-IS routers also use a homenet specific area ID and
+          cleartext password.
         </t>
       </section>
       <section title="Source-Specific Routing in Babel">
@@ -402,9 +376,10 @@
        ]]></artwork></figure>
       <section title="IS-IS Support for Stub Networks">
         <t>
-          A stub network in IS-IS is supported by the advertisement of
-          reachability to a prefix by a router in its LSP. [How does this
-          prevent the network from being used for transit? -- jch]
+          In IS-IS reachability (prefixes) and topology (links/adjacencies) are
+          separate things. IS-IS supports stub-networks as defined above simply
+          by advertising the prefix associated with a link, but not the link
+          itself. This is sometimes referred to as a "passive link".
         </t>
       </section>
       <section title="Babel Support for Stub Networks">
@@ -429,13 +404,9 @@
           IS-IS offers multiple levels of security from none, to simple clear-text
           (password) authentication, to fully generic cryptographic authentication
           using any number of hashing algorithms (e.g., HMAC-MD5, HMAC-SHA1,
-          ... HMAC-SHA512) based on security associations (link, area and domain
-          scoped).
+          ... HMAC-SHA512). Currently homenet uses the cleartext password set to
+          a predefined value for auto-configuration purposes.
         </t>
-        <t>[What does that mean?  Just support for symmetric-key
-        HMAC-based authentication, or am I missing something?  And why the
-        mention of areas if we're arguing in favour of a single-area
-        implementation?  -- jch]</t>
       </section>
       <section title="Security Features in Babel">
         <t>
