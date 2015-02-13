@@ -737,9 +737,9 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 15.  Evaluation of RFC 5218 Criteria
 
-   [I recommend removing this section, it reads like marketese.  -- jch]
-
 15.1.  Critical Success Factors
+
+   [I recommend removing this section, it reads like marketese.  -- jch]
 
    Does the protocol exhibit one or more of the critical initial success
    factors as defined in RFC 5218?
