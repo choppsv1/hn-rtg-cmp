@@ -642,7 +642,7 @@
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Babel</h1>
 <p id="rfc.section.4.2.p.1">Since Babel maintains a redundant routing table, it is most often able to reconverge almost instantaneously after a link failure (this is similar to e.g. EIGRP).  In the case where no feasible routes are available, Babel reconverges in 20ms per hop to the source.  </p>
 <h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Discussion</h1>
-<p id="rfc.section.4.3.p.1">Both protocols have fast convergence.  However, unless there is a high level of integration between the routing protocol and the link layer, the time needed to reconverge is dwarfed by the amount of time needed to detect a link failure, which is the hold time in IS-IS (30s by default), and two hello intervals on Babel wired links (8s by default).  (Babel performs link quality estimation on wireless links.) </p>
+<p id="rfc.section.4.3.p.1">Both protocols enjoy fast convergence.  However, unless there is a high level of integration between the routing protocol and the link layer, the time needed to reconverge is dwarfed by the amount of time needed to detect a link failure, which is the hold time in IS-IS (30s by default), and two hello intervals on Babel wired links (8s by default).  (Babel performs link quality estimation on wireless links, so the delay is somewhat more difficult to quantify there.) </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> Autoconfiguration</h1>
 <p id="rfc.section.5.p.1">Home networks are not administered, so a routing protocol needs to be entirely self-configuring in order to be suitable for Homenet.  </p>
 <h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> IS-IS</h1>

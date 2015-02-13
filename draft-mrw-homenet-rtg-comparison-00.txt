@@ -347,13 +347,13 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 4.3.  Discussion
 
-   Both protocols have fast convergence.  However, unless there is a
+   Both protocols enjoy fast convergence.  However, unless there is a
    high level of integration between the routing protocol and the link
    layer, the time needed to reconverge is dwarfed by the amount of time
    needed to detect a link failure, which is the hold time in IS-IS (30s
    by default), and two hello intervals on Babel wired links (8s by
-   default).  (Babel performs link quality estimation on wireless
-   links.)
+   default).  (Babel performs link quality estimation on wireless links,
+   so the delay is somewhat more difficult to quantify there.)
 
 5.  Autoconfiguration
 
