@@ -508,11 +508,10 @@
           to not only extension, but pairing down of features.
         </t>
         <t>
-          For HOMENET we could use a very simple level-2 only implementation
-          supporting a common topology supporting IPv4 and IPv6 over broadcast
-          (i.e., ethernet) link types. Additionally, we would need only support
-          the latest extended metric TLV (i.e., not implement legacy metric
-          support). Implemented as such the code size should be very manageable.
+          For HOMENET we need a level-1 only implementation supporting a common
+          topology for IPv4 and IPv6 over broadcast (i.e., ethernet) link
+          types. Additionally, we only require support of the latest extended
+          metric TLVs (i.e., not implement legacy metric support).
         </t>
         <t>
           The state actually required by IS-IS is not large, and primarily
