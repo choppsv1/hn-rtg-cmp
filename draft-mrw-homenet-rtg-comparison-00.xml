@@ -314,14 +314,6 @@
           cleartext password. Mixing in IS-IS routers without support for source
           specific routing is not supported as it may cause routing loops.
         </t>
-        <t>
-          [I still don't know what happens if somebody plugs
-          a non-source-specific IS-IS router into a Homenet.  Does the
-          Homenet collapse, or will it continue functioning with just the
-          non-specific router being unreachable?  This is perhaps of no
-          interest to Homenet -- I don't know, let the WG decide --, but
-          that's as good a place to put the information as any. -- jch]
-        </t>
       </section>
       <section title="Source-Specific Routing in Babel">
         <t>
@@ -334,12 +326,12 @@
           in version 1.6 (planned for March 2015).
         </t>
         <t>
-          Babel's source-specific extensions were carefully designed so
-          that source-specific and ordinary (non-specific) routers can
-          coexist in a single routing domain, without routing pathologies
-          such as routing loops.  Interoperability between plain Babel and
-          Source-Specific Babel is described in detail in Section VI.A of
-          <xref target="SS-ROUTING"/>.
+          Babel's source-specific extensions were carefully designed so that
+          source-specific and ordinary (non-specific) routers can coexist in a
+          single routing domain, without causing routing loops; however, routing
+          blackholes may still occur. Interoperability between plain Babel and
+          Source-Specific Babel is described in detail in Section VI.A of <xref
+          target="SS-ROUTING"/>.
 	</t>
       </section>
       <section title="Discussion">
