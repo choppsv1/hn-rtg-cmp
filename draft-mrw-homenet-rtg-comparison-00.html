@@ -660,6 +660,7 @@
 <p id="rfc.section.6.2.p.2">Babel's source-specific extensions were carefully designed so that source-specific and ordinary (non-specific) routers can coexist in a single routing domain, without causing routing loops.  However, unless there is a connected backbone of source-specific routers, any non-specific routers present in the Homenet may experience blackholes.  Interoperability between plain Babel and Source-Specific Babel is described in detail in Section VI.A of <a href="#SS-ROUTING">[SS-ROUTING]</a>.  </p>
 <h1 id="rfc.section.6.3"><a href="#rfc.section.6.3">6.3.</a> Discussion</h1>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Support for Link Metrics</h1>
+<p id="rfc.section.7.p.1">Typical Homenets are built out of multiple link technologies with very different performance characteristics -- Gigabit Ethernet can easily have three orders of magnitude higher throughput than a marginal wireless link.  Both IS-IS and Babel quantify the desirability of a link by assigning a metric to it.  </p>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> Link Metrics in IS-IS</h1>
 <p id="rfc.section.7.1.p.1">The homenet version of IS-IS uses the wide-metric (24-bit) link metric. Additionally IS-IS includes multi-topology support allowing for a variable number of metrics per link, as well as per-link and per-prefix tags allowing for coloring of links and reachability, and finally per-link and per-prefix sub-tlv's allowing for any future additional extensions.  </p>
 <h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> Link Metrics in Babel</h1>
@@ -679,13 +680,13 @@
 <h1 id="rfc.section.8.2"><a href="#rfc.section.8.2">8.2.</a> Babel Support for Stub Networks</h1>
 <p id="rfc.section.8.2.p.1">Babel supports flexible filtering of routes, and a stub network can be designated by simply setting up the necessary filtering rules.  For resource-limited deployments, a minimalistic, stub-only implementation of Babel is available.  </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> Security Features</h1>
-<p id="rfc.section.9.p.1">[I think this section is badly written.  We should just state whether each protocol supports auth or encryption, and whether it supports symmetric or something more exciting.  Listing password authentication seems silly. -- jch] </p>
+<p id="rfc.section.9.p.1">[I think this section is badly written.  We should just state whether each protocol supports auth or encryption, and whether it supports symmetric or something more exciting. -- jch] </p>
 <h1 id="rfc.section.9.1"><a href="#rfc.section.9.1">9.1.</a> Security Features in IS-IS</h1>
 <p id="rfc.section.9.1.p.1">IS-IS offers multiple levels of security from none, to simple clear-text (password) authentication, to fully generic cryptographic authentication using any number of hashing algorithms (e.g., HMAC-MD5, HMAC-SHA1, ... HMAC-SHA512). Currently homenet uses the cleartext password set to a predefined value for auto-configuration purposes.  </p>
 <h1 id="rfc.section.9.2"><a href="#rfc.section.9.2">9.2.</a> Security Features in Babel</h1>
 <p id="rfc.section.9.2.p.1">Babel supports symmetric key authentication using an extensible HMAC-based cryptographic authentication mechanism <a href="#RFC7298">[RFC7298]</a>.  </p>
 <h1 id="rfc.section.10"><a href="#rfc.section.10">10.</a> Support for Multicast</h1>
-<p id="rfc.section.10.p.1">Although the HOMENET WG has not yet determined how/if to support multicast in HOMENET Networks, it might be desirable to pick a routing protocol that supports multicast, so that it will be easier to add multicast support in the future.  </p>
+<p id="rfc.section.10.p.1">Although the HOMENET WG has not yet determined whether to support multicast in HOMENET Networks, it might be desirable to pick a routing protocol that supports multicast, so that it will be easier to add multicast support in the future.  </p>
 <h1 id="rfc.section.10.1"><a href="#rfc.section.10.1">10.1.</a> Multicast Routing in IS-IS</h1>
 <p id="rfc.section.10.1.p.1">The IS-IS protocol supports multicast routing.  However, none of the available implementations include support for multicast.  [XXX: chopps: what do we mean by supporting multicast routing?] </p>
 <h1 id="rfc.section.10.2"><a href="#rfc.section.10.2">10.2.</a> Multicast Routing in Babel</h1>
@@ -770,7 +771,7 @@
 <p id="rfc.section.13.1.p.1">IS-IS is in active use in in the Internet in large non-hierachical (i.e., level-2 or single area level-1) deployments with hundreds of nodes. The protocol has proven to be very scalable.  </p>
 <p id="rfc.section.13.1.p.2">Do we have any information about the performance of IS-IS on 802.11 networks, in particular? </p>
 <h1 id="rfc.section.13.2"><a href="#rfc.section.13.2">13.2.</a> Babel Performance on 802.11</h1>
-<p id="rfc.section.13.2.p.1">Babel was carefully optimised for 802.11 networks.  In particular, it performs link quality estimations of wireless links in a manner that works well with the 802.11 MAC.  In addition, Babel has provisions for estimating radio interference <a href="#BABEL-Z">[BABEL-Z]</a>, which is essential for providing decent throughput on multi-hop radio routes.  </p>
+<p id="rfc.section.13.2.p.1">Babel has been carefully optimised for 802.11 networks.  In particular, it performs link quality estimations of wireless links in a manner that works well with the 802.11 MAC.  In addition, Babel has provisions for estimating radio interference <a href="#BABEL-Z">[BABEL-Z]</a>, which is essential for providing decent throughput on multi-hop radio routes.  </p>
 <p id="rfc.section.13.2.p.2">Babel was designed to work well on pure mesh networks (networks where a packet might exit through the same interface as the one it came from), but this is probably out of scope for Homenet.  </p>
 <h1 id="rfc.section.14"><a href="#rfc.section.14">14.</a> Standardization Status</h1>
 <h1 id="rfc.section.14.1"><a href="#rfc.section.14.1">14.1.</a> IS-IS Standardization</h1>

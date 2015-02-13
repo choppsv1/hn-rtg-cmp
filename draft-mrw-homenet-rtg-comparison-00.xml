@@ -341,6 +341,13 @@
       </section>
     </section>
     <section title="Support for Link Metrics">
+      <t>
+        Typical Homenets are built out of multiple link technologies with
+        very different performance characteristics -- Gigabit Ethernet can
+        easily have three orders of magnitude higher throughput than
+        a marginal wireless link.  Both IS-IS and Babel quantify the
+        desirability of a link by assigning a metric to it.
+      </t>
       <section title="Link Metrics in IS-IS">
         <t>
           The homenet version of IS-IS uses the wide-metric (24-bit)
@@ -413,8 +420,7 @@
       <t>
         [I think this section is badly written.  We should just state
         whether each protocol supports auth or encryption, and whether it
-        supports symmetric or something more exciting.  Listing password
-        authentication seems silly. -- jch]
+        supports symmetric or something more exciting. -- jch]
       </t>
       <section title="Security Features in IS-IS">
         <t>
@@ -435,7 +441,7 @@
     </section>
     <section title="Support for Multicast">
       <t>
-	Although the HOMENET WG has not yet determined how/if to
+	Although the HOMENET WG has not yet determined whether to
 	support multicast in HOMENET Networks, it might be desirable
 	to pick a routing protocol that supports multicast, so that it
 	will be easier to add multicast support in the future.
@@ -620,7 +626,7 @@
       </section>
       <section title="Babel Performance on 802.11">
 	<t>
-          Babel was carefully optimised for 802.11 networks.  In
+          Babel has been carefully optimised for 802.11 networks.  In
           particular, it performs link quality estimations of wireless
           links in a manner that works well with the 802.11 MAC.  In
           addition, Babel has provisions for estimating radio interference
