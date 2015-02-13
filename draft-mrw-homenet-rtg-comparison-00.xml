@@ -326,12 +326,14 @@
           in version 1.6 (planned for March 2015).
         </t>
         <t>
-          Babel's source-specific extensions were carefully designed so that
-          source-specific and ordinary (non-specific) routers can coexist in a
-          single routing domain, without causing routing loops; however, routing
-          blackholes may still occur. Interoperability between plain Babel and
-          Source-Specific Babel is described in detail in Section VI.A of <xref
-          target="SS-ROUTING"/>.
+          Babel's source-specific extensions were carefully designed so
+          that source-specific and ordinary (non-specific) routers can
+          coexist in a single routing domain, without causing routing
+          loops.  However, unless there is a connected backbone of
+          source-specific routers, any non-specific routers present in the
+          Homenet may experience blackholes.  Interoperability between
+          plain Babel and Source-Specific Babel is described in detail in
+          Section VI.A of <xref target="SS-ROUTING"/>.
 	</t>
       </section>
       <section title="Discussion">

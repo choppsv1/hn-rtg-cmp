@@ -452,7 +452,7 @@
 
   <meta name="dct.creator" content="Wasserman, M., Hopps, C., and J. Chroboczek" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-mrw-homenet-rtg-comparison-00.txt" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-2-12" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-2-13" />
   <meta name="dct.abstract" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
   <meta name="description" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
 
@@ -476,7 +476,7 @@
   <td class="right">C. Hopps</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 16, 2015</td>
+  <td class="left">Expires: August 17, 2015</td>
   <td class="right">Deutsche Telekom</td>
 </tr>
 <tr>
@@ -489,7 +489,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">February 12, 2015</td>
+  <td class="right">February 13, 2015</td>
 </tr>
 
     	
@@ -509,7 +509,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 16, 2015.</p>
+<p>This Internet-Draft will expire on August 17, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -657,7 +657,7 @@
 <p id="rfc.section.6.1.p.1">IS-IS support for source specific routing is implemented with the addition of a sub-TLV to a reachability (prefix) TLV. The implementation assumes that all IS-IS routers have support for the sub-TLV. This assumption is safe to make due to the requirement that all homenet IS-IS routers also use a homenet specific area ID and cleartext password. Mixing in IS-IS routers without support for source specific routing is not supported as it may cause routing loops.  </p>
 <h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Source-Specific Routing in Babel</h1>
 <p id="rfc.section.6.2.p.1">The Source-specific extension to the Babel routing protocol <a href="#BABEL-SS">[BABEL-SS]</a> has been implemented for over a year, has been made widely available and has seen a fair amount deployment as part of OpenWRT and CeroWRT.  The source-specific code is currently in the process of being merged into the standard Babel implementation, and is scheduled to be included in version 1.6 (planned for March 2015).  </p>
-<p id="rfc.section.6.2.p.2">Babel's source-specific extensions were carefully designed so that source-specific and ordinary (non-specific) routers can coexist in a single routing domain, without causing routing loops; however, routing blackholes may still occur. Interoperability between plain Babel and Source-Specific Babel is described in detail in Section VI.A of <a href="#SS-ROUTING">[SS-ROUTING]</a>.  </p>
+<p id="rfc.section.6.2.p.2">Babel's source-specific extensions were carefully designed so that source-specific and ordinary (non-specific) routers can coexist in a single routing domain, without causing routing loops.  However, unless there is a connected backbone of source-specific routers, any non-specific routers present in the Homenet may experience blackholes.  Interoperability between plain Babel and Source-Specific Babel is described in detail in Section VI.A of <a href="#SS-ROUTING">[SS-ROUTING]</a>.  </p>
 <h1 id="rfc.section.6.3"><a href="#rfc.section.6.3">6.3.</a> Discussion</h1>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Support for Link Metrics</h1>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> Link Metrics in IS-IS</h1>
