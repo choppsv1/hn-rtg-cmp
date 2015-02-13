@@ -576,7 +576,8 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
    [I suggest removing the rest of this section, since it consists of
    unsubstantiated, vague claims depending on a not-yet-implemented
-   version of a not-yet-specified subset of a large protocol. -- jch]
+   version of a not-yet-specified subset of a large protocol.  In any
+   case, it belongs in 15.5, not here. -- jch]
 
    The code size of IS-IS depends greatly on what aspects of the
    protocol have been implemented.  IS-IS supports multiple address
@@ -607,7 +608,6 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    router in the network regardless of the number of links, adjacencies
    or the distance (or number of hops) from the storing router to the
    advertising router.
-
 
 
 

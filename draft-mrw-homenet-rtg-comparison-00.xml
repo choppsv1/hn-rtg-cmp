@@ -488,7 +488,7 @@
           [I suggest removing the rest of this section, since it consists
           of unsubstantiated, vague claims depending on
           a not-yet-implemented version of a not-yet-specified subset of
-          a large protocol. -- jch]
+          a large protocol.  In any case, it belongs in 15.5, not here. -- jch]
         </t>
 	<t>
           The code size of IS-IS depends greatly on what aspects of the protocol
