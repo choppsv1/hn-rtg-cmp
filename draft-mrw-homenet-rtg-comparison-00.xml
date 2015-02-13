@@ -223,7 +223,7 @@
         </t>
       </section>
     </section>
-    <section title="Converence Times">
+    <section title="Convergence Times">
       <t>
         Convergence time is defined as the amount of time after a link
         failure is detected during which the network is not fully

@@ -73,7 +73,7 @@ Table of Contents
      3.1.  Link State Algorithm  . . . . . . . . . . . . . . . . . .   5
      3.2.  Loop-Avoiding Distance-Vector Algorithm (Babel) . . . . .   5
      3.3.  Algorithm Comparison  . . . . . . . . . . . . . . . . . .   6
-   4.  Converence Times  . . . . . . . . . . . . . . . . . . . . . .   6
+   4.  Convergence Times . . . . . . . . . . . . . . . . . . . . . .   6
      4.1.  IS-IS . . . . . . . . . . . . . . . . . . . . . . . . . .   6
      4.2.  Babel . . . . . . . . . . . . . . . . . . . . . . . . . .   7
      4.3.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .   7
@@ -301,7 +301,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    entire network.  There is no duplication of state based on the number
    of adjacencies or unique paths to a given prefix.
 
-4.  Converence Times
+4.  Convergence Times
 
    Convergence time is defined as the amount of time after a link
    failure is detected during which the network is not fully

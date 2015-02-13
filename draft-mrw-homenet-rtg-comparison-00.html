@@ -382,7 +382,7 @@
 <link href="#rfc.section.3.1" rel="Chapter" title="3.1 Link State Algorithm"/>
 <link href="#rfc.section.3.2" rel="Chapter" title="3.2 Loop-Avoiding Distance-Vector Algorithm (Babel)"/>
 <link href="#rfc.section.3.3" rel="Chapter" title="3.3 Algorithm Comparison"/>
-<link href="#rfc.section.4" rel="Chapter" title="4 Converence Times"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Convergence Times"/>
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 IS-IS"/>
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Babel"/>
 <link href="#rfc.section.4.3" rel="Chapter" title="4.3 Discussion"/>
@@ -529,7 +529,7 @@
 <li>3.1.   <a href="#rfc.section.3.1">Link State Algorithm</a></li>
 <li>3.2.   <a href="#rfc.section.3.2">Loop-Avoiding Distance-Vector Algorithm (Babel)</a></li>
 <li>3.3.   <a href="#rfc.section.3.3">Algorithm Comparison</a></li>
-<li>4.   <a href="#rfc.section.4">Converence Times</a></li>
+<li>4.   <a href="#rfc.section.4">Convergence Times</a></li>
 <li>4.1.   <a href="#rfc.section.4.1">IS-IS</a></li>
 <li>4.2.   <a href="#rfc.section.4.2">Babel</a></li>
 <li>4.3.   <a href="#rfc.section.4.3">Discussion</a></li>
@@ -634,7 +634,7 @@
 <p id="rfc.section.3.3.p.1">[Putting this so early in the document gives undue import to scaling issues. -- jch] </p>
 <p id="rfc.section.3.3.p.2">Loop-avoiding Distance Vector scales to very large networks -- the amount of state is linear in the number of nodes, and, due to the absence of pathologies during reconvergence, does not need to be propagated in a timely manner.  It scales badly in extremely dense deployments, where a single node has thousands of direct neighbours; such deployments are unlikely, and clearly outside the scope of Homenet.  </p>
 <p id="rfc.section.3.3.p.3">The IS-IS link state algorithm distributes link and prefix information for each node in a single Logical LSP (possibly fragmented). It uses these LSPs to compute a tree representing the entire network. There is no duplication of state based on the number of adjacencies or unique paths to a given prefix.  </p>
-<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Converence Times</h1>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Convergence Times</h1>
 <p id="rfc.section.4.p.1">Convergence time is defined as the amount of time after a link failure is detected during which the network is not fully operational.  It does not include the time necessary to detect a link failure.  </p>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> IS-IS</h1>
 <p id="rfc.section.4.1.p.1">Given fast flooding of any change in the network, IS-IS has been shown to acheive sub 200ms end-to-end convergence even in very large provider networks (single area 900+ nodes). Basically the time for convergence is the time to propagate a new LSP from one end of the network to the other plus the SPF (tree computation interval) and FIB loading time. The flooding is done without delay and prior to running the SPF (tree-calculation) algorithm. Thus is roughly proportional to propagation delay across the diameter of the network. The tree calculation is sub 20ms on modern CPUs. FIB load time depends on the FIB hardware and design and not the routing protocol choice.  </p>
