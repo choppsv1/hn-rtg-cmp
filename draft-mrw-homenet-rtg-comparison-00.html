@@ -452,7 +452,7 @@
 
   <meta name="dct.creator" content="Wasserman, M., Hopps, C., and J. Chroboczek" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-mrw-homenet-rtg-comparison-00.txt" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-2-13" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-2-12" />
   <meta name="dct.abstract" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
   <meta name="description" content="This document is intended to provide information to members of the IETF Home Networks Working Group (HOMENET WG), so that we can make an informed decision regarding which routing protocol to use in home networks.  The routing protocols compared in this document are: The Babel Routing Protocol (Babel) and The Intermediate System to Intermediate System Intra-Domain Routing Protocol (IS-IS).  " />
 
@@ -476,7 +476,7 @@
   <td class="right">C. Hopps</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 17, 2015</td>
+  <td class="left">Expires: August 16, 2015</td>
   <td class="right">Deutsche Telekom</td>
 </tr>
 <tr>
@@ -489,7 +489,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">February 13, 2015</td>
+  <td class="right">February 12, 2015</td>
 </tr>
 
     	
@@ -509,7 +509,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 17, 2015.</p>
+<p>This Internet-Draft will expire on August 16, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -700,7 +700,7 @@
 <p id="rfc.section.12.1.p.1">The Homenet implementation of IS-IS consists of 7000 lines of Erlang code and has an installed size of over 11MB.  Its initial memory usage (as reported by the operating system) is 22MB, and its working set increases by XXX bytes for each new edge in the network graph.  To put these numbers into perspective, in a network with XXX nodes each of which has XXX neighbours, the Homenet implementation of IS-IS requires XXX bytes for its data structures.  </p>
 <p id="rfc.section.12.1.p.2">[I suggest removing the rest of this section, since it consists of unsubstantiated, vague claims depending on a not-yet-implemented version of a not-yet-specified subset of a large protocol.  In any case, it belongs in 15.5, not here. -- jch] </p>
 <p id="rfc.section.12.1.p.3">The code size of IS-IS depends greatly on what aspects of the protocol have been implemented. IS-IS supports multiple address families as well as completely different protocol stacks (OSI and IP), multiple area hierachical operation with automatic virtual link support for repairing area partitions, and multiple link types. Additionally many other protocol features have been added over time to augment the protocol or replace previous behavior. The protocol lends itself well to not only extension, but pairing down of features.  </p>
-<p id="rfc.section.12.1.p.4">For HOMENET we could use a very simple level-2 only implementation supporting a common topology supporting IPv4 and IPv6 over broadcast (i.e., ethernet) link types. Additionally, we would need only support the latest extended metric TLV (i.e., not implement legacy metric support). Implemented as such the code size should be very manageable.  </p>
+<p id="rfc.section.12.1.p.4">For HOMENET we need a level-1 only implementation supporting a common topology for IPv4 and IPv6 over broadcast (i.e., ethernet) link types. Additionally, we only require support of the latest extended metric TLVs (i.e., not implement legacy metric support).  </p>
 <p id="rfc.section.12.1.p.5">The state actually required by IS-IS is not large, and primarily correlates to the number of routers in the network (for LSP storage). The protocol stores it's own link and adjacency data which is expected to be negligible. Additionally, the protocol stores received and generated LSPs, and typically an SPF tree with prefix information attached.  This state correlates directly to the number of routers and prefixes in the network. Each router in the network generates, a single LSP (possibly fragmented into segments) with prefix information, a single copy of these LSPs is stored by each router in the network regardless of the number of links, adjacencies or the distance (or number of hops) from the storing router to the advertising router.  </p>
 <h1 id="rfc.section.12.2"><a href="#rfc.section.12.2">12.2.</a> Babel Code and State Size</h1>
 <p id="rfc.section.12.2.p.1">The source-specific implementation of Babel, which implements many non-Homenet extensions to the protocol, consists of roughly 10000 lines of C and has an installed size of less than 130kB on AMD-64.  Its initial memory usage (as reported by the operating system) is 300kB.  </p>
