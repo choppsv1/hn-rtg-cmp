@@ -693,7 +693,7 @@
 <h1 id="rfc.section.11"><a href="#rfc.section.11">11.</a> Implementation Status</h1>
 <p id="rfc.section.11.p.1">There are Homenet implementations of both IS-IS and Babel.  </p>
 <p id="rfc.section.11.p.2">Only the Homenet implementation of IS-IS supports source-specific routing, which is a hard requirement for Homenet.  If source-specific routing is not required, there are several independent, interoperable proprietary implementations of IS-IS (all major router vendors implement IS-IS).  We are not aware of any production-quality open-source implementation of IS-IS other than the Homenet one.  </p>
-<p id="rfc.section.11.p.3">There are multiple open source implementations of Babel, two of which support source-specific routing.  Both were originally derived from the same codebase.  </p>
+<p id="rfc.section.11.p.3">There are multiple open source implementations of Babel, two of which support source-specific routing.  All implementations (except the stub-only version) were originally derived from the same codebase.  </p>
 <h1 id="rfc.section.12"><a href="#rfc.section.12">12.</a> Code and State Size</h1>
 <h1 id="rfc.section.12.1"><a href="#rfc.section.12.1">12.1.</a> IS-IS Code and State Size</h1>
 <p id="rfc.section.12.1.p.1">The Homenet implementation of IS-IS consists of 7000 lines of Erlang code and has an installed size of over 11MB.  Its initial memory usage (as reported by the operating system) is 22MB, and its working set increases by XXX bytes for each new edge in the network graph.  To put these numbers into perspective, in a network with XXX nodes each of which has XXX neighbours, the Homenet implementation of IS-IS requires XXX bytes for its data structures.  </p>

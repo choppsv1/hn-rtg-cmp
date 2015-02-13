@@ -465,8 +465,9 @@
       </t>
       <t>
         There are multiple open source implementations of Babel, two of
-        which support source-specific routing.  Both were originally
-        derived from the same codebase.
+        which support source-specific routing.  All implementations
+        (except the stub-only version) were originally derived from the
+        same codebase.
       </t>
     </section>
     <section title="Code and State Size">
