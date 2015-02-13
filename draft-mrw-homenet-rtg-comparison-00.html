@@ -385,6 +385,7 @@
 <link href="#rfc.section.4" rel="Chapter" title="4 Converence Times"/>
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 IS-IS"/>
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Babel"/>
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 Discussion"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Autoconfiguration"/>
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 IS-IS"/>
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 Babel"/>
@@ -531,6 +532,7 @@
 <li>4.   <a href="#rfc.section.4">Converence Times</a></li>
 <li>4.1.   <a href="#rfc.section.4.1">IS-IS</a></li>
 <li>4.2.   <a href="#rfc.section.4.2">Babel</a></li>
+<li>4.3.   <a href="#rfc.section.4.3">Discussion</a></li>
 <li>5.   <a href="#rfc.section.5">Autoconfiguration</a></li>
 <li>5.1.   <a href="#rfc.section.5.1">IS-IS</a></li>
 <li>5.2.   <a href="#rfc.section.5.2">Babel</a></li>
@@ -626,19 +628,21 @@
 <p id="rfc.section.3.1.p.2">An additional benefit of this algorithm is that each node contains the full knowledge of the topology of the network. This information can be used by other applications outside the routing protocol itself.  </p>
 <p id="rfc.section.3.1.p.3">Additionally the flooding algorithm has been found as an efficient method for other applications to distribute node-specific application data, although some care must be taken with this use so as not to disrupt the fundamental routing function.  </p>
 <h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> Loop-Avoiding Distance-Vector Algorithm (Babel)</h1>
-<p id="rfc.section.3.2.p.1">Distance-vector algorithms distribute information about the path length to reach each destination through a given neighbor.  Packets are forwarded to the neighbor who is advertising the shortest path to reach the destination.  </p>
-<p id="rfc.section.3.2.p.2">Babel, like EIGRP, DSDV and to a certain extent BGP, uses a loop-avoiding distance-vector algorithm: it avoids creating a loop even during reconvergence (there is no "counting to infinity", and even short-lived "microloops" are avoided in most cases).  </p>
+<p id="rfc.section.3.2.p.1">Distance-vector algorithms distribute information about the path length to reach each destination through a given neighbor.  Packets are forwarded to the neighbor who is advertising the best path towards the destination.  </p>
+<p id="rfc.section.3.2.p.2">Babel, like EIGRP, DSDV, and to a certain extent BGP, uses a loop-avoiding distance-vector algorithm: it avoids creating a loop even during reconvergence (there is no "counting to infinity", and even short-lived "microloops" are avoided in most cases).  </p>
 <h1 id="rfc.section.3.3"><a href="#rfc.section.3.3">3.3.</a> Algorithm Comparison</h1>
 <p id="rfc.section.3.3.p.1">[Putting this so early in the document gives undue import to scaling issues. -- jch] </p>
-<p id="rfc.section.3.3.p.2">Loop-avoiding Distance Vector scales beautifully to very large networks -- the amount of state is linear in the number of nodes, and, due to the absence of pathologies during reconvergence, does not need to be propagated in a timely manner.  It scales badly in extremely dense deployments, where a single node has thousands of direct neighbours; such deployments are unlikely, and clearly outside the scope of Homenet.  [chopps: wouldn't 802.11 be an example of a somewhat dense network?] </p>
+<p id="rfc.section.3.3.p.2">Loop-avoiding Distance Vector scales to very large networks -- the amount of state is linear in the number of nodes, and, due to the absence of pathologies during reconvergence, does not need to be propagated in a timely manner.  It scales badly in extremely dense deployments, where a single node has thousands of direct neighbours; such deployments are unlikely, and clearly outside the scope of Homenet.  </p>
 <p id="rfc.section.3.3.p.3">The IS-IS link state algorithm distributes link and prefix information for each node in a single Logical LSP (possibly fragmented). It uses these LSPs to compute a tree representing the entire network. There is no duplication of state based on the number of adjacencies or unique paths to a given prefix.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Converence Times</h1>
-<p id="rfc.section.4.p.1">It is yet to be determined if convergence time of the routing protocols is going to be an important factor. We need to determine how link failures will be detected and how quickly this will occur.  </p>
+<p id="rfc.section.4.p.1">Convergence time is defined as the amount of time after a link failure is detected during which the network is not fully operational.  It does not include the time necessary to detect a link failure.  </p>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> IS-IS</h1>
 <p id="rfc.section.4.1.p.1">Given fast flooding of any change in the network, IS-IS has been shown to acheive sub 200ms end-to-end convergence even in very large provider networks (single area 900+ nodes). Basically the time for convergence is the time to propagate a new LSP from one end of the network to the other plus the SPF (tree computation interval) and FIB loading time. The flooding is done without delay and prior to running the SPF (tree-calculation) algorithm. Thus is roughly proportional to propagation delay across the diameter of the network. The tree calculation is sub 20ms on modern CPUs. FIB load time depends on the FIB hardware and design and not the routing protocol choice.  </p>
 <p id="rfc.section.4.1.p.2">We easily should expect sub-second convergence for any change in reachability (addition or subtraction) in any conceivable homenet deployment.  </p>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Babel</h1>
 <p id="rfc.section.4.2.p.1">Since Babel maintains a redundant routing table, it is most often able to reconverge almost instantaneously after a link failure (this is similar to e.g. EIGRP).  In the case where no feasible routes are available, Babel reconverges in 20ms per hop to the source.  </p>
+<h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Discussion</h1>
+<p id="rfc.section.4.3.p.1">Both protocols have fast convergence.  However, unless there is a high level of integration between the routing protocol and the link layer, the time needed to reconverge is dwarfed by the amount of time needed to detect a link failure, which is the hold time in IS-IS (30s by default), and two hello intervals on Babel wired links (8s by default).  (Babel performs link quality estimation on wireless links.) </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> Autoconfiguration</h1>
 <p id="rfc.section.5.p.1">Home networks are not administered, so a routing protocol needs to be entirely self-configuring in order to be suitable for Homenet.  </p>
 <h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> IS-IS</h1>
@@ -650,7 +654,8 @@
 <p id="rfc.section.6.p.1">Source-Specific Routing is a hard requirement for HOMENETs, as it will allow traffic to be routed to the correct outbound network based on host source address selection.  Routing packets to the wrong outbound network could result in packets being dropped due to ISP ingress filtering rules.  </p>
 <p id="rfc.section.6.p.2">Both Babel and IS-IS have extensions for source-specific routing.  </p>
 <h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> Source-Specific Routing in IS-IS</h1>
-<p id="rfc.section.6.1.p.1">IS-IS support for source specific routing is implemented with the addition of a sub-TLV to a reachability (prefix) TLV. The implementation assumes that all IS-IS routers have support for the sub-TLV. This assumption is safe to make due to the requirement that all homenet IS-IS routers also use a homenet specific area ID and cleartext password.  </p>
+<p id="rfc.section.6.1.p.1">IS-IS support for source specific routing is implemented with the addition of a sub-TLV to a reachability (prefix) TLV. The implementation assumes that all IS-IS routers have support for the sub-TLV. This assumption is safe to make due to the requirement that all homenet IS-IS routers also use a homenet specific area ID and cleartext password. Mixing in IS-IS routers without support for source specific routing is not supported as it may cause routing loops.  </p>
+<p id="rfc.section.6.1.p.2">[I still don't know what happens if somebody plugs a non-source-specific IS-IS router into a Homenet.  Does the Homenet collapse, or will it continue functioning with just the non-specific router being unreachable?  This is perhaps of no interest to Homenet -- I don't know, let the WG decide --, but that's as good a place to put the information as any. -- jch] </p>
 <h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Source-Specific Routing in Babel</h1>
 <p id="rfc.section.6.2.p.1">The Source-specific extension to the Babel routing protocol <a href="#BABEL-SS">[BABEL-SS]</a> has been implemented for over a year, has been made widely available and has seen a fair amount deployment as part of OpenWRT and CeroWRT.  The source-specific code is currently in the process of being merged into the standard Babel implementation, and is scheduled to be included in version 1.6 (planned for March 2015).  </p>
 <p id="rfc.section.6.2.p.2">Babel's source-specific extensions were carefully designed so that source-specific and ordinary (non-specific) routers can coexist in a single routing domain, without routing pathologies such as routing loops.  Interoperability between plain Babel and Source-Specific Babel is described in detail in Section VI.A of <a href="#SS-ROUTING">[SS-ROUTING]</a>.  </p>
