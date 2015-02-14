@@ -5,10 +5,10 @@
 Homenet Working Group                                       M. Wasserman
 Internet-Draft                                         Painless Security
 Intended status: Informational                                  C. Hopps
-Expires: August 16, 2015                                Deutsche Telekom
+Expires: August 17, 2015                                Deutsche Telekom
                                                            J. Chroboczek
                                    University of Paris-Diderot (Paris 7)
-                                                       February 12, 2015
+                                                       February 13, 2015
 
 
                    HOMENET IS-IS and Babel Comparison
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 16, 2015.
+   This Internet-Draft will expire on August 17, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 1]
+Wasserman, et al.        Expires August 17, 2015                [Page 1]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 2]
+Wasserman, et al.        Expires August 17, 2015                [Page 2]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -165,7 +165,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 3]
+Wasserman, et al.        Expires August 17, 2015                [Page 3]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -221,7 +221,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 4]
+Wasserman, et al.        Expires August 17, 2015                [Page 4]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -277,7 +277,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 5]
+Wasserman, et al.        Expires August 17, 2015                [Page 5]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -333,7 +333,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 6]
+Wasserman, et al.        Expires August 17, 2015                [Page 6]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -389,7 +389,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 7]
+Wasserman, et al.        Expires August 17, 2015                [Page 7]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -445,7 +445,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 8]
+Wasserman, et al.        Expires August 17, 2015                [Page 8]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -501,7 +501,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015                [Page 9]
+Wasserman, et al.        Expires August 17, 2015                [Page 9]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -557,7 +557,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 10]
+Wasserman, et al.        Expires August 17, 2015               [Page 10]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -598,22 +598,22 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
    types.  Additionally, we only require support of the latest extended
    metric TLVs (i.e., not implement legacy metric support).
 
-   The state actually required by IS-IS is not large, and primarily
-   correlates to the number of routers in the network (for LSP storage).
-   The protocol stores it's own link and adjacency data which is
-   expected to be negligible.  Additionally, the protocol stores
-   received and generated LSPs, and typically an SPF tree with prefix
-   information attached.  This state correlates directly to the number
-   of routers and prefixes in the network.  Each router in the network
-   generates, a single LSP (possibly fragmented into segments) with
-   prefix information, a single copy of these LSPs is stored by each
-   router in the network regardless of the number of links, adjacencies
-   or the distance (or number of hops) from the storing router to the
-   advertising router.
+   The operational state required by IS-IS is proportional to the number
+   of routers, links, and prefixes in the network.  Each router in the
+   network generates and advertises a Link State Protocol Data Unit
+   (LSP) that describes it's attached links and prefixes.  A copy of
+   each of these LSPs is stored by each router in the network.  IS-IS
+   uses these LSPs to construct a shortest-path-first (SPF) tree with
+   attached prefix information from which routes to the prefixes are
+   created.
+
+   Concrete numbers lacking.
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 11]
+
+
+Wasserman, et al.        Expires August 17, 2015               [Page 11]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -669,7 +669,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 12]
+Wasserman, et al.        Expires August 17, 2015               [Page 12]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -725,7 +725,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 13]
+Wasserman, et al.        Expires August 17, 2015               [Page 13]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -781,7 +781,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 14]
+Wasserman, et al.        Expires August 17, 2015               [Page 14]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -837,7 +837,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 15]
+Wasserman, et al.        Expires August 17, 2015               [Page 15]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -893,7 +893,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 16]
+Wasserman, et al.        Expires August 17, 2015               [Page 16]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -949,7 +949,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 17]
+Wasserman, et al.        Expires August 17, 2015               [Page 17]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -1005,7 +1005,7 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 18]
+Wasserman, et al.        Expires August 17, 2015               [Page 18]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -1061,7 +1061,7 @@ Authors' Addresses
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 19]
+Wasserman, et al.        Expires August 17, 2015               [Page 19]
 
 Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
@@ -1117,4 +1117,4 @@ Internet-Draft     HOMENET IS-IS and Babel Comparison      February 2015
 
 
 
-Wasserman, et al.        Expires August 16, 2015               [Page 20]
+Wasserman, et al.        Expires August 17, 2015               [Page 20]
