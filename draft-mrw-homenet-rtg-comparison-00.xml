@@ -514,19 +514,17 @@
           metric TLVs (i.e., not implement legacy metric support).
         </t>
         <t>
-          The state actually required by IS-IS is not large, and primarily
-          correlates to the number of routers in the network (for LSP
-          storage). The protocol stores it's own link and adjacency data which
-          is expected to be negligible. Additionally, the protocol stores
-          received and generated LSPs, and typically an SPF tree with prefix
-          information attached.  This state correlates directly to the number of
-          routers and prefixes in the network. Each router in the network
-          generates, a single LSP (possibly fragmented into segments) with
-          prefix information, a single copy of these LSPs is stored by each
-          router in the network regardless of the number of links, adjacencies
-          or the distance (or number of hops) from the storing router to the
-          advertising router.
-	</t>
+          The operational state required by IS-IS is proportional to the number
+          of routers, links, and prefixes in the network.  Each router in the
+          network generates and advertises a Link State Protocol Data Unit (LSP)
+          that describes it's attached links and prefixes. A copy of each of
+          these LSPs is stored by each router in the network. IS-IS uses these
+          LSPs to construct a shortest-path-first (SPF) tree with attached
+          prefix information from which routes to the prefixes are created.
+        </t>
+        <t>
+          Concrete numbers lacking.
+        </t>
       </section>
       <section title="Babel Code and State Size">
         <t>
