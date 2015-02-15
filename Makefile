@@ -1,4 +1,4 @@
-VERSION=00
+VERSION=01
 BASE=draft-mrw-homenet-rtg-comparison
 
 XML=$(BASE).xml
@@ -11,6 +11,9 @@ all: $(ALLGEN)
 
 clean:
 	rm -f *.txt *.html *.nroff
+
+idnits: $(TEXT)
+	idnits $(TEXT)
 
 $(TEXT): $(XML)
 	xml2rfc -o $@ --text $<
