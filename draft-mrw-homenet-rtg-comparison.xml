@@ -873,7 +873,7 @@
           </t>
           <t>
             the routing protocol should avoid sending large bursts of
-            munlticast data from multiple nodes simultaneously during
+            multicast data from multiple nodes simultaneously during
             reconvergence.
           </t>
         </list>
@@ -896,7 +896,10 @@
           Babel sends in a timely manner those control messages that are
           likely to repair a broken route, but delays sending those
           messages that merely announce a slightly better route than one
-          that is already available.
+          that is already available.  This mechanism has been shown to
+          work well in dense wireless deployments, avoiding a link-layer
+          meltdown even when the whole network is being rebooted
+          simultaneously.
         </t>
         <t>
           As explained in <xref target="metrics"/>, Babel performs link
