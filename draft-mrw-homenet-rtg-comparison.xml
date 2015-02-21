@@ -477,7 +477,7 @@
           sources of information in its metric computation.  The current
           implementation is able to automatically take the following
           criteria into account:
-          <list>
+          <list style="symbols">
             <t>whether a link is wired or wireless;</t>
             <t>packet loss;</t>
             <t>link latency <xref target="BABEL-RTT"/>;</t>
