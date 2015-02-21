@@ -244,7 +244,7 @@
           data in a timely manner.  IS-IS scales well because it is not
           naive: it includes a number of techniques to reduce the size of
           data structures and limit redundant communication, such as
-          pseudonodes, DER, multiple areas, mesh groups, and probably
+          pseudonodes, DIS, multiple areas, mesh groups, and probably
           others.  The distinction is relevant, since we later argue in
           favour of a simplified implementation.  Not that it matters
           much, of course, since even naive link state is likely to scale
@@ -569,7 +569,7 @@
           It is not known whether a similar stub-only implementation of
           a subset of IS-IS could be implemented.  Even a stub
           implementation would likely need to implement reliable flooding,
-          LSP fragmentation, SPF computation, DER election etc.
+          LSP fragmentation, SPF computation, DIS election etc.
         </t>
       </section>
     </section>
@@ -909,7 +909,7 @@
           We are not aware of any results about the behaviour of IS-IS's
           reliable flooding sub-protocol over IEEE 802.11 multicast.
           IS-IS is not likely to work over IEEE 802.11 IBSS mode without
-          changes, since both the pseudonode optimisation and DER election
+          changes, since both the pseudonode optimisation and DIS election
           assume transitive links, but this is probably out of scope for
           HOMENET.
         </t>
