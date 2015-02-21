@@ -1002,7 +1002,8 @@
         a single routing instance is able to carry both IPv6 and IPv4.</t>
         <t>multiple types of physical interfaces must be accounted for:
         only Babel is able to differentiate between different link
-        technologies, see <xref target="metrics"/>.</t>
+        technologies, see <xref target="metrics"/>; nothing is known about
+        IS-IS's behaviour on wireless links.</t>
         <t>minimising convergence time: both protocols converge fast, see
         <xref target="convergence-time"/>.</t>
         <t>support the generic use of multiple Internet connections: both
