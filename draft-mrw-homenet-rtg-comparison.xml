@@ -228,17 +228,19 @@
           Loop-avoiding distance vector scales to very large networks --
           both the amount of state and the amount of data advertised by
           each node are linear in the number of nodes in the network.
-          However, in very dense deployments (where each node has
-          thousands of direct neighbours), naive distance vector tends to
-          send redundant announcements on a single link, which can cause
-          collisions on shared media.
+          However, in very dense deployments (where each node has hundreds
+          or thousands of direct neighbours), multiple nodes tend to send
+          redundant announcements on a single link, which can cause
+          excessive collisions on shared media, especially wireless links.
         </t>
         <t>
           Babel mitigates this effect by delaying announcements that
-          merely advertise a route with better metric.  This is possible
-          since the loop-avoidance mechanisms built into the protocol
-          ensure that no pathologies will occur even if the routing
-          information is not synchronised.  More information about this
+          merely advertise a route with better metric than one that is
+          already available.  This is possible since the loop-avoidance
+          mechanisms built into the protocol ensure that no pathologies
+          will occur even if the routing information is not
+          synchronised -- there is no requirement that routing information
+          be propagated in a timely manner.  More information about this
           mechanism, and its consequences on wireless networks, is given
           in <xref target="wireless"/>.
         </t>
@@ -256,8 +258,9 @@
           others.  The distinction is relevant, since we later argue in
           favour of a simplified implementation.  Not that it matters
           much, of course, since even naive link state is likely to scale
-          well enough for HOMENET, but that's not a reason to induce the
-          reader in error. -- jch]
+          well enough for HOMENET (at least as long as we don't get into
+          the unpleasant issue of wireless links), but that's not a reason
+          to induce the reader in error. -- jch]
         </t>
 	<t>
 	  IS-IS distributes link and prefix information for
