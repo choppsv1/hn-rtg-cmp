@@ -225,14 +225,22 @@
       </section>
       <section title="Algorithm Comparison">
         <t>
-          Loop-avoiding distance vector scales to very large
-          networks -- the amount of state is linear in the number of
-          nodes, and, due to the absence of pathologies during
-          reconvergence, does not need to be propagated in a timely
-          manner.  It scales badly in extremely dense deployments, where
-          a single node has thousands of direct neighbours; such
-          deployments are unlikely, and clearly outside the scope of
-          HOMENET.
+          Loop-avoiding distance vector scales to very large networks --
+          both the amount of state and the amount of data advertised by
+          each node are linear in the number of nodes in the network.
+          However, in very dense deployments (where each node has
+          thousands of direct neighbours), naive distance vector tends to
+          send redundant announcements on a single link, which can cause
+          collisions on shared media.
+        </t>
+        <t>
+          Babel mitigates this effect by delaying announcements that
+          merely advertise a route with better metric.  This is possible
+          since the loop-avoidance mechanisms built into the protocol
+          ensure that no pathologies will occur even if the routing
+          information is not synchronised.  More information about this
+          mechanism, and its consequences on wireless networks, is given
+          in <xref target="wireless"/>.
         </t>
         <t>
           Link state algorithms scales to very large, very dense
@@ -823,7 +831,8 @@
         </t>
       </section>
     </section>
-    <section title="Performance on IEEE 802.11 Wireless Networks">
+    <section title="Performance on IEEE 802.11 Wireless Networks"
+             anchor="wireless">
       <t>
         We expect wireless networks, and notably IEEE 802.11 wireless
         networks, to be in wide use in HOMENETs, not only for client
