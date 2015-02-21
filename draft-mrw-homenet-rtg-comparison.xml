@@ -3,6 +3,7 @@
 	  <!ENTITY rfc6126 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6126.xml'>
 	  <!ENTITY rfc7298 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7298.xml'>
 	  <!ENTITY rfc1142 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1142.xml'>
+	  <!ENTITY rfc7368 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7368.xml'>
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="yes"?>
@@ -93,46 +94,46 @@
         software updates.
       </t>
       <t>
+        A Plastic Home Router is usually equipped with a reasonable CPU but
+        fairly small amounts of flash and RAM.  At the time of writing,
+        a typical example of the bottom of the range has a 200MHz MIPS
+        4KEc CPU (8kB data cache), but only 4MB of flash and 8MB of RAM.
+        More expensive multi-purpose products may have a 700MHz MIPS 24Kc
+        with 32MB of flash and as much as 128MB of RAM.
+      </t>
+      <t>
+        We expect smaller devices to want to participate in the HOMENET
+        protocols.  In particular, some vendors have expressed interest in
+        producing sensor-class hardware that is able to interoperate with
+        HOMENET (smart thermostats, home automation hardware, etc.).  It
+        is therefore desirable to be able to scale down the HOMENET
+        protocols down to a few tens of kB, at least in a stub role.
+      </t>
+      <t>
         HOMENETs are built and grow organically, and often end up
         consisting of multiple link technologies with widely different
-        performance characteristics (twisted-pair Ethernet, IEEE 802.11
-        and its multiple variants, Powerline Ethernet, etc.).  It is
-        desirable for a HOMENET routing protocol to be able to dynamically
-        optimise paths according to the link characteristics.
+        performance characteristics (twisted-pair Ethernet at gigabit
+        speed, IEEE 802.11 (WiFi) and its multiple variants, Powerline
+        Ethernet, etc.).  It is desirable for a HOMENET routing protocol
+        to be able to dynamically optimise paths according to the link
+        characteristics.
       </t>
       <t>
-        Contrary to popular perception, the Plastic Home Router is usually
-        equipped with a reasonably fast CPU and reasonable amounts of
-        flash and RAM; at the time of writing, a (non-superscalar) 700MHz
-        MIPS CPU with 16MB of flash and 64MB of RAM is typical.  However,
-        we expect smaller devices to participate in the HOMENET protocols,
-        at least as stub routers.  The ability to scale down the HOMENET
-        protocols is therefore likely to encourage their wider adoption.
-      </t>
-      <t>
-	[Isn't it also the case that the HOMENET routing protocol will
-	be implemented on lower-end embedded devices, such as nodes in
-	a low-power wireless network? What is considered to be a
-	reasonable low-end system requirement for a HOMENET router?
-	-- mrw]
-      </t>
-      <t>
-        Experts appear to disagree on the expected size of a HOMENET; we
+        Experts appear to disagree on the expected size of a HOMENET: we
         have heard estimates ranging from just one router up to 250
         routers.  In any case, while scaling beyond a few thousand nodes
         is not likely to be relevant to HOMENET in the foreseeable future,
         the HOMENET protocols, if successful, will be repurposed to larger
-        networks, whether we like it or not, and using a protocol that
-        scales well from the outset may be desirable.
+        networks, whether we like it or not, and it is desirable to use
+        a protocol that scales well.
       </t>
     </section>
     <section title="Protocols and Extensions Included in Comparison">
       <t>
-	Both IS-IS and Babel are living protocols that are updated and
-	extended over time.  This section lists the extensions that
-	were considered in this comparison.  Additional protocol
-	extensions could affect some of the information included in this
-	document.
+	Both the IS-IS and Babel protocols are updated and extended over
+	time.  This section lists the extensions that were considered in
+	this comparison.  Additional protocol extensions could affect some
+	of the information included in this document.
       </t>
       <section title="IS-IS Protocol and Extensions">
 	<t>
@@ -148,6 +149,12 @@
             Source-Specific routing in IS-IS <xref target="ISIS-SS"/>.
           </t>
         </list></t>
+        <t>
+          [This list is badly incomplete.  To my untrained eye, it looks
+          like we'll also need RFC 1195, RFC 5304, RFC 5305 and RFC 5308,
+          as well as parts of RFC 3719 and RFC 3787.  We might also need
+          RFC 5303, I'm not sure. -- jch]
+        </t>
       </section>
       <section title="Babel Protocol and Extensions">
 	<t> 
@@ -195,25 +202,30 @@
           taken with this use so as not to disrupt the fundamental
           routing function.
 	</t>
+        <t>
+          [If this is meant to imply that we don't need DNCP, it should be
+          removed -- this particular ship has sailed.  Otherwise, we
+          should explain why this is relevant. -- jch]
+        </t>
       </section>
       <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
 	<t>
 	  Distance-vector algorithms distribute information about the 
 	  path length to reach each destination through a given 
-	  neighbor.  Packets are forwarded to the neighbor who is 
+	  neighbor.  Packets are forwarded through the neighbor that is 
 	  advertising the best path towards the destination.
 	</t>
         <t>
           Babel, like EIGRP, DSDV, and to a certain extent BGP, uses
           a loop-avoiding distance-vector algorithm: it avoids creating
-          a loop even during reconvergence (there is no "counting to
-          infinity", and even short-lived "microloops" are avoided in most
-          cases).
+          a loop even during reconvergence, there is no "counting to
+          infinity", and even short-lived "microloops" are avoided in
+          most cases.
         </t>
       </section>
       <section title="Algorithm Comparison">
         <t>
-          Loop-Avoiding Distance Vector scales to very large
+          Loop-avoiding distance vector scales to very large
           networks -- the amount of state is linear in the number of
           nodes, and, due to the absence of pathologies during
           reconvergence, does not need to be propagated in a timely
@@ -224,8 +236,21 @@
         </t>
         <t>
           Link state algorithms scales to very large, very dense
-          networks.  
+          networks.
 	</t>
+        <t>
+          [I believe the above is not true.  Naive link state doesn't
+          scale very well, due to the requirement to propagate topology
+          data in a timely manner.  IS-IS scales well because it is not
+          naive: it includes a number of techniques to reduce the size of
+          data structures and limit redundant communication, such as
+          pseudonodes, DER, multiple areas, mesh groups, and probably
+          others.  The distinction is relevant, since we later argue in
+          favour of a simplified implementation.  Not that it matters
+          much, of course, since even naive link state is likely to scale
+          well enough for HOMENET, but that's not a reason to induce the
+          reader in error. -- jch]
+        </t>
 	<t>
 	  IS-IS distributes link and prefix information for
           each node in a single Logical LSP (possibly fragmented). It
@@ -233,9 +258,14 @@
           network. There is no duplication of state based on the
           number of adjacencies or unique paths to a given prefix.
         </t>
+        <t>
+          [Why is the fact that it's a single (arbitrarily large, possibly
+          fragmented) LSP relevant?  Seems like an irrelevant
+          implementation detail.  -- jch]
+        </t>
       </section>
     </section>
-    <section title="Convergence Times">
+    <section title="Convergence Times" anchor="convergence-time">
       <t>
         Convergence time is defined as the amount of time after a link
         failure is detected during which the network is not fully
@@ -262,6 +292,14 @@
           in reachability (addition or subtraction) in any conceivable
           homenet deployment.
         </t>
+        <t>
+          [According to Gredler, "today, 1000–2000 routers in a single
+          area are said to represent the upper boundary of IS-IS [...] The
+          authors do not endorse these optimistic area numbers, since
+          a lot, is dependent on other factors than just the raw number of
+          routers." (p. 84).  And I'm pretty sure he's not thinking of
+          200MHz CPUs with 8kB data caches, 802.11 and powerline. -- jch]
+        </t>
       </section>
       <section title="Babel">
         <t>
@@ -274,22 +312,39 @@
       </section>
       <section title="Discussion">
         <t>
-          Both protocols enjoy fast convergence.  However, unless there is
-          a high level of integration between the routing protocol and the
-          link layer, the time needed to reconverge is dwarfed by the
-          amount of time needed to detect a link failure, which is the
-          hold time in IS-IS (30s by default), and two hello intervals on
-          Babel wired links (8s by default).  (Babel performs link quality
-          estimation on wireless links, so the delay is somewhat more
-          difficult to quantify there.)
+          Both protocols enjoy fast convergence.  However, the time needed
+          to reconverge is dwarfed by the amount of time needed to detect
+          a link failure, which is the hold time in IS-IS (30s by
+          default), and 2.5 hello intervals on Babel wired links (2.5*4s,
+          i.e. 10s by default).  (Babel performs link quality estimation
+          on wireless links, so the delay is a little higher when wireless
+          links are involved.)
+        </t>
+        <t>
+          This can be mitigated somewhat by using smaller timers, at the
+          cost of higher overhead, especially on wireless links, as they
+          suffer from abominable per-frame overhead.  IS-IS supports hold
+          times as small as 1s, while Babel supports hello intervals as
+          low as 10ms (leading to a 25ms hold time).
+        </t>
+        <t>
+          This issue with slow detection of link failure does not occur in
+          carrier and enterprise networks, where physical layer carrier
+          sense is used to detect broken links in a timely manner.
+          Unfortunately, this technique is not useful in HOMENET, since
+          most Plastic Home Routers put their Ethernet ports behind an
+          internal switch in order to provide 5 or more Ethernet ports
+          using a single NIC: carrier sense indicates the status of the
+          internal link to the switch, not of the user-visible Ethernet
+          link.  Carrier sense has also been found to be unreliable on
+          wireless links.
         </t>
       </section>
     </section>
-    <section title="Autoconfiguration">
+    <section title="Autoconfiguration" anchor="autoconf">
       <t>
-        Home networks are not administered, so a routing protocol
-        needs to be entirely self-configuring in order to be suitable
-        for HOMENETs.
+        Home networks are not administered, so a routing protocol needs to
+        be entirely self-configuring in order to be suitable for HOMENETs.
       </t>
       <section title="IS-IS">
         <t>
@@ -309,7 +364,8 @@
       <section title="Discussion">
       </section>
     </section>
-    <section title="Support for Source-Specific Routing">
+    <section title="Support for Source-Specific Routing"
+             anchor="source-specific">
       <t>
 	Source-Specific Routing is a hard requirement for HOMENETs, as
 	it will allow traffic to be routed to the correct outbound
@@ -358,14 +414,39 @@
       <section title="Discussion">
       </section>
     </section>
-    <section title="Support for Link Metrics">
+    <section title="Support for Link Metrics" anchor="metrics">
       <t>
-        Typical HOMENETs are built out of multiple link technologies
-        with very different performance characteristics -- Gigabit
-        Ethernet can easily have three orders of magnitude higher
-        throughput than a marginal wireless link.  Both IS-IS and
-        Babel quantify the desirability of a link by assigning a
-        metric to it.
+        Typical HOMENETs are built out of multiple link technologies with
+        very different performance characteristics -- Gigabit Ethernet can
+        easily have three orders of magnitude higher throughput than
+        a marginal wireless link.  Both IS-IS and Babel model the notion
+        of greater or lesser desirability of a link by a value called
+        a metric; the smaller the metric, the more desirable the link.
+      </t>
+      <t>
+        The following example illustrates the importance of assigning
+        suitable metrics to links in a home network:
+      </t>
+      <figure><artwork><![CDATA[
+      Internet --- A --- B....C          --- is Ethernet
+                    .        .           ... is WiFi
+                     ........
+       ]]></artwork></figure>
+      <t>
+        A is the CPE (edge router), and lives in a storeroom.  B is the
+        home's main router, lives in the living room, and is connected to
+        A over Ethernet.  C is a wireless router in the guest room, or
+        perhaps in the garden shed.  All the routers are equipped with
+        wireless interfaces.
+      </t>
+      <t>
+        Suppose that the wireless link B..C is solid, but the longer A..C
+        link has very high packet loss.  Murphy's law dictates that the
+        link A..C will be just good enough for the routing instances on
+        A and C to become neighbours.  If the routing protocol doesn't
+        take link quality into account in its metric computation, even if
+        it is smart enough to prefer wired links to wireless ones, it will
+        prefer the lossy route A..C to the solid route A-B..C.
       </t>
       <section title="Link Metrics in IS-IS">
         <t>
@@ -380,44 +461,81 @@
       </section>
       <section title="Link Metrics in Babel">
         <t>
-          Since Babel was originally designed for heterogeneous
-          networks, it is able to dynamically assign metrics to links
-          depending on their lower-layer characteristics.  In
-          practice, Babel assigns lower (better) metrics to wired
-          links than to wireless ones, dynamically measures loss rates
-          in order to favour lossless wireless links, favours routes
-          with non-interfering radio frequencies, and avoids
-          high-latency tunnels.
+          Since Babel was originally designed for heterogeneous networks,
+          the protocol is able to automatically include a number of
+          sources of information in its metric computation.  The current
+          implementation is able to automatically take the following
+          criteria into account:
+          <list>
+            <t>whether a link is wired or wireless;</t>
+            <t>packet loss;</t>
+            <t>link latency <xref target="BABEL-RTT"/>;</t>
+            <t>intra-route radio interference <xref target="BABEL-Z"/>.</t>
+          </list>
         </t>
         <t>
-          Obviously, such a wealth of information can lead to
-          contradictory data in edge cases; however, Babel's
-          loop-avoidance mechanisms ensure that the network remains in
-          a consistent state in all cases, and a hysteresis mechanism
-          ensures that, should a feedback loop occur, the frequency of
-          oscillations remains bounded <xref target="DELAY-BASED"/>.
+          This wealth of information can produce conflicting data in edge
+          cases.  Babel's loop-avoidance mechanisms ensure that the
+          network remains in a consistent state in all cases, and
+          a hysteresis mechanism ensures that, should a feedback loop
+          occur, the frequency of oscillations remains bounded <xref
+          target="DELAY-BASED"/>.
+        </t>
+      </section>
+      <section title="Discussion">
+        <t>
+          Babel has reasonably good support for dynamically computed
+          metrics for IEEE 802.11 links and high-latency tunnels.  The
+          current implementation doesn't have explicit support for
+          variable-speed Ethernet and Powerline Ethernet, both
+          technologies are bundled into a single "good quality link"
+          category.
+        </t>
+        <t>
+          All implementations of IS-IS known to us require metrics to be
+          set by the operator, which is not acceptable in Homenet.  While
+          support for dynamically computed metrics could potentially be
+          added to IS-IS, this is not completely trivial to do right,
+          since a naive approach would cause unacceptable churn,
+          potentially leading to repeated SPF computations and transient
+          microloops.  Suitable mitigation techniques could probably be
+          developed, but they would likely be different from the
+          mitigation techniques that work well in Babel, since the
+          link-state algorithm used by IS-IS and the triggered updates
+          used by Babel have fundamentally different dynamics.
         </t>
       </section>
     </section>
-    <section title="Support for Attached Stub Networks">
+    <section title="Support for Attached Stub Networks" anchor="stub">
       <t>
         A stub network is one that is attached to a HOMENET, possibly
         through multiple HOMENET routers, but must not be used for
-        transit.  For example, a stub network could be a sensor
-        network which would collapse under the HOMENET traffic should
-        it ever be used for transit.
-      </t>
-      <t>
-        In the following example, if the dotted link between C and D is
-        a stub network, then it must not be used for transit even if the
-        link between A and B fails:
+        transit.  In the following example, if the dotted link between
+        C and D is a stub network, then it must not be used for transit
+        even if the link between A and B fails:
       </t>
       <figure><artwork><![CDATA[
----- A ----- B -----
-     |       |
-     |       |
-     C ..... D
+      ---- A ----- B -----
+           |       |
+           |       |
+           C ..... D
        ]]></artwork></figure>
+      <t>
+        A number of people have expressed interest in attaching sensor
+        class equipment to Homenets, such as smart thermostats and home
+        automation hardware.  Presumably, the sensor-class devices will
+        run over a dedicated low-power link (e.g. IEEE 802.15.4), with
+        a small number of devices acting as gateways between the homenet
+        and the low power network.  Ideally, the gateway nodes would not
+        be dedicated devices, but merely sensor nodes that happen to have
+        been equipped with an Ethernet or WiFi interface.
+      </t>
+      <t>
+        Since low power links have orders of magnitude lower throughput
+        than Homenet links, routing Homenet traffic through the low power
+        link would cause it to collapse.  Designating this link as a stub
+        network avoids this issue.
+      </t>
       <section title="IS-IS Support for Stub Networks">
         <t>
           In IS-IS reachability (prefixes) and topology
@@ -429,20 +547,57 @@
       </section>
       <section title="Babel Support for Stub Networks">
         <t>
-	  Babel supports flexible filtering of routes, and a stub
-	  network can be designated by simply setting up the necessary
-	  filtering rules.  For resource-limited deployments, a
-	  minimalistic, stub-only implementation of Babel is
-	  available.
+          As all distance vector protocols, Babel supports fairly
+          arbitrary route filtering.  Designating a stub network is done
+          with two statements in the current implementation's filtering
+          language.
+        </t>
+        <t>
+          For resource-limited deployments, a minimalistic, stub-only
+          implementation of Babel is available that consists of less than
+          1000 lines of C code that compile to a dozen kilobytes of text.
+          Just like the standard implementation, the stub implementation
+          is mostly portable code, and should be easily ported to any
+          embedded environment that supports the "sockets" API.
 	</t>
+      </section>
+      <section title="Discussion">
+        <t>
+          A tiny, stub-only implementation of Babel is available.
+        </t>
+        <t>
+          It is not known whether a similar stub-only implementation of
+          a subset of IS-IS could be implemented.  Even a stub
+          implementation would likely need to implement reliable flooding,
+          LSP fragmentation, SPF computation, DER election etc.
+        </t>
+      </section>
+    </section>
+    <section title="Support for non-IEEE 802.2 link layers">
+      <t>
+        Most link technologies employed in a HOMENET use the IEEE 802.2
+        frame format; this is notably the case of Ethernet, IEEE 802.11
+        and common powerline technologies.  However, other framing formats
+        exist, and at least PPP, PPPoE, GRE and VPN technologies are
+        relevant to HOMENET.
+      </t>
+      <section title="IS-IS">
+        <t>
+          IS-IS is built directly above the link layer (IS-IS control data
+          is not encapsulated within IP packets), and therefore needs
+          explicit support for every type of lower layer encapsulation.
+          It is not known what particular kinds of framing the HOMENET
+          implementation of IS-IS supports.
+        </t>
+      </section>
+      <section title="Babel">
+        <t>
+          Babel is built above UDP over link-local IPv6, and is able to
+          run with no modifications over any link that supports IPv6.
+        </t>
       </section>
     </section>
     <section title="Security Features">
-      <t>
-        [I think this section is badly written.  We should just state
-        whether each protocol supports auth or encryption, and whether it
-        supports symmetric or something more exciting. -- jch]
-      </t>
       <section title="Security Features in IS-IS">
         <t>
           IS-IS offers multiple levels of security from none, to
@@ -458,8 +613,17 @@
         <t>
 	  Babel supports symmetric key authentication using an
 	  extensible HMAC-based cryptographic authentication mechanism
-	  <xref target="RFC7298"/>.
+	  <xref target="RFC7298"/>.  This mechanism is not vulnerable to
+          replay attacks.
 	</t>
+      </section>
+      <section title="Discussion">
+        <t>
+          Both protocols support password authentication.  This probably
+          provides the necessary hooks for the HOMENET Configuration
+          Protocol (HNCP) to implement whatever security policies are
+          required by HOMENET.
+        </t>
       </section>
     </section>
     <section title="Support for Multicast">
@@ -629,9 +793,77 @@
           "Total installed size" is the sum of the size of the deamon's
           packages and all its dependencies, excluding the C library.
         </t>
+        <t>
+          [We should add the size of the native Quagga isisd.  While this
+          implementation is incomplete and doesn't support the HOMENET
+          extensions, it should give us an idea how much we can hope to
+          scale IS-IS down.  It's roughly 20000 lines of C, not counting
+          the additional 20000 for zebra. -- jch]
+        </t>
+      </section>
+    </section>
+    <section title="Behaviour upon resource exhaustion">
+      <section title="IS-IS">
+        <t>XXX</t>
+      </section>
+      <section title="Babel">
+        <t>
+          Babel degrades gracefully.  Since Babel is a distance-vector
+          protocol, a Babel implementation can simply drop excess routes
+          when it runs out of memory.  As long as the default route is not
+          discarded, connectivity will be degraded but not completely
+          lost.
+        </t>
+        <t>
+          The current implementation of Babel discards redundant routes
+          before it starts dropping announcements, but doesn't yet
+          prioritise the default route.  (This behaviour was tested when
+          somebody redistributed the entire IPv6 default-free zone into
+          a Babel network.  We had a lot of fun that day.)
+        </t>
       </section>
     </section>
     <section title="Performance on IEEE 802.11 Wireless Networks">
+      <t>
+        We expect wireless networks, and notably IEEE 802.11 wireless
+        networks, to be in wide use in HOMENETs, not only for client
+        connections but also for router-to-router connections.  In fact,
+        some of us believe that the ability to cheaply and easily extend
+        wireless coverage by adding a wireless router is a "killer feature"
+        of Homenet, one that it easy to explain both to one's boss and to
+        end users.
+      </t>
+      <t>
+        IEEE 802.11 has some rather unpleasant performance
+        characteristics.  First, wireless links are of very variable
+        quality.  Second, multicast traffic is sent at a lowest common
+        denominator speed, typically 2Mbit/s, which makes multicast
+        outrageously expensive.  Third, multicast traffic is not
+        protected by link-layer ARQ, which makes multicast packet drops
+        likely, especially in the presence of collisions, which are
+        particularly likely when the routing protocol is in the process of
+        reconverging.
+      </t>
+      <t>
+        This has some consequences for routing protocols:
+        <list style="symbols">
+          <t>
+            the routing protocol must be able to deal with varying link
+            qualities (see <xref target="metrics"/>);
+          </t>
+          <t>
+            if the routing protocol uses multicast for transmitting
+            control data, it must deal gracefully with packet loss
+            during reconvergence;
+          </t>
+          <t>
+            the routing protocol should avoid sending large bursts of
+            munlticast data from multiple nodes simultaneously during
+            reconvergence.
+          </t>
+        </list>
+      </t>
+
       <section title="IS-IS Performance on 802.11">
         <t>
           IS-IS is in active use in in the Internet in large
@@ -639,25 +871,47 @@
           deployments with hundreds of nodes. The protocol has proven
           to be very scalable.
         </t>
-	<t>
-	  [Do we have any information about the performance of IS-IS
-	  on 802.11 networks, in particular? -- mrw]
-	</t>
       </section>
       <section title="Babel Performance on 802.11">
 	<t>
-          Babel has been carefully optimised for 802.11 networks.  In
-          particular, it performs link quality estimations of wireless
-          links in a manner that works well with the 802.11 MAC.  In
-          addition, Babel has provisions for estimating radio
-          interference <xref target="BABEL-Z"/>, which is essential
-          for providing decent throughput on multi-hop radio routes.
+          Babel has been carefully optimised for IEEE 802.11 networks.
+          While Babel transmits most control data over multicast, it
+          applies large amounts of random jitter (on the order of seconds)
+          to all but its most urgent control messages.  Roughly speaking,
+          Babel sends in a timely manner those control messages that are
+          likely to repair a broken route, but delays sending those
+          messages that merely announce a slightly better route than one
+          that is already available.
         </t>
         <t>
-          Babel was designed to work well on pure mesh networks
-          (networks where a packet might exit through the same
-          interface as the one it came from), but this is probably out
-          of scope for HOMENET.
+          As explained in <xref target="metrics"/>, Babel performs link
+          quality estimation on wireless links in a manner that works
+          relatively well with the 802.11 MAC.  In addition, Babel has
+          provisions for estimating radio interference <xref
+          target="BABEL-Z"/>, which is essential for providing decent
+          throughput on multi-hop radio routes.
+        </t>
+        <t>
+          Babel was designed to work well on pure mesh networks (networks
+          where links are not guaranteed to be transitive, and where
+          a packet might be routed through the same interface as the one
+          it came from), but this is probably outside the scope of HOMENET.
+        </t>
+      </section>
+      <section title="Discussion">
+        <t>
+          Babel has been designed with wireless networks in mind, and has
+          been shown to work reasonably well even in the extremely hostile
+          environment of wireless mesh networks built over IEEE 802.11
+          in IBSS ("ad hoc") mode.
+        </t>
+        <t>
+          We are not aware of any results about the behaviour of IS-IS's
+          reliable flooding sub-protocol over IEEE 802.11 multicast.
+          IS-IS is not likely to work over IEEE 802.11 IBSS mode without
+          changes, since both the pseudonode optimisation and DER election
+          assume transitive links, but this is probably out of scope for
+          HOMENET.
         </t>
       </section>
     </section>
@@ -695,6 +949,58 @@
 	</t>
       </section>
     </section>
+    <section title="Evaluation of RFC 7368 Criteria">
+      <t>
+        Section 3.5 of <xref target="RFC7368"/> lists a set of criteria
+        that the HOMENET routing protocol must satisfy.
+      </t>
+      <t><list style="symbols">
+        <t>border discovery: out of scope, as this is done by HNCP.</t>
+        <t>self configuring: both protocols are self-configuring, see
+        <xref target="autoconf"/>.</t>
+        <t>behaviour during reconfiguration and reconvergence:
+        <list style="symbols">
+          <t>both protocols are able to establish adjacencies and to route
+          IPv6 before they even receive an IPv6 address due to their use
+          of stable neighbour identifiers [is that true for IS-IS? -- jch];</t>
+          <t>Babel will avoid creating loops even during reconvergence, but
+          might create temporary blackholes;</t>
+          <t>IS-IS may create short-lived loops during reconvergence;</t>
+          <t>since HNCP doesn't depend on unicast, in principle it is not
+          impacted by the routing protocol's behaviour during
+          reconvergence; however, on a wireless network, the interference
+          caused by routing loops may delay HNCP's reconvergence.</t>
+        </list> </t>
+        <t>the homenet routing protocol should be based on a previously
+        deployed protocol:
+        <list style="symbols">
+          <t>IS-IS is more widely deployed in carrier networks,</t>
+          <t>there is more experience with running Babel on Plastic
+          Home Routers</t>
+          <t>Only the Babel implementation of source-specific routing has
+          seen any deployment.</t>
+        </list></t>
+        <t>support for IPv4: both protocols are intrinsically double-stack --
+        a single routing instance is able to carry both IPv6 and IPv4.</t>
+        <t>multiple types of physical interfaces must be accounted for:
+        only Babel is able to differentiate between different link
+        technologies, see <xref target="metrics"/>.</t>
+        <t>minimising convergence time: both protocols converge fast, see
+        <xref target="convergence-time"/>.</t>
+        <t>support the generic use of multiple Internet connections: both
+        protocols support source-specific routing, see
+        <xref target="source-specific"/>.</t>
+        <t>scalable to higher hop counts: both protocols have reasonably
+        wide metrics (24 bits in IS-IS, 16 bits in Babel).</t>
+        <t>support for attached LLNs and other non-transit networks: both
+        protocols are able to designate a link as non-transit.  A tiny
+        stub implementation of Babel is available.  It is not known
+        whether a small stub-only implementation of IS-IS is possible.
+        See <xref target="stub"/>.</t>
+        <t>support for Multicast: IS-IS is able to carry multicast routes,
+        Babel is not.</t>
+      </list></t>
+    </section>
     <section title="Evaluation of RFC 5218 Criteria">
       <section title="Critical Success Factors">
         <t>
@@ -704,9 +1010,9 @@
         <section title="IS-IS Success Factors">
           <t>
             IS-IS exhibits the following critical initial success factors:
-            <list>
+            <list style="symbols">
               <t>Positive Net Value:
-              <list>
+              <list style="symbols">
                 <t> Hardware cost: None. </t>
                 <t> Operational interface: Existing and extensive. </t>
                 <t> Retraining: None. </t>
@@ -732,9 +1038,9 @@
         <section title="Babel Success Factos">
           <t>
             Babel exhibits the following critical initial success factors:
-            <list>
+            <list style="symbols">
               <t>Positive Net Value:
-              <list>
+              <list style="symbols">
                 <t> Hardware cost: None. </t>
                 <t> Operational interface: tcpdump and wireshark support,
                 dedicated monitoring software. </t>
@@ -783,6 +1089,12 @@
             licensed), and the codebase has proven of sufficiently high
             quality to be easily extended by people who were not in direct
             contact with the author <xref target="RFC7298"/>.
+          </t>
+          <t>
+            With the exception of a small number of functions used for
+            interfacing with the kernel's routing tables, Babel is
+            portable code, and is easily ported to any environment that
+            supports the familiar "sockets" API.
           </t>
         </section>
       </section>
@@ -892,13 +1204,27 @@
         </section>
         <section title="Babel">
           <t>
-            The extension mechanisms built into the Babel protocol
-            <xref target="BABEL-EXT"/> have been shown to be a solid
-            basis on which many backwards-compatible extensions have
-            been built, including one that fundamentally changes the
-            structure of announcements <xref target="BABEL-SS"/> and
-            one that needs a non-trivial extension to the space of
-            metrics <xref target="BABEL-Z"/>.
+            The extension mechanisms built into the Babel protocol <xref
+            target="BABEL-EXT"/> have been used to build a number of
+            extensions, including one that significantly extends the
+            structure of announcements <xref target="BABEL-SS"/> and one
+            that needs a non-trivial extension to the space of metrics
+            <xref target="BABEL-Z"/>.
+          </t>
+          <t>
+            All Babel extensions that have been defined interoperate with
+            the original protocol, as defined in RFC 6126, to the extent
+            possible.  For example, a router that doesn't implement the
+            radio interference extension will just ignore the frequency
+            information attached to route updates, which may lead to
+            slightly sub-optimal routing but will cause neither blackholes
+            nor routing loops.  To the contrary, a router that doesn't
+            support the source-specific extensions will silently ignore
+            any source-specific update, and therefore route according to
+            the non-specific subset of available routes, which might cause
+            blackholes, but under no circumstances will cause routing
+            loops.  Backwards compatibility provisions are described in
+            Section 4 of <xref target="BABEL-EXT"/>.
           </t>
         </section>
       </section>
@@ -913,23 +1239,23 @@
         <section title="IS-IS">
           <t>
             For IS-IS the market has already decided that the protocol
-            is successful in a fairly wide variety of
-            deployments. [We're speaking of source-specific,
-            autoconfiguring IS-IS here?  And are we speaking of small,
-            unadministered networks? -- jch]
+            is successful in a fairly wide variety of deployments.
           </t>
         </section>
         <section title="Babel">
           <t>
-            Source-specific Babel is probably the only source-specific
-            routing protocol that has seen deployment and is being
-            used in production.
+            Plain (non-source-specific) Babel has seen a modest amount of
+            deployment, most notably for routing over wireless mesh
+            networks and intercontinental overlay networks.  Babel is
+            included as an installable package in many Linux
+            distributions, which makes it easily available to interested
+            parties.
           </t>
           <t>
-            Plain Babel has seen a modest amount of deployment, most
-            notably for routing over wireless mesh networks and
-            large-scale overlay networks.  However, it remains a young
-            protocol, certainly much younger than IS-IS.
+            Source-specific Babel is probably the only source-specific
+            routing protocol that has seen any deployment.  Source-specific
+            Babel is available as an installable package for OpenWRT, and
+            is used by default by CeroWRT.
           </t>
         </section>
       </section>
@@ -946,6 +1272,8 @@
       &rfc6126;
 
       &rfc7298;
+
+      &rfc7368;
 
       <reference anchor="BABEL-SS"><front>
         <title>Source-Specific Routing in Babel</title>
@@ -980,6 +1308,16 @@
         <date year="2014" month="July"/>
         </front>
         <seriesInfo name="Internet Draft" value="draft-chroboczek-babel-diversity-routing-00"/>
+      </reference>
+
+      <reference anchor="BABEL-RTT"><front>
+        <title>Delay-based Metric Extension for the Babel Routing Protocol</title>
+
+        <author fullname="Baptiste Jonglez" initials="B." surname="Jonglez"/>
+        <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
+        <date year="2014" month="July"/>
+        </front>
+        <seriesInfo name="Internet Draft" value="draft-jonglez-babel-rtt-extension-00"/>
       </reference>
 
       &rfc1142;
