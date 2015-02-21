@@ -709,6 +709,9 @@
           legacy metric support).
         </t>
         <t>
+          [Does that mean that we don't care about PPP, PPPeE, GRE etc?]
+        </t>
+        <t>
           The operational state required by IS-IS is proportional to
           the number of routers, links, and prefixes in the network.
           Each router in the network generates and advertises a Link
