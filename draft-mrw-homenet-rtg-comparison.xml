@@ -227,11 +227,6 @@
         <t>
           From a purely algorithmic point of view, both kinds of
           algorithms are known to scale well beyond the needs of HOMENET.
-          Whichever protocol is chosen, neither the limited CPU nor the
-          limited amount of RAM in home routers are likely to be
-          problematic.
-        </t>
-        <t>
           Issues of scaling over wireless and lossy links is discussed in
           <xref target="wireless"/>.
         </t>
