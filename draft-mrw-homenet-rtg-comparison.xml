@@ -290,22 +290,22 @@
         </t>
         <t>
           This can be mitigated somewhat by using smaller timers, at the
-          cost of higher overhead, especially on wireless links, as they
-          suffer from abominable per-frame overhead.  IS-IS supports hold
-          times as small as 1s, while Babel supports hello intervals as
-          low as 10ms (leading to a 25ms hold time).
+          cost of higher overhead, especially on wireless links, which
+          tend to suffer from abominable per-frame overhead.  IS-IS
+          supports hold times as small as 1s, while Babel supports hello
+          intervals as low as 10ms (leading to a 25ms hold time).  (Either
+          protocol could of course be combined with BFD, which supports
+          arbitrarily small hold times.)
         </t>
         <t>
-          This issue with slow detection of link failure is less of an
-          issue in carrier and enterprise networks, where physical layer
-          carrier sense can often be used to detect broken links in
-          a timely manner.  Unfortunately, this technique is not useful in
-          HOMENET, since most Plastic Home Routers put their Ethernet
-          ports behind an internal switch in order to provide 5 or more
-          Ethernet ports using a single NIC: carrier sense indicates the
-          status of the internal link to the switch, not of the
-          user-visible Ethernet link.  Carrier sense has also been found
-          to be unreliable on wireless links.
+          It has been suggested that physical layer carrier sense could be
+          used to detect broken links in a timely manner.  Unfortunately,
+          this technique is not useful in HOMENET, since most Plastic Home
+          Routers put their Ethernet ports behind an internal switch in
+          order to provide 5 or more Ethernet ports using a single NIC:
+          carrier sense indicates the status of the internal link to the
+          switch, not that of the user-visible Ethernet link.  Carrier
+          sense has also been found to be unreliable on wireless links.
         </t>
       </section>
     </section>
