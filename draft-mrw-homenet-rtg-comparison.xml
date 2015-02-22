@@ -325,6 +325,10 @@
         </t>
       </section>
       <section title="Discussion">
+        <t>
+          When combined with HNCP, both protocols are able to run in an
+          unadministered network (but see also <xref target="metrics"/>).
+        </t>
       </section>
     </section>
     <section title="Support for Source-Specific Routing"
@@ -375,6 +379,12 @@
 	</t>
       </section>
       <section title="Discussion">
+        <t>
+          Both protocols have been extended with support for
+          source-specific routing.  The IS-IS extension is not able to
+          coexist with non-extended implementations, but this is probably
+          not a serious problem for Homenet.
+        </t>
       </section>
     </section>
     <section title="Support for Link Metrics" anchor="metrics">
