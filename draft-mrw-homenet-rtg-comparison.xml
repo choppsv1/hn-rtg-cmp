@@ -781,7 +781,7 @@
         provide a more exotic environment, such as an embedded operating
         system or one designed for mobile phones.
       </t>
-      <section title="IS-IS ease of implementation">
+      <section title="IS-IS ease of porting">
         <t>
           As IS-IS runs directly over layer 2, an implementation needs to
           be able to send and receive layer 2 frames itself.  On Unix
@@ -791,7 +791,7 @@
           to priviledged processes.
         </t>
       </section>
-      <section title="Babel ease of implementation">
+      <section title="Babel ease of porting">
         <t>
           Babel is layered above UDP.  Except for a thin layer interfacing
           to the kernel, the reference implementation of Babel consists of
