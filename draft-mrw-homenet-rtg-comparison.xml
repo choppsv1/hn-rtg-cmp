@@ -299,17 +299,18 @@
           design and not the routing protocol choice.
         </t>
         <t>
-          We easily should expect sub-second convergence for any change
-          in reachability (addition or subtraction) in any conceivable
-          homenet deployment.
-        </t>
-        <t>
           [According to Gredler, "today, 1000–2000 routers in a single
           area are said to represent the upper boundary of IS-IS [...] The
           authors do not endorse these optimistic area numbers, since
           a lot, is dependent on other factors than just the raw number of
           routers." (p. 84).  And I'm pretty sure he's not thinking of
           200MHz CPUs with 8kB data caches, 802.11 and powerline. -- jch]
+        </t>
+        <t>
+          We easily should expect sub-second convergence for any change in
+          reachability (addition or subtraction) in any conceivable
+          homenet deployment that does not use IEEE 802.11 for
+          router-to-router links (see <xref target="wireless"/>).
         </t>
       </section>
       <section title="Babel">
