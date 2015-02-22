@@ -773,6 +773,50 @@
         </t>
       </section>
     </section>
+    <section title="Ease of porting">
+      <t>
+        If successful, the Homenet protocols will be implemented on exotic
+        devices, such as sensor-class devices, set-top boxes and mobile
+        phones.  Rather than a full Unix system, such devices sometimes
+        provide a more exotic environment, such as an embedded operating
+        system or one designed for mobile phones.
+      </t>
+      <section title="IS-IS ease of implementation">
+        <t>
+          As IS-IS runs directly over layer 2, an implementation needs to
+          be able to send and receive layer 2 frames itself.  On Unix
+          systems, this can be done using raw sockets or by hooking into
+          the Berkeley Packet Filter.  Such interfaces might not be
+          available on non-Unix systems, and even on Unix are restricted
+          to priviledged processes.
+        </t>
+      </section>
+      <section title="Babel ease of implementation">
+        <t>
+          Babel is layered above UDP.  Except for a thin layer interfacing
+          to the kernel, the reference implementation of Babel consists of
+          portable code using the familiar "sockets" API (RFC 3493).
+          Enabling forwarding and manipulating the kernel's routing tables
+          is the only priviledged operation it performs.
+        </t>
+        <t>
+          Babel has been successfully ported to Android.  Android does not
+          currently allow unpriviledged code to manipulate the kernel's
+          routing table, so Babel can only run on "rooted" phones.  Should
+          a future version of Android provide the ability to manipulate
+          the kernel's routing table, Babel could conceivably be packaged
+          as an installable "app".
+        </t>
+      </section>
+      <section title="Discussion">
+        <t>
+          IS-IS is somewhat difficult to port, due to the requirement for
+          raw sockets.  Except for the requirement to install routes,
+          Babel is portable code, and has been successfully ported to
+          Android.
+        </t>
+      </section>
+    </section>
     <section title="Behaviour upon resource exhaustion">
       <section title="IS-IS">
         <t>XXX</t>
