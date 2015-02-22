@@ -232,10 +232,8 @@
           problematic.
         </t>
         <t>
-          The requirement of link state that the topology information be
-          propagated in a timely manner may be problematic over some kinds
-          of wireless links.  This is discussed in more detail in <xref
-          target="wireless"/>.
+          Issues of scaling over wireless and lossy links is discussed in
+          <xref target="wireless"/>.
         </t>
       </section>
     </section>
