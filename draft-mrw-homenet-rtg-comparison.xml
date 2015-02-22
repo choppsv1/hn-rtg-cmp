@@ -956,7 +956,7 @@
         <list style="symbols">
           <t>both protocols are able to establish adjacencies and to route
           IPv6 before they even receive an IPv6 address due to their use
-          of stable neighbour identifiers [is that true for IS-IS? -- jch];</t>
+          of stable neighbour identifiers;</t>
           <t>Babel will avoid creating loops even during reconvergence, but
           might create temporary blackholes;</t>
           <t>IS-IS may create short-lived loops during reconvergence;</t>
