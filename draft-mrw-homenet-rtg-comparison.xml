@@ -837,7 +837,7 @@
         </t>
       </section>
     </section>
-    <section title="Performance on IEEE 802.11 Wireless Networks"
+    <section title="Performance and scaling on IEEE 802.11 Wireless Networks"
              anchor="wireless">
       <t>
         We expect wireless networks, and notably IEEE 802.11 wireless
@@ -845,7 +845,7 @@
         connections but also for router-to-router connections.  In fact,
         some of us believe that the ability to cheaply and easily extend
         wireless coverage by adding a wireless router is a "killer feature"
-        of Homenet, one that it easy to explain both to one's boss and to
+        of Homenet, one that is easy to explain both to one's boss and to
         end users.
       </t>
       <t>
@@ -853,11 +853,11 @@
         characteristics.  First, wireless links are of very variable
         quality.  Second, multicast traffic is sent at a lowest common
         denominator speed, typically 2Mbit/s, which makes multicast
-        outrageously expensive.  Third, multicast traffic is not
-        protected by link-layer ARQ, which makes multicast packet drops
-        likely, especially in the presence of collisions, which are
-        particularly likely when the routing protocol is in the process of
-        reconverging.
+        outrageously expensive (13ms for a full-size frame).  Third,
+        multicast traffic is not protected by link-layer ARQ, which makes
+        multicast packet drops very common, especially in the presence of
+        collisions, which are particularly likely when the routing
+        protocol is in the process of reconverging.
       </t>
       <t>
         This has some consequences for routing protocols:
@@ -872,11 +872,26 @@
             during reconvergence;
           </t>
           <t>
-            the routing protocol should avoid sending large bursts of
-            multicast data from multiple nodes simultaneously during
+            the routing protocol must avoid sending large bursts of
+            multicast traffic from multiple nodes simultaneously during
             reconvergence.
           </t>
         </list>
+      </t>
+      <t>
+        IEEE 802.11 has two main modes of operation.  In "infrastructure
+        mode", a small number of "access points" (APs), often just one,
+        communicate with a number of "stations" (STAs); communication
+        between two stations transits through one or at most two APs.  In
+        "IBSS mode" (also called "ad hoc mode"), communication is
+        unrestricted, and any node can directly communicate with any other
+        node in range; as there is no link-layer forwarding, IBSS mode
+        does not guarantee that communication is transitive.  Virtually
+        all home network deployments today use infrastructure mode, with
+        the router acting as AP and client devices acting as stations.  We
+        believe that IBSS may be out of scope for HOMENET, but we expect
+        that people will attempt to use the HOMENET protocols in IBSS
+        mode, whether we like it or not.
       </t>
 
       <section title="IS-IS Performance on 802.11">
@@ -885,6 +900,12 @@
           non-hierachical (i.e., level-2 or single area level-1)
           deployments with hundreds of nodes. The protocol has proven
           to be very scalable.
+        </t>
+        <t>
+          We are not aware of any results in the open litterature about
+          the behaviour of IS-IS over IEEE 802.11.  In particular, we do
+          not know how IS-IS's reliable flooding mechanism behaves over
+          IEEE 802.11.
         </t>
       </section>
       <section title="Babel Performance on 802.11">
@@ -897,23 +918,22 @@
           likely to repair a broken route, but delays sending those
           messages that merely announce a slightly better route than one
           that is already available.  This mechanism has been shown to
-          work well in dense wireless deployments, avoiding a link-layer
-          meltdown even when the whole network is being rebooted
-          simultaneously.
+          work well in dense wireless deployments, with recent versions of
+          Babel being able to avoid link-layer meltdowns even when
+          a whole network is being rebooted simultaneously.
         </t>
         <t>
           As explained in <xref target="metrics"/>, Babel performs link
           quality estimation on wireless links in a manner that works
           relatively well with the 802.11 MAC.  In addition, Babel has
           provisions for estimating radio interference <xref
-          target="BABEL-Z"/>, which is essential for providing decent
-          throughput on multi-hop radio routes.
+          target="BABEL-Z"/>, which is necessary in order to provide
+          decent throughput on multi-hop radio routes.
         </t>
         <t>
-          Babel was designed to work well on pure mesh networks (networks
-          where links are not guaranteed to be transitive, and where
-          a packet might be routed through the same interface as the one
-          it came from), but this is probably outside the scope of HOMENET.
+          Babel has been designed to work well in IBSS mode, where
+          communication is not transitive and therefore a packet may be
+          routed through the same interface it was received on.
         </t>
       </section>
       <section title="Discussion">
@@ -926,10 +946,9 @@
         <t>
           We are not aware of any results about the behaviour of IS-IS's
           reliable flooding sub-protocol over IEEE 802.11 multicast.
-          IS-IS is not likely to work over IEEE 802.11 IBSS mode without
-          changes, since both the pseudonode optimisation and DIS election
-          assume transitive links, but this is probably out of scope for
-          HOMENET.
+          IS-IS will not work over IEEE 802.11 IBSS mode without changes,
+          since both the pseudonode optimisation and DIS election assume
+          that communication is transitive.
         </t>
       </section>
     </section>
