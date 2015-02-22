@@ -202,11 +202,6 @@
           taken with this use so as not to disrupt the fundamental
           routing function.
 	</t>
-        <t>
-          [If this is meant to imply that we don't need DNCP, it should be
-          removed -- this particular ship has sailed.  Otherwise, we
-          should explain why this is relevant. -- jch]
-        </t>
       </section>
       <section title="Loop-Avoiding Distance-Vector Algorithm (Babel)">
 	<t>
