@@ -296,16 +296,16 @@
           low as 10ms (leading to a 25ms hold time).
         </t>
         <t>
-          This issue with slow detection of link failure does not occur in
-          carrier and enterprise networks, where physical layer carrier
-          sense is used to detect broken links in a timely manner.
-          Unfortunately, this technique is not useful in HOMENET, since
-          most Plastic Home Routers put their Ethernet ports behind an
-          internal switch in order to provide 5 or more Ethernet ports
-          using a single NIC: carrier sense indicates the status of the
-          internal link to the switch, not of the user-visible Ethernet
-          link.  Carrier sense has also been found to be unreliable on
-          wireless links.
+          This issue with slow detection of link failure is less of an
+          issue in carrier and enterprise networks, where physical layer
+          carrier sense can often be used to detect broken links in
+          a timely manner.  Unfortunately, this technique is not useful in
+          HOMENET, since most Plastic Home Routers put their Ethernet
+          ports behind an internal switch in order to provide 5 or more
+          Ethernet ports using a single NIC: carrier sense indicates the
+          status of the internal link to the switch, not of the
+          user-visible Ethernet link.  Carrier sense has also been found
+          to be unreliable on wireless links.
         </t>
       </section>
     </section>
