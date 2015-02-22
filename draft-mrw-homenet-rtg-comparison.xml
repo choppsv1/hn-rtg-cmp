@@ -223,7 +223,7 @@
           most cases.
         </t>
       </section>
-      <section title="Algorithm Comparison">
+      <section title="Discussion">
         <t>
           From a purely algorithmic point of view, both kinds of
           algorithms are known to scale well beyond the needs of HOMENET.
