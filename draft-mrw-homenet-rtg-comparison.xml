@@ -551,8 +551,8 @@
         Most link technologies employed in a Homenet use the IEEE 802.2
         frame format; this is notably the case of Ethernet, IEEE 802.11
         and common powerline technologies.  However, other framing formats
-        exist, and at least PPP, PPPoE, GRE and VPN technologies are
-        relevant to Homenet.
+        exist, and at least PPP, PPPoE, IEEE 802.15.4, GRE and various VPN
+        technologies are likely to be used in Homenets.
       </t>
       <section title="IS-IS">
         <t>
