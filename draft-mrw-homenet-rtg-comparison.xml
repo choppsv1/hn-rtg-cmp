@@ -2,7 +2,10 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 	  <!ENTITY rfc6126 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6126.xml'>
 	  <!ENTITY rfc7298 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7298.xml'>
-	  <!ENTITY rfc1142 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1142.xml'>
+	  <!ENTITY rfc1195 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1195.xml'>
+	  <!ENTITY rfc5304 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5304.xml'>
+	  <!ENTITY rfc5305 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5305.xml'>
+	  <!ENTITY rfc5308 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5308.xml'>
 	  <!ENTITY rfc7368 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7368.xml'>
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -63,7 +66,7 @@
     <section title="Introduction"> 
       <t>
 	This document compares IS-IS (ISO/IEC 10589:2002) <xref
-	target="RFC1142"/> and Babel <xref target="RFC6126"/> according to
+	target="ISO10589"/> and Babel <xref target="RFC6126"/> according to
 	several criteria related to their use in home networks (Homenets),
 	as defined by the Homenet WG.
       </t>
@@ -141,12 +144,25 @@
 	  (ISO/IEC 10589:2002), this comparison considers the
 	  following IS-IS extensions:
 	</t>
+        <t>Homenet related specifications</t>
         <t><list style="symbols">
           <t>
             ISIS Auto-Configuration <xref target="ISIS-AUTOCONF"/>;
           </t>
           <t>
             Source-Specific routing in IS-IS <xref target="ISIS-SS"/>.
+          </t>
+        </list></t>
+        <t>Base protocol specifications.</t>
+        <t><list style="symbols">
+          <t>
+            Use of OSI IS-IS for Routing in TCP/IP and Dual Environments <xref target="RFC1195"/>
+          </t>
+          <t>
+            IS-IS Extensions for Traffic Engineering <xref target="RFC5305"/>
+          </t>
+          <t>
+            Routing IPv6 with IS-IS <xref target="RFC5308"/>
           </t>
         </list></t>
         <t>
@@ -573,13 +589,12 @@
     <section title="Security Features">
       <section title="Security Features in IS-IS">
         <t>
-          IS-IS offers multiple levels of security from none, to
-          simple clear-text (password) authentication, to fully
-          generic cryptographic authentication using any number of
-          hashing algorithms (e.g., HMAC-MD5, HMAC-SHA1,
-          ... HMAC-SHA512). Currently, the Homenet implementation of
-          IS-IS uses the cleartext password set to a predefined value
-          for auto-configuration purposes.
+          IS-IS offers multiple levels of security from none, to simple
+          clear-text (password) authentication, to fully generic cryptographic
+          authentication using any number of hashing algorithms <xref
+          target="RFC5304"/>. Currently, the Homenet implementation of IS-IS uses
+          the cleartext password set to a predefined value for
+          auto-configuration purposes.
         </t>
       </section>
       <section title="Security Features in Babel">
@@ -708,66 +723,90 @@
         </t>
         <t>
           The stub-only implementation of Babel consists of 900 lines
-          of C and compiles to 12kB (dynamically linked).  Its memory
+          of C and compiles to 13kB (dynamically linked).  Its memory
           usage (as reported by the operating system) is 200kB, and
           remains constant (it doesn't perform any dynamic memory
           allocation).
+	</t>
+        <t>
+          The stub-only implementation of isis consists of 1300 lines of C and
+          compiles to 18kB (stripped and dynamically linked).  Its memory usage
+          (as reported by linux) is 1500kB which isn't a very useful figure as
+          it's unoptimized for space.
 	</t>
       </section>
       <section title="Comparison">
         <t>
           <xref target="size-comparison"/> summarises the sizes of the
-          available Homenet routing protocol implementations.  (Data
+          available Homenet routing protocol implementations.  (Babel data
           courtesy of Steven Barth and Markus Stenberg.)
         </t>
 
         <texttable title="Comparison of Homenet implementation size" anchor="size-comparison">
           <ttcol align="center"/>
-          <ttcol align="center">babeld (source-specific)</ttcol>
-          <ttcol align="center">sbabeld (stub-only)</ttcol>
-          <ttcol align="center">AutoISIS</ttcol>
+          <ttcol align="center">babeld (SS)</ttcol>
+          <ttcol align="center">sbabeld (stub)</ttcol>
+          <ttcol align="center">AutoISIS (SS)</ttcol>
+          <ttcol align="center">tinyisis (stub)</ttcol>
 
           <c>Version</c>
           <c>2598774</c>
           <c>cc7d681</c>
-          <c>0.8.0</c>
+          <c>[update]0.8.0</c>
+          <c>3ed2068</c>
 
           <c>Date</c>
           <c>2014-09-08</c>
           <c>2014-11-21</c>
           <c>2014-08-26</c>
+          <c>2015-02-22</c>
 
           <c>License</c>
           <c>MIT</c>
           <c>MIT</c>
           <c>Apache 2.0</c>
+          <c>Apache 2.0</c>
 
           <c>Lines of Code</c>
-          <c>10.000 (C)</c>
-          <c>1.000 (C)</c>
-          <c>7.000 (Erlang)</c>
+          <c>10000 (C)</c>
+          <c>1000 (C)</c>
+          <c>7000 (Erlang)</c>
+          <c>1300 (C)</c>
 
           <c>Installed size (AMD64)</c>
           <c>129kB</c>
           <c>13kB</c>
-          <c>11,385kB</c>
+          <c>732kB</c>
+          <c>17kB</c>
 
           <c>Total installed size</c>
           <c>129kB</c>
           <c>13kB</c>
-          <c>14,155kB</c>
+          <c>7MB</c>
+          <c>17kB</c>
 
           <c>Baseline RSS</c>
           <c>~300kB</c>
           <c>~200kB</c>
-          <c>~22,000kB</c>
+          <c>11MB</c>
+          <c>420 kB</c>
         </texttable>
         <t>
           In this table, "Installed size" is the size reported by the
-          package manager for the routing daemon's package(s) (including
-          the 1.6MB of the "Beam" Erlang VM in the case of IS-IS), while
+          package manager for the routing daemon's package(s), while
           "Total installed size" is the sum of the size of the deamon's
           packages and all its dependencies, excluding the C library.
+        </t>
+        <t>
+          The erlang AutoISIS has not been optimized for space or features
+          (i.e., it is a full IS-IS multilevel multi-address family
+          implementation). One example of how this affects the reported numbers,
+          is that the erlang logging package is taking up 4MB of ram.
+        </t>
+        <t>
+          Additionally, as erlang is interpreted and not compiled as with the
+          C implementations, there's not much use in directly comparing the
+          numbers themselves.
         </t>
         <t>
           [We should add the size of the native Quagga isisd.  While this
@@ -824,7 +863,12 @@
     </section>
     <section title="Behaviour upon resource exhaustion">
       <section title="IS-IS">
-        <t>XXX</t>
+        <t>
+          The IS-IS protocol has an overload indicator. When the protocol is
+          unable to acquire a needed resource, it enters overloaded state. This
+          state is signaled to the other routers and the overloaded router is
+          considered to be destination only (i.e., it becomes a stub router).
+        </t>
       </section>
       <section title="Babel">
         <t>
@@ -1325,7 +1369,7 @@
         <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
         <date year="2014" month="November"/>
       </front>
-      <seriesInfo name="Internet Draft" value="draft-boutier-babel-source-specific-00"/>
+      <seriesInfo name="Internet-Draft" value="draft-boutier-babel-source-specific-00"/>
       </reference>
 
       <reference anchor="SS-ROUTING" target="http://arxiv.org/abs/1403.0445">
@@ -1342,7 +1386,7 @@
         <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
         <date month="June" year="2013"/>
       </front>
-      <seriesInfo name="Internet Draft" value="draft-chroboczek-babel-extension-mechanism-03"/>
+      <seriesInfo name="Internet-Draft" value="draft-chroboczek-babel-extension-mechanism-03"/>
       </reference>
 
       <reference anchor="BABEL-Z"><front>
@@ -1351,7 +1395,7 @@
         <author fullname="Juliusz Chroboczek" initials="J." surname="Chroboczek"/>
         <date year="2014" month="July"/>
         </front>
-        <seriesInfo name="Internet Draft" value="draft-chroboczek-babel-diversity-routing-00"/>
+        <seriesInfo name="Internet-Draft" value="draft-chroboczek-babel-diversity-routing-00"/>
       </reference>
 
       <reference anchor="BABEL-RTT"><front>
@@ -1363,9 +1407,6 @@
         </front>
         <seriesInfo name="Internet Draft" value="draft-jonglez-babel-rtt-extension-00"/>
       </reference>
-
-      &rfc1142;
-
 
       <reference anchor="DELAY-BASED" target="http://arxiv.org/abs/1403.3488">
         <front>
@@ -1381,7 +1422,7 @@
         <author fullname="B. Liu" initials="B." surname="Liu"/>
         <date year="2014" month="October"/>
       </front>
-      <seriesInfo name="Internet Draft" value="draft-liu-isis-auto-conf-03"/>
+      <seriesInfo name="Internet-Draft" value="draft-liu-isis-auto-conf-03"/>
       </reference>
 
       <reference anchor="ISIS-SS"><front>
@@ -1390,8 +1431,25 @@
         <author fullname="D. Lamparter" initials="D." surname="Lamparter"/>
         <date year="2014" month="October"/>
       </front>
-      <seriesInfo name="Internet Draft" value="draft-baker-ipv6-isis-dst-src-routing-02"/>
+      <seriesInfo name="Internet-Draft" value="draft-baker-ipv6-isis-dst-src-routing-02"/>
       </reference>
+      <reference anchor="ISO10589">
+        <front>
+          <title>Intermediate system to Intermediate system intra-domain
+          routeing information exchange protocol for use in conjunction with the
+          protocol for providing the connectionless-mode Network Service (ISO
+          8473) Second Edition</title>
+          <author>
+            <organization>ISO/IEC</organization>
+          </author>
+          <date year="2002" month="Novmeber"/>
+        </front>
+        <annotation>ISO 10589:2002 Second Edition</annotation>
+      </reference>
+      &rfc1195;
+      &rfc5304;
+      &rfc5305;
+      &rfc5308;
     </references>
   </back>
 </rfc>
