@@ -140,9 +140,9 @@
       </t>
       <section title="IS-IS Protocol and Extensions">
 	<t>
-	  In addition to the base IS-IS protocol specification
-	  (ISO/IEC 10589:2002), this comparison considers the
-	  following IS-IS extensions:
+	  In addition to the base IS-IS protocol specification <xref
+	  target="ISO10589"/>, this comparison considers the following IS-IS
+	  extensions:
 	</t>
         <t>Homenet related specifications</t>
         <t><list style="symbols">
@@ -495,7 +495,7 @@
         </t>
       </section>
     </section>
-    <section title="Support for Attached Stub Networks" anchor="stub">
+    <section title="Support for Stub Networks and Stub Routers" anchor="stub">
       <t>
         A stub network is one that is attached to a Homenet, possibly
         through multiple Homenet routers, but must not be used for
@@ -509,6 +509,11 @@
            |       |
            C ..... D
        ]]></artwork></figure>
+      <t>
+        Similarly a stub router is a router which may advertise and be a
+        destination for stub networks but should never be used for transit
+        traffic.
+      </t>
       <t>
         A number of people have expressed interest in attaching sensor
         class equipment to Homenets, such as smart thermostats and home
@@ -525,13 +530,22 @@
         link would cause it to collapse.  Designating this link as a stub
         network avoids this issue.
       </t>
-      <section title="IS-IS Support for Stub Networks">
+      <section title="IS-IS Support for Stub Networks and Stub Routers">
         <t>
           In IS-IS reachability (prefixes) and topology
           (links/adjacencies) are separate things. IS-IS supports
           stub-networks as defined above simply by advertising the
           prefix associated with a link, but not the link itself. This
           is sometimes referred to as a "passive link".
+        </t>
+        <t>
+          Further an IS-IS router has the ability to set a bit (the overload
+          bit) to indicate that it should not be used for any transit traffic,
+          and that it will only be considered a destination for the prefixes it
+          has advertised, i.e., it is a stub router as defined above. As per the
+          IS-IS standard <xref target="ISO10589"/> an IS-IS router marked as
+          such is not expected to participate in the propagation of LSPs or the
+          SPF computation.
         </t>
       </section>
       <section title="Babel Support for Stub Networks">
@@ -555,10 +569,9 @@
           A tiny, stub-only implementation of Babel is available.
         </t>
         <t>
-          It is not known whether a similar stub-only implementation of
-          a subset of IS-IS could be implemented.  Even a stub
-          implementation would likely need to implement reliable flooding,
-          LSP fragmentation, SPF computation, DIS election etc.
+          A tiny, stub-router-only implementation of IS-IS is available. This is
+          the "tinyisis" referred to later in the document when comparing
+          implementation sizes.
         </t>
       </section>
     </section>
@@ -729,10 +742,9 @@
           allocation).
 	</t>
         <t>
-          The stub-only implementation of isis consists of 1300 lines of C and
-          compiles to 18kB (stripped and dynamically linked).  Its memory usage
-          (as reported by linux) is 1500kB which isn't a very useful figure as
-          it's unoptimized for space.
+          The stub-only implementation of IS-IS consists of 1300 lines of C and
+          compiles to 18kB (stripped and dynamically linked).  Its base memory
+          usage (as reported by 32-bit linux) is 330kB.
 	</t>
       </section>
       <section title="Comparison">
@@ -789,7 +801,7 @@
           <c>~300kB</c>
           <c>~200kB</c>
           <c>11MB</c>
-          <c>~300kB</c>
+          <c>330kB</c>
         </texttable>
         <t>
           In this table, "Installed size" is the size reported by the
@@ -1005,11 +1017,10 @@
     <section title="Standardization Status">
       <section title="IS-IS Standardization">
 	<t>
-	  IS-IS is an ISO Standard documented in ISO/IEC 10589:2002.
-	  There is an active IETF IS-IS Working Group (ISIS) that
-	  maintains and extends the IS-IS protocol, and the IS-IS
-	  protocol has been extended in several ISIS Working Group
-	  documents.
+	  IS-IS is an ISO Standard documented in ISO/IEC 10589:2002 <xref
+          target="ISO10589"/> There is an active IETF IS-IS Working Group (isis-wg)
+          that maintains and extends the IS-IS protocol, and the IS-IS protocol
+          has been extended in several IS-IS Working Group documents.
 	</t>
         <t>
           The autoconfiguration and source-specific extensions to
