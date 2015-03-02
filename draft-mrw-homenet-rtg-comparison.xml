@@ -80,10 +80,10 @@
       <t>
         The Homenet environment is different from the environment of
         a professionally administered network.  The most obvious
-        difference is that a Homenet is not administered: any protocols
-        used must be robust and fully self-configuring, and any tuning
-        knobs that they provide will be unused in the vast majority of
-        deployments.
+        difference is that most home networks are not administered: any
+        protocols used must be robust and fully self-configuring, and any
+        tuning knobs that they provide will be unused in the vast majority
+        of deployments.
       </t>
       <t>
         Another difference is that Homenets are usually built out of
@@ -322,8 +322,9 @@
     </section>
     <section title="Autoconfiguration" anchor="autoconf">
       <t>
-        Home networks are not administered, so a routing protocol needs to
-        be entirely self-configuring in order to be suitable for Homenets.
+        Most home networks are not administered, so a routing protocol
+        needs to be entirely self-configuring in order to be suitable for
+        Homenets.
       </t>
       <section title="IS-IS">
         <t>
@@ -644,6 +645,13 @@
 	<t>
           There is no support for multicast routing in Babel.
 	</t>
+      </section>
+      <section title="Discussion">
+        <t>
+          Some experts believe that it may be better to run a dedicated
+          multicast routing protocol rather than extensions to a unicast
+          routing protocol.
+        </t>
       </section>
     </section>
     <section title="Implementation Status">
