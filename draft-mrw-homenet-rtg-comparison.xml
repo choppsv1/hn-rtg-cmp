@@ -256,7 +256,7 @@
           been shown to acheive sub 200ms end-to-end convergence even
           in very large provider networks (single area 900+
           nodes). Basically the time for convergence is the time to
-          propagate a new LSP from one end of the network to the other
+          propagate new link state from one end of the network to the other
           plus the SPF (tree computation interval) and FIB loading
           time. The flooding is done without delay and prior to
           running the SPF (tree-calculation) algorithm. Thus is
@@ -482,8 +482,10 @@
           category.
         </t>
         <t>
-          All implementations of IS-IS known to us require metrics to be
-          set by the operator, which is not acceptable in Homenet.  While
+          Current implementations of IS-IS will supply a default metric for
+          links if not configured. We are unaware of any implementation that
+          computes this default metric dynamically, rather it is static and
+          supplied by the vendor. While
           support for dynamically computed metrics could potentially be
           added to IS-IS, this is not completely trivial to do right,
           since a naive approach would cause unacceptable churn,
@@ -545,7 +547,7 @@
           and that it will only be considered a destination for the prefixes it
           has advertised, i.e., it is a stub router as defined above. As per the
           IS-IS standard <xref target="ISO10589"/> an IS-IS router marked as
-          such is not expected to participate in the propagation of LSPs or the
+          such is not expected to participate in the propagation of link state or the
           SPF computation.
         </t>
       </section>
